@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" width="45" height="15" tilewidth="80" tileheight="80">
+ <properties>
+  <property name="StartDirection" value="0"/>
+ </properties>
+ <tileset firstgid="1" name="Untitled" tilewidth="80" tileheight="80">
+  <image source="tileset.png" width="640" height="320"/>
+ </tileset>
+ <layer name="Level" width="45" height="15">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC+2VywqAIBBFp4fWtsemx/9/ZwoKMlxHg7ACD1yImUldeJCoUoLFZH37EDc5TE733QVBhD0F6r7XC70h8Q+vK1a3tEJCpLnSqZThTw5OJjPFHeQeoroi2UWLdkEzMddj620mO6Xv+5gx87RX1cHv8BcPvYMNYQ8tmtVy3jP0boXroBnkItoz18GSyfX9Als2il2MCgAA
+  </data>
+ </layer>
+</map>

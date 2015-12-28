@@ -13,10 +13,12 @@ $RECYCLE.BIN/
 *.msi
 *.msm
 *.msp
-
+build
 # Windows shortcuts
 *.lnk
-
+.gradle
+.idea
+build
 # =========================
 # Operating System Files
 # =========================
