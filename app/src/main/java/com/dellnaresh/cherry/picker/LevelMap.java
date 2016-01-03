@@ -1,4 +1,4 @@
-package com.dellnaresh.mowgli.dancing;
+package com.dellnaresh.cherry.picker;
 
 import org.cocos2d.actions.base.CCAction;
 import org.cocos2d.actions.base.CCRepeatForever;

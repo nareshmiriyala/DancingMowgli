@@ -1,4 +1,4 @@
-package com.dellnaresh.mowgli.dancing;
+package com.dellnaresh.cherry.picker;
 
 import org.cocos2d.layers.CCLayer;
 import org.cocos2d.layers.CCScene;
