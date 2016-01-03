@@ -87,7 +87,7 @@ public class LevelMap extends CCTMXTiledMap {
 	public void createBird()
 	{
 		// run ani
-		CCAnimation animation = CCAnimation.animation("run", 0.02f);
+		CCAnimation animation = CCAnimation.animation("run", 0.04f);
 		for (int i=0; i<16; i++)
 		{
 			animation.addFrame(String.format("game/bird/run%d.png", i));

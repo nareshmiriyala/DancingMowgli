@@ -25,8 +25,8 @@ public class MainActivity extends Activity {
 	private CCGLSurfaceView mGLSurfaceView;
 
 	//<!-- Admob Ads Using Google Play Services SDK -->
-	private static final String AD_UNIT_ID = "";
-	private static final String AD_INTERSTITIAL_UNIT_ID = "";
+	private static final String AD_UNIT_ID = "ca-app-pub-2404182789555566/4527670134";
+	private static final String AD_INTERSTITIAL_UNIT_ID = "ca-app-pub-2404182789555566/6004403336";
 	
 
 	/** The Admob ad. */
@@ -34,6 +34,7 @@ public class MainActivity extends Activity {
 	public AdView adView = null;
 
 	public static MainActivity app;
+	public static int count=0;
 	
 	public void onCreate(Bundle savedInstanceState)
 	{
@@ -182,6 +183,12 @@ public class MainActivity extends Activity {
     
     public void showInterstitialAds()
 	{
+		if(count<3){
+			count++;
+			return;
+		}else {
+			count++;
+		}
 		runOnUiThread(new Runnable() {
 		    public void run() {
 		    	 AdRequest interstitialAdRequest = new AdRequest.Builder().build();
