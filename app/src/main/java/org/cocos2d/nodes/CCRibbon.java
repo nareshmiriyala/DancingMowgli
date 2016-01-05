@@ -87,7 +87,7 @@ public class CCRibbon extends CCNode {
                     int i = begin;
                     for (; i < end; ++i) {
                         int idx = i * 8;
-                        colors[idx + 0] = r / 255f;
+                        colors[idx] = r / 255f;
                         colors[idx + 1] = g / 255f;
                         colors[idx + 2] = b / 255f;
                         colors[idx + 4] = r / 255f;

@@ -22,7 +22,7 @@ public class CCEaseElasticInOut extends CCEaseElastic {
     }
 
     public void update(float t) {
-        float newT = 0;
+        float newT;
 
         if (t == 0 || t == 1)
             newT = t;

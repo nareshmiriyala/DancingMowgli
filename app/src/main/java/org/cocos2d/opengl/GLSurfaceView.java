@@ -15,6 +15,7 @@ import javax.microedition.khronos.opengles.GL10;
 import android.content.Context;
 import android.content.pm.ConfigurationInfo;
 import android.opengl.GLDebugHelper;
+import android.support.annotation.NonNull;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.SurfaceHolder;
@@ -1469,7 +1470,7 @@ public class GLSurfaceView extends SurfaceView implements SurfaceHolder.Callback
             flushBuilder();
         }
 
-        @Override public void write(char[] buf, int offset, int count) {
+        @Override public void write(@NonNull char[] buf, int offset, int count) {
             for(int i = 0; i < count; i++) {
                 char c = buf[offset + i];
                 if ( c == '\n') {
@@ -1526,10 +1527,7 @@ public class GLSurfaceView extends SurfaceView implements SurfaceHolder.Callback
                 return true;
             }
             checkGLESVersion();
-            if (mMultipleGLESContextsAllowed) {
-                return true;
-            }
-            return false;
+            return mMultipleGLESContextsAllowed;
         }
         /*
          * Releases the EGL surface. Requires that we are already in the

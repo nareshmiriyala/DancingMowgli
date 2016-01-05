@@ -79,7 +79,7 @@ public class CCTileMapAtlas extends CCAtlasNode {
         for (int x = 0; x < tgaInfo.width; x++) {
             for (int y = 0; y < tgaInfo.height; y++) {
             	int p = x + y * tgaInfo.width;
-                ccColor3B value = new ccColor3B(tgaInfo.imageData[p + 0],
+                ccColor3B value = new ccColor3B(tgaInfo.imageData[p],
                         tgaInfo.imageData[p + 1],
                         tgaInfo.imageData[p + 2]);
                 if (value.r != 0)
@@ -112,7 +112,7 @@ public class CCTileMapAtlas extends CCAtlasNode {
         ccColor3B value = ptr[pos.x + pos.y * tgaInfo->width];
         */
 
-        ccColor3B value = new ccColor3B(tgaInfo.imageData[pos.x + 0 + pos.y * tgaInfo.width],
+        ccColor3B value = new ccColor3B(tgaInfo.imageData[(pos.x + pos.y * tgaInfo.width)],
                 tgaInfo.imageData[pos.x + 1 + pos.y * tgaInfo.width],
                 tgaInfo.imageData[pos.x + 2 + pos.y * tgaInfo.width]);
 
@@ -130,14 +130,14 @@ public class CCTileMapAtlas extends CCAtlasNode {
         assert pos.y < tgaInfo.height : "Invalid position.y";
         assert tile.r != 0 : "R component must be non-zero";
 
-        ccColor3B value = new ccColor3B(tgaInfo.imageData[pos.x + 0 + pos.y * tgaInfo.width],
+        ccColor3B value = new ccColor3B(tgaInfo.imageData[(pos.x + pos.y * tgaInfo.width)],
                 tgaInfo.imageData[pos.x + 1 + pos.y * tgaInfo.width],
                 tgaInfo.imageData[pos.x + 2 + pos.y * tgaInfo.width]);
 
         if (value.r == 0) {
             Log.w(null, "Value.r must be non-zero.");
         } else {
-            tgaInfo.imageData[pos.x + 0 + pos.y * tgaInfo.width] = (byte) tile.r;
+            tgaInfo.imageData[(pos.x + pos.y * tgaInfo.width)] = (byte) tile.r;
             tgaInfo.imageData[pos.x + 1 + pos.y * tgaInfo.width] = (byte) tile.g;
             tgaInfo.imageData[pos.x + 2 + pos.y * tgaInfo.width] = (byte) tile.b;
 
@@ -189,7 +189,7 @@ public class CCTileMapAtlas extends CCAtlasNode {
         for (int x = 0; x < tgaInfo.width; x++) {
             for (int y = 0; y < tgaInfo.height; y++) {
                 if (total < itemsToRender) {
-                    ccColor3B value = new ccColor3B(tgaInfo.imageData[x + 0 + y * tgaInfo.width],
+                    ccColor3B value = new ccColor3B(tgaInfo.imageData[(x + y * tgaInfo.width)],
                             tgaInfo.imageData[x + 1 + y * tgaInfo.width],
                             tgaInfo.imageData[x + 2 + y * tgaInfo.width]);
 

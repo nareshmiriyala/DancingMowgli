@@ -19,7 +19,7 @@ public class CCEaseBounceInOut extends CCEaseBounce {
 
     @Override
     public void update(float t) {
-        float newT = 0;
+        float newT;
         if (t < 0.5) {
             t = t * 2;
             newT = (1 - bounceTime(1 - t)) * 0.5f;

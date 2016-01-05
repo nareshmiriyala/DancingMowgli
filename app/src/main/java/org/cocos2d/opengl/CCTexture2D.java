@@ -672,7 +672,7 @@ public class CCTexture2D implements Resource {
       @since v0.99.0
       */
     public void generateMipmap() {
-        assert ( mWidth == toPow2((int)mWidth) && mHeight == toPow2((int)mHeight))
+        assert ( mWidth == toPow2(mWidth) && mHeight == toPow2(mHeight))
                 : "Mimpap texture only works in POT textures";
         
 		GLResourceHelper.sharedHelper().perform(new GLResourceHelper.GLResorceTask() {

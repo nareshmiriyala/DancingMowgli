@@ -28,11 +28,11 @@ public class CCPVRTexture {
 		}
 		
 		public int headerLength() {
-			return bb.getInt(0 * 4);
+			return bb.getInt(0);
 		}
 		
 		public int height() {
-			return bb.getInt(1 * 4);
+			return bb.getInt(4);
 		}
 		
 		public int width() {
@@ -131,11 +131,11 @@ public class CCPVRTexture {
 
 	private boolean unpackPVRData(ByteBuffer data) {
 		boolean success = false;
-		PVRTexHeader header = null;
+		PVRTexHeader header;
 		int flags, pvrTag;
-		int dataLength = 0, dataOffset = 0, dataSize = 0;
-		int blockSize = 0, widthBlocks = 0, heightBlocks = 0;
-		int width = 0, height = 0, bpp = 4;
+		int dataLength, dataOffset = 0, dataSize;
+		int blockSize, widthBlocks, heightBlocks;
+		int width, height, bpp;
 		int formatFlags;
 		
 		header = new PVRTexHeader(data);
@@ -144,7 +144,7 @@ public class CCPVRTexture {
 		// pvrTag = CFSwapInt32LittleToHost(header->pvrTag);
 		pvrTag = header.pvrTag();
 		
-		if ((int)gPVRTexIdentifier[0] != ((pvrTag >>  0) & 0xff) ||
+		if ((int)gPVRTexIdentifier[0] != ((pvrTag) & 0xff) ||
 			(int)gPVRTexIdentifier[1] != ((pvrTag >>  8) & 0xff) ||
 			(int)gPVRTexIdentifier[2] != ((pvrTag >> 16) & 0xff) ||
 			(int)gPVRTexIdentifier[3] != ((pvrTag >> 24) & 0xff))
@@ -162,18 +162,15 @@ public class CCPVRTexture {
 			
 			if (formatFlags == kPVRTextureFlagTypePVRTC_4)
 				_internalFormat = GL10.GL_COMPRESSED_TEXTURE_FORMATS; // GL_COMPRESSED_RGBA_PVRTC_4BPPV1_IMG;
-			else if (formatFlags == kPVRTextureFlagTypePVRTC_2)
-				_internalFormat = GL10.GL_COMPRESSED_TEXTURE_FORMATS; // GL_COMPRESSED_RGBA_PVRTC_2BPPV1_IMG;
+			else _internalFormat = GL10.GL_COMPRESSED_TEXTURE_FORMATS; // GL_COMPRESSED_RGBA_PVRTC_2BPPV1_IMG;
 		
 			// _width = width = CFSwapInt32LittleToHost(header->width);
 			_width = width = header.width();
 			// _height = height = CFSwapInt32LittleToHost(header->height);
 			_height = height = header.height();
 			
-			if ( header.bitmaskAlpha() != 0 /*CFSwapInt32LittleToHost(header->bitmaskAlpha)*/ )
-				_hasAlpha = true;
-			else
-				_hasAlpha = false;
+			/*CFSwapInt32LittleToHost(header->bitmaskAlpha)*/
+			_hasAlpha = header.bitmaskAlpha() != 0;
 			
 			dataLength = header.dataLength(); // CFSwapInt32LittleToHost(header->dataLength);
 			
@@ -238,7 +235,7 @@ public class CCPVRTexture {
 			gl.glBindTexture(GL10.GL_TEXTURE_2D, _name[0]);
 		}
 
-		for (int i=0; i < _imageData.size(); i++) {
+		for (int i=0; i < (_imageData != null ? _imageData.size() : 0); i++) {
 			data = _imageData.get(i);
 			gl.glCompressedTexImage2D(GL10.GL_TEXTURE_2D, i, _internalFormat, width, height, 0, data.capacity(), data);
 						

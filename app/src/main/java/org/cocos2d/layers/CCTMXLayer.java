@@ -402,7 +402,7 @@ public class CCTMXLayer extends CCSpriteSheet {
 
 	private int vertexZForPos(CGPoint pos) {
 		int ret = 0;
-		int maxVal = 0;
+		int maxVal;
 		if( useAutomaticVertexZ_ ) {
 			switch( layerOrientation_ ) {
 				case CCTMXTiledMap.CCTMXOrientationIso:
@@ -549,9 +549,9 @@ public class CCTMXLayer extends CCSpriteSheet {
 
 	private int atlasIndexForNewZ(int z) {
 		// XXX: This can be improved with a sort of binary search
-		int i=0;
+		int i;
 		for( i=0; i< atlasIndexArray_.size() ; i++) {
-			int val = (int) atlasIndexArray_.get(i);
+			int val = atlasIndexArray_.get(i);
 			if (z < val)
 				break;
 		}

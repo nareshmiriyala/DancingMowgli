@@ -163,7 +163,7 @@ public class CCTMXTiledMap extends CCNode {
 			CCTMXLayer layer = (CCTMXLayer)node;
 			if (layer != null){
 				if (layer.layerName.equals(layerName))
-					return (CCTMXLayer)layer;
+					return layer;
 			}
 		}
 

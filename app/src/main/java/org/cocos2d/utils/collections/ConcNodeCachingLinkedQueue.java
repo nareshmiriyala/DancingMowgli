@@ -112,7 +112,7 @@ public class ConcNodeCachingLinkedQueue<E> {
             Node<E> s = t.next;
             if (t == tail) {
                 if (s == null) {
-                    if (t.casNext(s, n)) {
+                    if (t.casNext(null, n)) {
                         casTail(t, n);
                         return;
                     }

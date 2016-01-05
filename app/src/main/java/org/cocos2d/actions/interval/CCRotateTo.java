@@ -33,9 +33,9 @@ public class CCRotateTo extends CCIntervalAction {
         super.start(aTarget);
         startAngle = target.getRotation();
         if (startAngle > 0)
-            startAngle = (float) (startAngle % 360.0f);
+            startAngle = startAngle % 360.0f;
         else
-            startAngle = (float) (startAngle % -360.0f);
+            startAngle = startAngle % -360.0f;
 
         diffAngle = dstAngle - startAngle;
         if (diffAngle > 180)

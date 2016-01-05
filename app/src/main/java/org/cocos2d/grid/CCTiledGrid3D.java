@@ -178,7 +178,7 @@ public class CCTiledGrid3D extends CCGridBase {
         texCoordinates.position(0);
 
         for (int x = 0; x < numQuads; x++) {
-            indices.put(x * 6 + 0, (short) (x * 4 + 0));
+            indices.put(x * 6, (short) (x * 4));
             indices.put(x * 6 + 1, (short) (x * 4 + 1));
             indices.put(x * 6 + 2, (short) (x * 4 + 2));
 

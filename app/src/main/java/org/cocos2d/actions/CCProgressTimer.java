@@ -261,7 +261,7 @@ public class CCProgressTimer extends CCNode {
                 }
 
                 //	s and t are returned by ccpLineIntersect
-                float s = 0, t = 0;
+                float s, t;
                 CGPoint ret = CGPoint.zero();
                 if(CGPoint.ccpLineIntersect(edgePtA, edgePtB, midpoint, percentagePt, ret)) {
                 	s = ret.x;
@@ -311,7 +311,7 @@ public class CCProgressTimer extends CCNode {
         }
 
         if (!sameIndexCount) {
-        	CGPoint tmpPoint = null;
+        	CGPoint tmpPoint;
             //	First we populate the array with the midpoint, then all 
             //	vertices/texcoords/colors of the 12 'o clock start and edges and the hitpoint
             this.textureCoordinates.put(0, midpoint.x);
@@ -331,11 +331,11 @@ public class CCProgressTimer extends CCNode {
             for(int i = 0; i < index; ++i){
                 CGPoint texCoords = CGPoint.ccpCompMult(boundaryTexCoord(i), tMax);
                 
-                this.textureCoordinates.put((i + 2) * 2 + 0, texCoords.x);
+                this.textureCoordinates.put((i + 2) * 2, texCoords.x);
                 this.textureCoordinates.put((i + 2) * 2 + 1, texCoords.y);
 
                 tmpPoint = vertexFromTexCoord(texCoords);
-                this.vertexCoordinates.put((i + 2) * 2 + 0, tmpPoint.x);
+                this.vertexCoordinates.put((i + 2) * 2, tmpPoint.x);
                 this.vertexCoordinates.put((i + 2) * 2 + 1, tmpPoint.y);
             }
 
@@ -343,7 +343,7 @@ public class CCProgressTimer extends CCNode {
             if (sprite_.flipY_ || sprite_.flipX_) {
                 for(int i = 0; i < vertexDataCount_ - 1; ++i){
                     if (sprite_.flipX_) {
-                    	textureCoordinates.put(i*2+0, tMax.x - textureCoordinates.get(i*2+0));
+                    	textureCoordinates.put(i * 2, tMax.x - textureCoordinates.get(i * 2));
                     }
                     if(sprite_.flipY_){
                     	textureCoordinates.put(i*2+1, tMax.y - textureCoordinates.get(i*2+1));
@@ -353,16 +353,16 @@ public class CCProgressTimer extends CCNode {
         }
 
         //	hitpoint will go last
-        this.textureCoordinates.put((vertexDataCount_ - 1) * 2 + 0, hit.x);
+        this.textureCoordinates.put((vertexDataCount_ - 1) * 2, hit.x);
         this.textureCoordinates.put((vertexDataCount_ - 1) * 2 + 1, hit.y);
 
         CGPoint tmpPoint = vertexFromTexCoord(hit);
-        this.vertexCoordinates.put((vertexDataCount_ - 1) * 2 + 0, tmpPoint.x);
+        this.vertexCoordinates.put((vertexDataCount_ - 1) * 2, tmpPoint.x);
         this.vertexCoordinates.put((vertexDataCount_ - 1) * 2 + 1, tmpPoint.y);
 
         if (sprite_.flipY_ || sprite_.flipX_) {
             if (sprite_.flipX_) {
-                textureCoordinates.put((vertexDataCount_ - 1) * 2 + 0, tMax.x - this.textureCoordinates.get((vertexDataCount_ - 1) * 2 + 0));
+                textureCoordinates.put((vertexDataCount_ - 1) * 2, tMax.x - this.textureCoordinates.get((vertexDataCount_ - 1) * 2));
             }
             if(sprite_.flipY_){
                 textureCoordinates.put((vertexDataCount_ - 1) * 2 + 1, tMax.y - this.textureCoordinates.get((vertexDataCount_ - 1) * 2 + 1));
@@ -401,52 +401,52 @@ public class CCProgressTimer extends CCNode {
             	vIndexes[0] = 0;
             	vIndexes[1] = 1;
             	
-            	this.textureCoordinates.put(vIndexes[0]*2 + 0, 0);
+            	this.textureCoordinates.put(vIndexes[0] * 2, 0);
             	this.textureCoordinates.put(vIndexes[0]*2 + 1, 0);
-            	this.textureCoordinates.put(vIndexes[1]*2 + 0, 0);
+            	this.textureCoordinates.put(vIndexes[1] * 2, 0);
             	this.textureCoordinates.put(vIndexes[1]*2 + 1, tMax.y);
             }else if (type_ == kCCProgressTimerTypeHorizontalBarRL) {
             	vIndexes[0] = 2;
             	vIndexes[1] = 3;
             	
-            	this.textureCoordinates.put(vIndexes[0]*2 + 0, tMax.x);
+            	this.textureCoordinates.put(vIndexes[0] * 2, tMax.x);
             	this.textureCoordinates.put(vIndexes[0]*2 + 1, tMax.y);
-            	this.textureCoordinates.put(vIndexes[1]*2 + 0, tMax.x);
+            	this.textureCoordinates.put(vIndexes[1] * 2, tMax.x);
             	this.textureCoordinates.put(vIndexes[1]*2 + 1, 0);
             }else if (type_ == kCCProgressTimerTypeVerticalBarBT) {
             	vIndexes[0] = 1;
             	vIndexes[1] = 3;
             	
-            	this.textureCoordinates.put(vIndexes[0]*2 + 0, 0);
+            	this.textureCoordinates.put(vIndexes[0] * 2, 0);
             	this.textureCoordinates.put(vIndexes[0]*2 + 1, tMax.y);
-            	this.textureCoordinates.put(vIndexes[1]*2 + 0, tMax.x);
+            	this.textureCoordinates.put(vIndexes[1] * 2, tMax.x);
             	this.textureCoordinates.put(vIndexes[1]*2 + 1, tMax.y);
             }else if (type_ == kCCProgressTimerTypeVerticalBarTB) {
             	vIndexes[0] = 0;
             	vIndexes[1] = 2;
             	
-            	this.textureCoordinates.put(vIndexes[0]*2 + 0, 0);
+            	this.textureCoordinates.put(vIndexes[0] * 2, 0);
             	this.textureCoordinates.put(vIndexes[0]*2 + 1, 0);
-            	this.textureCoordinates.put(vIndexes[1]*2 + 0, tMax.x);
+            	this.textureCoordinates.put(vIndexes[1] * 2, tMax.x);
             	this.textureCoordinates.put(vIndexes[1]*2 + 1, 0);
             }
 
             char index = vIndexes[0];
-            CGPoint tmpPoint = vertexFromTexCoord(CGPoint.ccp(this.textureCoordinates.get(index*2+0), this.textureCoordinates.get(index*2+1)));
-            this.vertexCoordinates.put(index*2+0, tmpPoint.x);
+            CGPoint tmpPoint = vertexFromTexCoord(CGPoint.ccp(this.textureCoordinates.get(index * 2), this.textureCoordinates.get(index*2+1)));
+            this.vertexCoordinates.put(index * 2, tmpPoint.x);
             this.vertexCoordinates.put(index*2+1, tmpPoint.y);
 
             index = vIndexes[1];
-            tmpPoint = vertexFromTexCoord(CGPoint.ccp(this.textureCoordinates.get(index*2+0), this.textureCoordinates.get(index*2+1)));
-            this.vertexCoordinates.put(index*2+0, tmpPoint.x);
+            tmpPoint = vertexFromTexCoord(CGPoint.ccp(this.textureCoordinates.get(index * 2), this.textureCoordinates.get(index*2+1)));
+            this.vertexCoordinates.put(index * 2, tmpPoint.x);
             this.vertexCoordinates.put(index*2+1, tmpPoint.y);
 
             if (sprite_.flipY_ || sprite_.flipX_) {
                 if (sprite_.flipX_) {
                     index = vIndexes[0];
-                    this.textureCoordinates.put(index*2+0, tMax.x - this.textureCoordinates.get(index*2+0));
+                    this.textureCoordinates.put(index * 2, tMax.x - this.textureCoordinates.get(index * 2));
                     index = vIndexes[1];
-                    this.textureCoordinates.put(index*2+0, tMax.x - this.textureCoordinates.get(index*2+0));
+                    this.textureCoordinates.put(index * 2, tMax.x - this.textureCoordinates.get(index * 2));
                 }
                 if(sprite_.flipY_){
                     index = vIndexes[0];
@@ -464,53 +464,53 @@ public class CCProgressTimer extends CCNode {
         	vIndexes[0] = 3;
         	vIndexes[1] = 2;
         	
-        	this.textureCoordinates.put(vIndexes[0]*2 + 0, tMax.x*alpha);
+        	this.textureCoordinates.put(vIndexes[0] * 2, tMax.x*alpha);
         	this.textureCoordinates.put(vIndexes[0]*2 + 1, tMax.y);
-        	this.textureCoordinates.put(vIndexes[1]*2 + 0, tMax.x*alpha);
+        	this.textureCoordinates.put(vIndexes[1] * 2, tMax.x*alpha);
         	this.textureCoordinates.put(vIndexes[1]*2 + 1, 0);
         } else if (type_ == kCCProgressTimerTypeHorizontalBarRL) {
             vIndexes[0] = 1;
         	vIndexes[1] = 0;
         	
-        	this.textureCoordinates.put(vIndexes[0]*2 + 0, tMax.x*(1.f - alpha));
+        	this.textureCoordinates.put(vIndexes[0] * 2, tMax.x*(1.f - alpha));
         	this.textureCoordinates.put(vIndexes[0]*2 + 1, 0);
-        	this.textureCoordinates.put(vIndexes[1]*2 + 0, tMax.x*(1.f - alpha));
+        	this.textureCoordinates.put(vIndexes[1] * 2, tMax.x*(1.f - alpha));
         	this.textureCoordinates.put(vIndexes[1]*2 + 1, tMax.y);
         } else if (type_ == kCCProgressTimerTypeVerticalBarBT) {
             vIndexes[0] = 0;
         	vIndexes[1] = 2;
         	
-        	this.textureCoordinates.put(vIndexes[0]*2 + 0, 0);
+        	this.textureCoordinates.put(vIndexes[0] * 2, 0);
         	this.textureCoordinates.put(vIndexes[0]*2 + 1, tMax.y*(1.f - alpha));
-        	this.textureCoordinates.put(vIndexes[1]*2 + 0, tMax.x);
+        	this.textureCoordinates.put(vIndexes[1] * 2, tMax.x);
         	this.textureCoordinates.put(vIndexes[1]*2 + 1, tMax.y*(1.f - alpha));
         } else if (type_ == kCCProgressTimerTypeVerticalBarTB) {
             vIndexes[0] = 1;
         	vIndexes[1] = 3;
         	
-        	this.textureCoordinates.put(vIndexes[0]*2 + 0, 0);
+        	this.textureCoordinates.put(vIndexes[0] * 2, 0);
         	this.textureCoordinates.put(vIndexes[0]*2 + 1, tMax.y*alpha);
-        	this.textureCoordinates.put(vIndexes[1]*2 + 0, tMax.x);
+        	this.textureCoordinates.put(vIndexes[1] * 2, tMax.x);
         	this.textureCoordinates.put(vIndexes[1]*2 + 1, tMax.y*alpha);
         }
 
         char index = vIndexes[0];
-        CGPoint tmpPoint = vertexFromTexCoord(CGPoint.ccp(this.textureCoordinates.get(index*2+0), this.textureCoordinates.get(index*2+1)));
-        this.vertexCoordinates.put(index*2+0, tmpPoint.x);
+        CGPoint tmpPoint = vertexFromTexCoord(CGPoint.ccp(this.textureCoordinates.get(index * 2), this.textureCoordinates.get(index*2+1)));
+        this.vertexCoordinates.put(index * 2, tmpPoint.x);
         this.vertexCoordinates.put(index*2+1, tmpPoint.y);
 
         index = vIndexes[1];
-        tmpPoint = vertexFromTexCoord(CGPoint.ccp(this.textureCoordinates.get(index*2+0), this.textureCoordinates.get(index*2+1)));
-        this.vertexCoordinates.put(index*2+0, tmpPoint.x);
+        tmpPoint = vertexFromTexCoord(CGPoint.ccp(this.textureCoordinates.get(index * 2), this.textureCoordinates.get(index*2+1)));
+        this.vertexCoordinates.put(index * 2, tmpPoint.x);
         this.vertexCoordinates.put(index*2+1, tmpPoint.y);
         
         if (sprite_.flipY_ || sprite_.flipX_) {
             if (sprite_.flipX_) {
                 index = vIndexes[0];
-                this.textureCoordinates.put(index*2+0, tMax.x - this.textureCoordinates.get(index*2+0));
+                this.textureCoordinates.put(index * 2, tMax.x - this.textureCoordinates.get(index * 2));
 
                 index = vIndexes[1];
-                this.textureCoordinates.put(index*2+0, tMax.x - this.textureCoordinates.get(index*2+0));
+                this.textureCoordinates.put(index * 2, tMax.x - this.textureCoordinates.get(index * 2));
             }
             if(sprite_.flipY_){
                 index = vIndexes[0];

@@ -135,7 +135,7 @@ public abstract class CCAtlasNode extends CCNode
 
 	    // special opacity for premultiplied textures
         if (opacityModifyRGB_) {
-            setColor(opacityModifyRGB_? colorUnmodified_ : color_);
+            setColor(colorUnmodified_);
         }
     }
 

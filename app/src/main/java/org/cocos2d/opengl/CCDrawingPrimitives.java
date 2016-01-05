@@ -50,7 +50,7 @@ public class CCDrawingPrimitives {
 //        ByteBuffer vbb = ByteBuffer.allocateDirect(4 * 2 * 1);
 //        vbb.order(ByteOrder.nativeOrder());
 //        FloatBuffer vertices = vbb.asFloatBuffer();
-        FastFloatBuffer vertices = getVertices(2 * 1);
+        FastFloatBuffer vertices = getVertices(2);
 
         vertices.put(pnt.x);
         vertices.put(pnt.y);

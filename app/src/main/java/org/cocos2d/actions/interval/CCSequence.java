@@ -61,8 +61,8 @@ public class CCSequence extends CCIntervalAction {
 
     @Override
     public void update(float t) {
-        int found = 0;
-        float new_t = 0.f;
+        int found;
+        float new_t;
 
         if (t >= split) {
             found = 1;

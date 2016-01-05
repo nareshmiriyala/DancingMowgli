@@ -30,22 +30,16 @@ public class ccMacros {
      *		CCLOGERROR() will be enabled
      *		CCLOGINFO()	will be enabled 
      */
-    public static final void CCLOG(final String logName, final String logStr) {
-        if (ccConfig.COCOS2D_DEBUG >= 1) {
-            Log.d(logName, logStr);
-        }
+    public static void CCLOG(final String logName, final String logStr) {
+        Log.d(logName, logStr);
     }
 
-    public static final void CCLOGINFO(final String logName, final String logStr) {
-        if (ccConfig.COCOS2D_DEBUG >= 1) {
-            Log.i(logName, logStr);
-        }
+    public static void CCLOGINFO(final String logName, final String logStr) {
+        Log.i(logName, logStr);
     }
 
-    public static final void CCLOGERROR(final String logName, final String logStr) {
-        if (ccConfig.COCOS2D_DEBUG >= 2) {
-            Log.e(logName, logStr);
-        }
+    public static void CCLOGERROR(final String logName, final String logStr) {
+        Log.e(logName, logStr);
     }
 
     public static final float FLT_EPSILON = 0.000001f;
@@ -58,14 +52,14 @@ public class ccMacros {
     /** @def CCRANDOM_MINUS1_1
       returns a random float between -1 and 1
     */
-    public static final float CCRANDOM_MINUS1_1() {
+    public static float CCRANDOM_MINUS1_1() {
         return (float) Math.random() * 2.0f - 1.0f;
     }
 
     /** @def CCRANDOM_0_1
       returns a random float between 0 and 1
     */
-    public static final float CCRANDOM_0_1() {
+    public static float CCRANDOM_0_1() {
         return (float) Math.random();
     }
 
@@ -78,14 +72,14 @@ public class ccMacros {
     /** @def CC_DEGREES_TO_RADIANS
         converts degrees to radians
     */
-    public static final float CC_DEGREES_TO_RADIANS(float angle) {
+    public static float CC_DEGREES_TO_RADIANS(float angle) {
         return (angle / 180.0f * (float) Math.PI);
     }
 
     /** @def CC_RADIANS_TO_DEGREES
         converts radians to degrees
     */
-    public static final float CC_RADIANS_TO_DEGREES(float angle) {
+    public static float CC_RADIANS_TO_DEGREES(float angle) {
         return (angle / (float) Math.PI * 180.0f);
     }
 
@@ -96,7 +90,7 @@ public class ccMacros {
       - GL_TEXTURE_COORD_ARRAY
       - GL_COLOR_ARRAY
       */
-    public static final void CC_ENABLE_DEFAULT_GL_STATES(GL10 gl) {
+    public static void CC_ENABLE_DEFAULT_GL_STATES(GL10 gl) {
         gl.glEnableClientState(GL10.GL_VERTEX_ARRAY);
         gl.glEnableClientState(GL10.GL_COLOR_ARRAY);
         gl.glEnableClientState(GL10.GL_TEXTURE_COORD_ARRAY);
@@ -110,7 +104,7 @@ public class ccMacros {
       - GL_TEXTURE_COORD_ARRAY
       - GL_COLOR_ARRAY
       */
-    public static final void CC_DISABLE_DEFAULT_GL_STATES(GL10 gl) {
+    public static void CC_DISABLE_DEFAULT_GL_STATES(GL10 gl) {
         gl.glDisable(GL10.GL_TEXTURE_2D);
         gl.glDisableClientState(GL10.GL_COLOR_ARRAY);
         gl.glDisableClientState(GL10.GL_TEXTURE_COORD_ARRAY);
@@ -135,7 +129,7 @@ public class ccMacros {
     @since v0.99.4
     */
     // not supported yet...
-    public static final void CC_DIRECTOR_INIT(Activity app) {
+    public static void CC_DIRECTOR_INIT(Activity app) {
     	CCDirector director = CCDirector.sharedDirector();
     	director.setDeviceOrientation(CCDirector.kCCDeviceOrientationPortrait);
     	director.setDisplayFPS(false);
@@ -154,7 +148,7 @@ public class ccMacros {
       @since v0.99.4
       */
     // do nothing yet...
-    public static final void CC_DIRECTOR_END() {
+    public static void CC_DIRECTOR_END() {
         CCDirector director = CCDirector.sharedDirector();
         GLSurfaceView view = director.getOpenGLView();
         ViewGroup vg = (ViewGroup)view.getParent();

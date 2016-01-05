@@ -25,7 +25,7 @@ public class CCBlink extends CCIntervalAction {
     public void update(float t) {
         float slice = 1.0f / times;
         float m = t % slice;
-        target.setVisible(m > slice / 2 ? true : false);
+        target.setVisible(m > slice / 2);
     }
 
     @Override

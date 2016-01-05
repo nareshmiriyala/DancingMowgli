@@ -65,7 +65,7 @@ public class CCPointParticleSystem extends CCParticleSystem {
     public void updateQuad(CCParticle p, CGPoint newPos) {
         // place vertices and colos in array
     	final int base = particleIdx * ccPointSprite.spriteSize;
-        vertices.put(base + 0, newPos.x);
+        vertices.put(base, newPos.x);
         vertices.put(base + 1, newPos.y);        
         vertices.put(base + 2, p.color.r);
         vertices.put(base + 3, p.color.g);

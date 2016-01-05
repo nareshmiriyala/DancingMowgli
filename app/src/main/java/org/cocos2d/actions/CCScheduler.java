@@ -55,7 +55,7 @@ public class CCScheduler {
 	//
 	// "updates with priority" stuff
 	//
-	ArrayList<tListEntry>    updatesNeg;	// list of priority < 0
+    final ArrayList<tListEntry>    updatesNeg;	// list of priority < 0
 	ArrayList<tListEntry>    updates0;	// list priority == 0
 	ArrayList<tListEntry>    updatesPos;	// list priority > 0
 		
@@ -372,9 +372,6 @@ public class CCScheduler {
         if( target==null || selector==null)
             return;
 
-        assert target != null: "Target MUST not be null";
-        assert selector != null: "Selector MUST not be null";
-
         tHashSelectorEntry element = hashForSelectors.get(target);
         if( element != null ) {
             for( int i=0; i< element.timers.size(); i++ ) {
@@ -416,9 +413,6 @@ public class CCScheduler {
         // explicity handle nil arguments when removing an object
         if( target==null || callback==null)
             return;
-
-        assert target != null: "Target MUST not be null";
-        assert callback != null: "Selector MUST not be null";
 
         tHashSelectorEntry element = hashForSelectors.get(target);
         if( element != null ) {
@@ -585,10 +579,8 @@ public class CCScheduler {
     */
 	public void scheduleUpdate(Object target, int priority, boolean paused) {
         // TODO Auto-generated method stub
-        if (ccConfig.COCOS2D_DEBUG >= 1) {
-        	tHashSelectorEntry hashElement = hashForUpdates.get(target);
-            assert hashElement == null:"CCScheduler: You can't re-schedule an 'update' selector'. Unschedule it first";
-        }
+        tHashSelectorEntry hashElement = hashForUpdates.get(target);
+        assert hashElement == null:"CCScheduler: You can't re-schedule an 'update' selector'. Unschedule it first";
 
         // most of the updates are going to be 0, that's why there
         // is an special list for updates with priority 0
@@ -608,10 +600,8 @@ public class CCScheduler {
      */
 	public void scheduleUpdate(UpdateCallback target, int priority, boolean paused) {
         // TODO Auto-generated method stub
-        if (ccConfig.COCOS2D_DEBUG >= 1) {
-        	tHashSelectorEntry hashElement = hashForUpdates.get(target);
-            assert hashElement == null:"CCScheduler: You can't re-schedule an 'update' selector'. Unschedule it first";
-        }
+        tHashSelectorEntry hashElement = hashForUpdates.get(target);
+        assert hashElement == null:"CCScheduler: You can't re-schedule an 'update' selector'. Unschedule it first";
 
         // most of the updates are going to be 0, that's way there
         // is an special list for updates with priority 0

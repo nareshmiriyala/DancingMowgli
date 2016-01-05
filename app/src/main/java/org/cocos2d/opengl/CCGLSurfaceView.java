@@ -6,6 +6,7 @@ import org.cocos2d.types.CGSize;
 
 import android.app.Activity;
 import android.content.Context;
+import android.support.annotation.NonNull;
 import android.view.MotionEvent;
 
 public class CCGLSurfaceView extends GLSurfaceView {
@@ -60,7 +61,7 @@ public class CCGLSurfaceView extends GLSurfaceView {
     }        
 
     @Override
-    public boolean onTouchEvent(MotionEvent event) {
+    public boolean onTouchEvent(@NonNull MotionEvent event) {
   	
     	mDispatcher.queueMotionEvent(event);
     	

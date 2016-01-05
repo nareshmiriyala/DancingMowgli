@@ -21,8 +21,6 @@ import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 public class MainActivity extends Activity {
-	
-	private CCGLSurfaceView mGLSurfaceView;
 
 	//<!-- Admob Ads Using Google Play Services SDK -->
 	private static final String AD_UNIT_ID = "ca-app-pub-2404182789555566/4527670134";
@@ -43,7 +41,7 @@ public class MainActivity extends Activity {
 		super.onCreate(savedInstanceState);
 				
 		// set view
-		mGLSurfaceView = new CCGLSurfaceView(this);
+		CCGLSurfaceView mGLSurfaceView = new CCGLSurfaceView(this);
 		
 		
 		//Ads ----------------

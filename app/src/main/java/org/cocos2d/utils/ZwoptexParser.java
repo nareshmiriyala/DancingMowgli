@@ -168,7 +168,7 @@ public class ZwoptexParser extends DefaultHandler {
 		String s = new String(ch, start, length);
 
 		// section
-		if (mode_set_key == true && dict_depth == 1)
+		if (mode_set_key && dict_depth == 1)
 		{
 			section = s;
 		}
@@ -183,44 +183,44 @@ public class ZwoptexParser extends DefaultHandler {
 
 		// metadata key
 		if ("texture".equals(section) &&
-			mode_set_key == true && dict_depth == 2)
+				mode_set_key && dict_depth == 2)
 		{
 			metadata_key = s;
 		}
 		
 		// metadata integer
 		if ("texture".equals(section) &&
-			mode_set_integer == true && dict_depth == 2)
+				mode_set_integer && dict_depth == 2)
 		{
 			metadata.put(metadata_key, Integer.parseInt(s));
 		}
 		
-		if ("metadata".equals(section) && mode_set_integer == true
+		if ("metadata".equals(section) && mode_set_integer
 				&& dict_depth == 2 && "format".equals(f_key))
 		{
 			f_format = Integer.parseInt(s);
 		}
 		
-		if ("metadata".equals(section) && mode_set_key == true && dict_depth == 2)
+		if ("metadata".equals(section) && mode_set_key && dict_depth == 2)
 		{
 			f_key = s;
 		}
 
 		// filename
-		if ("frames".equals(section) && mode_set_key == true && dict_depth == 2)
+		if ("frames".equals(section) && mode_set_key && dict_depth == 2)
 		{
 			f_filename = s;
 		}
 
 		// frame key
-		if ("frames".equals(section) && mode_set_key == true && dict_depth == 3)
+		if ("frames".equals(section) && mode_set_key && dict_depth == 3)
 		{
 			f_key = s;
 		}
 
 		// strings
 		if ("frames".equals(section) &&
-			mode_set_string == true && dict_depth == 3)
+				mode_set_string && dict_depth == 3)
 		{
 			// version 2
 			if ("frame".equals(f_key)) {

@@ -63,7 +63,7 @@ public class CCSprite extends CCNode implements CCRGBAProtocol, CCTextureProtoco
      * @since v0.99.0
      */
 	//! Translate with it's parent
-	public static final int CC_HONOR_PARENT_TRANSFORM_TRANSLATE =  1 << 0;
+	public static final int CC_HONOR_PARENT_TRANSFORM_TRANSLATE = 1;
 	//! Rotate with it's parent
 	public static final int CC_HONOR_PARENT_TRANSFORM_ROTATE	=  1 << 1;
 	//! Scale with it's parent
@@ -558,7 +558,7 @@ public class CCSprite extends CCNode implements CCRGBAProtocol, CCTextureProtoco
             initAnimationDictionary();
 
         CCAnimation anim = animations_.get(animationName);
-        CCSpriteFrame frame = (CCSpriteFrame) anim.frames().get(frameIndex);
+        CCSpriteFrame frame = anim.frames().get(frameIndex);
         setDisplayFrame(frame);
     }
 
@@ -648,8 +648,6 @@ public class CCSprite extends CCNode implements CCRGBAProtocol, CCTextureProtoco
         assert ! usesSpriteSheet_: "CCSprite: setTexture doesn't work when the sprite is rendered using a CCSpriteSheet";
 
         // accept texture==nil as argument
-        assert (texture==null || texture instanceof CCTexture2D) 
-        	: "setTexture expects a CCTexture2D. Invalid argument";
         texture_ = texture;
         updateBlendFunc();
     }
@@ -1034,7 +1032,7 @@ public class CCSprite extends CCNode implements CCRGBAProtocol, CCTextureProtoco
         } 
 
         // else do affine transformation according to the HonorParentTransform
-        else if( parent_ != spriteSheet_ ) {
+        else {
 
             int prevHonor = CC_HONOR_PARENT_TRANSFORM_ALL;
 

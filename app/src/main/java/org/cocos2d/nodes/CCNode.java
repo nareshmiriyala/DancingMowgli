@@ -1388,7 +1388,7 @@ public class CCNode {
     }
 
 
-    private static final float RENDER_IN_SUBPIXEL(float f) {
+    private static float RENDER_IN_SUBPIXEL(float f) {
         if (ccConfig.CC_COCOSNODE_RENDER_SUBPIXEL) {
             return f;
         } else {

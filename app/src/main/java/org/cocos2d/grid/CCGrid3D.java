@@ -92,10 +92,10 @@ public class CCGrid3D extends CCGridBase {
             for (x = 0; x < (gridSize_.x + 1); x++) {
                 int idx = (y * (gridSize_.x + 1)) + x;
 
-                vertices.put(idx * 3 + 0, -1);
+                vertices.put(idx * 3, -1);
                 vertices.put(idx * 3 + 1, -1);
                 vertices.put(idx * 3 + 2, -1);
-                vertices.put(idx * 2 + 0, -1);
+                vertices.put(idx * 2, -1);
                 vertices.put(idx * 2 + 1, -1);
             }
         }
@@ -132,11 +132,11 @@ public class CCGrid3D extends CCGridBase {
                 CGPoint[] tex2 = {CGPoint.ccp(x1, y1), CGPoint.ccp(x2, y1), CGPoint.ccp(x2, y2), CGPoint.ccp(x1, y2)};
 
                 for (i = 0; i < 4; i++) {
-                    vertices.put(l1[i] + 0, l2[i].x);
+                    vertices.put(l1[i], l2[i].x);
                     vertices.put(l1[i] + 1, l2[i].y);
                     vertices.put(l1[i] + 2, l2[i].z);
 
-                    texCoordinates.put(tex1[i] + 0, tex2[i].x / width);
+                    texCoordinates.put(tex1[i], tex2[i].x / width);
                     texCoordinates.put(tex1[i] + 1, tex2[i].y / height);
                 }
             }
@@ -152,7 +152,7 @@ public class CCGrid3D extends CCGridBase {
     /** returns the vertex at a given position */
     public CCVertex3D vertex(ccGridSize pos) {
         int index = (pos.x * (gridSize_.y + 1) + pos.y) * 3;
-        CCVertex3D vert = new CCVertex3D(vertices.get(index + 0), vertices.get(index + 1), vertices.get(index + 2));
+        CCVertex3D vert = new CCVertex3D(vertices.get(index), vertices.get(index + 1), vertices.get(index + 2));
 
         return vert;
     }
@@ -160,7 +160,7 @@ public class CCGrid3D extends CCGridBase {
     /** returns the original (non-transformed) vertex at a given position */
     public CCVertex3D originalVertex(ccGridSize pos) {
         int index = (pos.x * (gridSize_.y + 1) + pos.y) * 3;
-        CCVertex3D vert = new CCVertex3D(originalVertices.get(index + 0), originalVertices.get(index + 1), originalVertices.get(index + 2));
+        CCVertex3D vert = new CCVertex3D(originalVertices.get(index), originalVertices.get(index + 1), originalVertices.get(index + 2));
 
         return vert;
     }
@@ -168,7 +168,7 @@ public class CCGrid3D extends CCGridBase {
     /** sets a new vertex at a given position */
     public void setVertex(ccGridSize pos, CCVertex3D vertex) {
         int index = (pos.x * (gridSize_.y + 1) + pos.y) * 3;
-        vertices.put(index + 0, vertex.x);
+        vertices.put(index, vertex.x);
         vertices.put(index + 1, vertex.y);
         vertices.put(index + 2, vertex.z);
     }

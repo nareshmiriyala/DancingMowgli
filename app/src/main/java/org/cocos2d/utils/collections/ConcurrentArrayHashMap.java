@@ -76,7 +76,7 @@ public class ConcurrentArrayHashMap<K,V> {
 	
 		map.remove(key);
 		
-		int curInd = ind.intValue();
+		int curInd = ind;
 		int lastInd = array.size()-1;
 		
 		V ret = array.get(curInd).value;

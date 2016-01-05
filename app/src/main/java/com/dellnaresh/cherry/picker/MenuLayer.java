@@ -88,7 +88,7 @@ public class MenuLayer extends CCLayer {
 		SharedPreferences sp = CCDirector.sharedDirector().getActivity().getSharedPreferences("GameInfo", 0);
 		SharedPreferences.Editor  et = sp.edit();
 		et.putBoolean("sound", G.sound);
-		et.commit();
+		et.apply();
 	}
 
 	public void onMusic(Object sender)
@@ -99,7 +99,7 @@ public class MenuLayer extends CCLayer {
 		SharedPreferences sp = CCDirector.sharedDirector().getActivity().getSharedPreferences("GameInfo", 0);
 		SharedPreferences.Editor  et = sp.edit();
 		et.putBoolean("music", G.music);
-		et.commit();
+		et.apply();
 
 		if (G.music)
 		{

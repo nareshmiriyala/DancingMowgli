@@ -966,9 +966,9 @@ public final class MathLib {
      * @return the value y such as <code>10<sup>y</sup> == x</code>
      **/
     public static double log10(double x) {
+        double INV_LOG10 = 0.43429448190325182765112891891661;
         return log(x) * INV_LOG10;
     }
-    private static double INV_LOG10 = 0.43429448190325182765112891891661;
     /**/
 
     /**

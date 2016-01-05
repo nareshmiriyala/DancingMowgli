@@ -9,6 +9,8 @@
 package org.cocos2d.utils.javolution;
 
 
+import android.support.annotation.NonNull;
+
 import java.io.IOException;
 import java.io.Writer;
 
@@ -224,7 +226,7 @@ public class TextBuilder implements Appendable,
         if (obj instanceof String)
             return append((String) obj);
         if (obj instanceof Number)
-            return appendNumber((Number)obj);
+            return appendNumber(obj);
         return append(String.valueOf(obj));
     }
 
@@ -419,7 +421,7 @@ public class TextBuilder implements Appendable,
             append('-');
             if (i == Integer.MIN_VALUE) { // Negative would overflow.
                 appendPositive(-(i / radix), radix);
-                return (TextBuilder) append(DIGIT_TO_CHAR[-(i % radix)]);
+                return append(DIGIT_TO_CHAR[-(i % radix)]);
             }
             i = -i;
         }
@@ -495,7 +497,7 @@ public class TextBuilder implements Appendable,
             append('-');
             if (l == Long.MIN_VALUE) { // Negative would overflow.
                 appendPositive(-(l / radix), radix);
-                return (TextBuilder) append(DIGIT_TO_CHAR[(int) -(l % radix)]);
+                return append(DIGIT_TO_CHAR[(int) -(l % radix)]);
             }
             l = -l;
         }
@@ -635,7 +637,7 @@ public class TextBuilder implements Appendable,
         return this;
     }
 
-    private final void appendFraction(long l, int digits, boolean showZero) {
+    private void appendFraction(long l, int digits, boolean showZero) {
         append('.');
         if (l == 0)
             if (showZero)
@@ -739,6 +741,7 @@ public class TextBuilder implements Appendable,
      *
      * @return the <code>java.lang.String</code> for this text builder.
      */
+    @NonNull
     public final String toString() {
         char[] data = new char[_length];
         this.getChars(0, _length, data, 0);

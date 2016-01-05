@@ -315,8 +315,7 @@ public class CCDirector implements GLSurfaceView.Renderer {
     /* display FPS ? */
     private int frames_;
     private float accumDt_;
-    private float frameRate_;
-	
+
     CCLabelAtlas FPSLabel_;
 
     /* is the running scene paused */
@@ -1041,7 +1040,7 @@ public class CCDirector implements GLSurfaceView.Renderer {
                 break;
 
             default:
-                return ret;
+                return null;
         }
 
 	    if (contentScaleFactor_ != 1 && isContentScaleSupported_ )
@@ -1385,6 +1384,7 @@ public class CCDirector implements GLSurfaceView.Renderer {
     }
 
     public int[] getConfigSpec() {
+        boolean mTranslucentBackground = false;
         if (mTranslucentBackground) {
             // We want a depth buffer and an getOpacity buffer
             int[] configSpec = {
@@ -1411,6 +1411,7 @@ public class CCDirector implements GLSurfaceView.Renderer {
 	
     private void showFPS(GL10 gl) {
 
+        float frameRate_;
         if (FAST_FPS_DISPLAY) {
             // display the FPS using a LabelAtlas
             // updates the FPS every frame
@@ -1423,7 +1424,7 @@ public class CCDirector implements GLSurfaceView.Renderer {
                 frames_ = 0;
                 accumDt_ = 0;
                 
-                int fpsInt = (int)frameRate_;
+                int fpsInt = (int) frameRate_;
                 int fpsFract = (int)( (frameRate_ - fpsInt) * 10 );
                 
                 fpsBuilder.reset();
@@ -1469,8 +1470,6 @@ public class CCDirector implements GLSurfaceView.Renderer {
         }
     }
 
-    private boolean mTranslucentBackground = false;
-    
     public boolean onKeyDown(KeyEvent event){
     	if (!CCKeyDispatcher.sharedDispatcher().getDispatchEvents())
     		return false;

@@ -34,8 +34,8 @@ import android.view.MotionEvent;
  */
 public class CCTouchDispatcher {
     public enum ccTouchSelectorFlag {
-    	ccTouchSelectorNoneBit (1 << 0),
-        ccTouchSelectorBeganBit (1 << 0),
+    	ccTouchSelectorNoneBit (1),
+        ccTouchSelectorBeganBit (1),
         ccTouchSelectorMovedBit (1 << 1),
         ccTouchSelectorEndedBit (1 << 2),
         ccTouchSelectorCancelledBit (1 << 3),
@@ -83,7 +83,7 @@ public class CCTouchDispatcher {
 	struct ccTouchHandlerHelperData handlerHelperData[ccTouchMax];
 }*/
     /** Listeners for raw MotionEvents */
-    private ArrayList<CCMotionEventProtocol> motionListeners;
+    private final ArrayList<CCMotionEventProtocol> motionListeners;
    
     private ArrayList<CCTargetedTouchHandler> targetedHandlers;
     private ArrayList<CCTouchHandler> touchHandlers;
@@ -232,7 +232,7 @@ public class CCTouchDispatcher {
 		    	CCTouchHandler handler = null;
 		    	@SuppressWarnings("rawtypes")
 				ArrayList list = null;
-		        int i = 0;
+		        int i;
 		        for( i = 0; i < targetedHandlers.size(); i++ ) {
 		        	handler = targetedHandlers.get(i++);
 		            if( handler.getDelegate() == delegate ) {

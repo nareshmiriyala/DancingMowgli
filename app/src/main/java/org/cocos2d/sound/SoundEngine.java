@@ -13,11 +13,11 @@ import android.media.SoundPool;
 // TODO: support volume customizations for both effects and background ...
 public class SoundEngine {
 	// effects are sounds that less than 5 seconds, better in 3 seconds
-	IntMap<Integer> effectsMap = new IntMap<Integer>();
+	final IntMap<Integer> effectsMap = new IntMap<Integer>();
 	IntMap<Integer> streamsMap = new IntMap<Integer>();
 	
 	// sounds are background sounds, usually longer than 5 seconds
-	IntMap<MediaPlayer> soundsMap = new IntMap<MediaPlayer>();
+	final IntMap<MediaPlayer> soundsMap = new IntMap<MediaPlayer>();
 	SoundPool sp = new SoundPool(5, AudioManager.STREAM_MUSIC, 0);
 	int lastSndId = -1;
 	Float prevEffectsVolume = null;
@@ -105,7 +105,7 @@ public class SoundEngine {
 	}
 		
 	public void playEffect(Context app, int resId) {
-		Integer sndId = -1;
+		Integer sndId;
 		synchronized (effectsMap) {
 			sndId = effectsMap.get(resId);
 			if (sndId == null) {
@@ -145,7 +145,7 @@ public class SoundEngine {
 			pauseSound();
 		}
 		
-		MediaPlayer mp = null;
+		MediaPlayer mp;
 		synchronized(soundsMap) {
 			mp = soundsMap.get(resId);
 			if (mp == null) {
@@ -158,10 +158,7 @@ public class SoundEngine {
 				soundsMap.put(resId, mp);
 				try {
 					mp.prepare();
-				} catch (IllegalStateException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				} catch (IOException e) {
+				} catch (IllegalStateException | IOException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
@@ -180,7 +177,7 @@ public class SoundEngine {
 		if (lastSndId == -1)
 			return;
 		
-		MediaPlayer mp = null;
+		MediaPlayer mp;
 		synchronized(soundsMap) {
 			mp = soundsMap.get(lastSndId);
 			if (mp == null)
@@ -193,7 +190,7 @@ public class SoundEngine {
 		if (lastSndId == -1)
 			return;
 		
-		MediaPlayer mp = null;
+		MediaPlayer mp;
 		synchronized(soundsMap) {
 			mp = soundsMap.get(lastSndId);
 			if (mp == null)
@@ -204,7 +201,7 @@ public class SoundEngine {
 	
 	public void realesSound(int resId)
 	{
-		MediaPlayer mp = null;
+		MediaPlayer mp;
 		synchronized(soundsMap) {
 			mp = soundsMap.get(resId);
 			if (mp != null) {

@@ -159,7 +159,8 @@ public class CCBitmapFontAtlas extends CCSpriteSheet implements CCLabelProtocol,
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-        	BufferedReader reader = new BufferedReader(new InputStreamReader(in));
+            assert in != null;
+            BufferedReader reader = new BufferedReader(new InputStreamReader(in));
         	
             // Create a holder for each line we are going to work with
             String line;
@@ -213,7 +214,7 @@ public class CCBitmapFontAtlas extends CCSpriteSheet implements CCLabelProtocol,
         }
 
         public void parseImage(String line, String fntFile) {
-            String propertyValue = null;
+            String propertyValue;
 
             // Break the values for this line up using =
             String [] values = line.split("=");
@@ -249,7 +250,7 @@ public class CCBitmapFontAtlas extends CCSpriteSheet implements CCLabelProtocol,
             //
             String[] values = line.split("=");
             ListIterator<String> nse = Arrays.asList(values).listIterator();	
-            String propertyValue = null;
+            String propertyValue;
 
             // We need to move past the first entry in the array before we start assigning values
             nse.next();
@@ -316,7 +317,7 @@ public class CCBitmapFontAtlas extends CCSpriteSheet implements CCLabelProtocol,
             //
             String[] values = line.split("=");
             ListIterator<String> nse = Arrays.asList(values).listIterator();	
-            String propertyValue = null;
+            String propertyValue;
 
             // We need to move past the first entry in the array before we start assigning values
             nse.next();

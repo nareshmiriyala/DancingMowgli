@@ -177,28 +177,39 @@ public class PlistParser extends DefaultHandler {
 	@Override
 	public void startElement(String uri, String localName, String qName,
 			Attributes attributes) throws SAXException {
-		if(localName.equals(EL_KEY)) {
-			currentElement = TYPE_KEY;
-		} else if(localName.equals(EL_STRING)) {
-			currentElement = TYPE_STRING;
-		} else if(localName.equals(EL_INTEGER)) {
-			currentElement = TYPE_INTEGER;
-		} else if(localName.equals(EL_REAL)) {
-			currentElement = TYPE_REAL;
-		} else if(localName.equals(EL_DATA)) {
-			currentElement = TYPE_DATA;
-		} else if(localName.equals(EL_DATE)) {
-			currentElement = TYPE_DATE;
-		} else if(localName.equals(EL_TRUE)) {
-			addToCollection(true);
-		} else if(localName.equals(EL_FALSE)) {
-			addToCollection(false);
-			
-		// collections	
-		} else if(localName.equals(EL_DICT)) {
-			depthUp(new HashMap<String, Object>());
-		} else if(localName.equals(EL_ARRAY)) {
-			depthUp(new ArrayList<Object>());
+		switch (localName) {
+			case EL_KEY:
+				currentElement = TYPE_KEY;
+				break;
+			case EL_STRING:
+				currentElement = TYPE_STRING;
+				break;
+			case EL_INTEGER:
+				currentElement = TYPE_INTEGER;
+				break;
+			case EL_REAL:
+				currentElement = TYPE_REAL;
+				break;
+			case EL_DATA:
+				currentElement = TYPE_DATA;
+				break;
+			case EL_DATE:
+				currentElement = TYPE_DATE;
+				break;
+			case EL_TRUE:
+				addToCollection(true);
+				break;
+			case EL_FALSE:
+				addToCollection(false);
+
+				// collections
+				break;
+			case EL_DICT:
+				depthUp(new HashMap<String, Object>());
+				break;
+			case EL_ARRAY:
+				depthUp(new ArrayList<Object>());
+				break;
 		}
 	}
 	
@@ -230,10 +241,10 @@ public class PlistParser extends DefaultHandler {
 			}
 			break;
 		case TYPE_INTEGER:
-			addToCollection(new Integer(characterData.toString().trim()));
+			addToCollection(Integer.valueOf(characterData.toString().trim()));
 			break;
 		case TYPE_REAL:
-			addToCollection(new Double(characterData.toString().trim()));
+			addToCollection(Double.valueOf(characterData.toString().trim()));
 			break;
 		default:
 			break;

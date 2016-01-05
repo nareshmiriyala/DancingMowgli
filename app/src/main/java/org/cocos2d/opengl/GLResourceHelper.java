@@ -50,7 +50,7 @@ public class GLResourceHelper {
 	}
 
 	private ConcurrentLinkedQueue<GLResorceTask> taskQueue;
-	private Map<Resource, GLResourceLoader> reloadMap;
+	private final Map<Resource, GLResourceLoader> reloadMap;
 
 	
 	public GLResourceHelper() {

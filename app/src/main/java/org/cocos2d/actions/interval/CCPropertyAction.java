@@ -63,18 +63,12 @@ public class CCPropertyAction extends CCIntervalAction {
     public void update(float dt) {
         try {
         	if (setMethod_ == null) {        		
-        		setMethod_    = target.getClass().getMethod(key_, new Class[] {Float.TYPE});        		
+        		setMethod_    = target.getClass().getMethod(key_, Float.TYPE);
         	}
-        	setMethod_.invoke(target, new Object[] {
-        			to_  - delta_ * (1 - dt)
-        	});
-    	} catch (NoSuchMethodException e) {
+        	setMethod_.invoke(target, to_  - delta_ * (1 - dt));
+    	} catch (NoSuchMethodException | IllegalArgumentException | InvocationTargetException e) {
     		e.printStackTrace();
-    	} catch (IllegalArgumentException e) {
-			e.printStackTrace();
-		} catch (IllegalAccessException e) {
-			e.printStackTrace();
-		} catch (InvocationTargetException e) {
+    	} catch (IllegalAccessException e) {
 			e.printStackTrace();
 		}
     }

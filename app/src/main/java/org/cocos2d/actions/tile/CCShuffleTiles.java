@@ -50,8 +50,8 @@ public class CCShuffleTiles extends CCTiledGrid3DAction {
         CGPoint	pos2 = CGPoint.make(0, 0);
         int idx = pos.x * gridSize.y + pos.y;
 
-        pos2.x = tilesOrder[idx] / (int)gridSize.y;
-        pos2.y = tilesOrder[idx] % (int)gridSize.y;
+        pos2.x = tilesOrder[idx] / gridSize.y;
+        pos2.y = tilesOrder[idx] % gridSize.y;
 
         return ccGridSize.ccg((int)(pos2.x - pos.x), (int)(pos2.y - pos.y));
     }

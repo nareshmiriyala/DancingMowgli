@@ -121,10 +121,11 @@ public class GameLayer extends CCLayer {
 		scheduleUpdate();
 	}
 	
-	public int getScore() { return _score; };
+	public int getScore() { return _score; }
 
-	public void gameReady() { state = G.gsReady; };
-	public void gameRun() { state = G.gsRun; };
+	public void gameReady() { state = G.gsReady; }
+
+	public void gameRun() { state = G.gsRun; }
 
 	public void setScore(int score)
 	{
@@ -180,7 +181,7 @@ public class GameLayer extends CCLayer {
 		}
 		
 		// save
-		et.commit();	
+		et.apply();
 
 		if (_level > maxLevel[_levelMode])
 		{

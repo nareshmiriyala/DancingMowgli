@@ -11,7 +11,7 @@ public class CCKeyDispatcher {
 	public static final boolean kEventHandled = true;
 	public static final boolean kEventIgnored = false;
 
-	private ArrayList<CCKeyHandler> keyHandlers;
+	private final ArrayList<CCKeyHandler> keyHandlers;
 	private boolean dispatchEvents;
 
 	public boolean getDispatchEvents() {
@@ -99,7 +99,7 @@ public class CCKeyDispatcher {
 			synchronized (keyHandlers) {
 				for (int ind = 0; ind < keyHandlers.size(); ind++) {
 					CCKeyHandler handler = keyHandlers.get(ind);
-					if (handler.ccKeyDown(event.getKeyCode(), event) == kEventHandled)
+					if (handler.ccKeyDown(event.getKeyCode(), event))
 						break;
 				}
 			}
@@ -111,7 +111,7 @@ public class CCKeyDispatcher {
 			synchronized (keyHandlers) {
 				for (int ind = 0; ind < keyHandlers.size(); ind++) {
 					CCKeyHandler handler = keyHandlers.get(ind);
-					if (handler.ccKeyUp(event.getKeyCode(), event) == kEventHandled)
+					if (handler.ccKeyUp(event.getKeyCode(), event))
 						break;
 				}
 			}

@@ -14,7 +14,7 @@ public class BufferProvider {
 	// 64k is big enough for most objects
 	private static final int ALLOCATION_SIZE = 1024 * 1024;
 	private ByteBuffer currentBuffer = null;
-	private static BufferProvider global_synced = new BufferProvider();
+	private static final BufferProvider global_synced = new BufferProvider();
 	
 	public ByteBuffer allocate(int size) {
 		if(size >= ALLOCATION_SIZE)
@@ -89,7 +89,7 @@ public class BufferProvider {
     public static ByteBuffer bufferFromFile(String path) {
     	ByteArrayOutputStream tmpOut = new ByteArrayOutputStream();
     	byte buf[] = new byte[1024];
-    	int len = 0;
+    	int len;
     	try {
 			FileInputStream fis = new FileInputStream(path);
 			while(true) {
@@ -98,9 +98,6 @@ public class BufferProvider {
 					break;
 				tmpOut.write(buf, 0, len);
 			}
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

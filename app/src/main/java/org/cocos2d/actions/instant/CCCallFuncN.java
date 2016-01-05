@@ -23,7 +23,7 @@ public class CCCallFuncN extends CCCallFunc {
      */
     public void execute() {
         try {
-            invocation.invoke(targetCallback, new Object[]{target});
+            invocation.invoke(targetCallback, target);
         } catch (Exception e) {
         }
     }

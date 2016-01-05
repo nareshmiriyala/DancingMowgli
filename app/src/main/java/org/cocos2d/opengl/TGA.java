@@ -99,7 +99,7 @@ public class TGA {
         int mode, total, i, index = 0;
         byte[] aux = new byte[4];
         int runlength = 0;
-        boolean skip = false;
+        boolean skip;
         int flag = 0;
 
         // mode equal the number of components for each pixel

@@ -99,7 +99,7 @@ public class CCQuadParticleSystem extends CCParticleSystem implements Resource {
 		
 		indices = BufferProvider.createShortBuffer(totalParticles * 6 );
 
-		if( texCoords == null || vertices == null || colors == null || indices == null) {
+		if(texCoords == null || vertices == null || colors == null) {
 			ccMacros.CCLOG("cocos2d", "Particle system: not enough memory");
 			return ;
 		}
@@ -162,7 +162,7 @@ public class CCQuadParticleSystem extends CCParticleSystem implements Resource {
 		for(int i=0; i<totalParticles; i++) {
 			final int base = i * 8;
 			// bottom-left vertex:
-			texCoords.put(base + 0, bottomLeftX);
+			texCoords.put(base, bottomLeftX);
 			texCoords.put(base + 1, bottomLeftY);
 			
 			// bottom-right vertex:
@@ -221,7 +221,7 @@ public class CCQuadParticleSystem extends CCParticleSystem implements Resource {
 		for( int i=0;i< totalParticles;i++) {
 			final short base4 = (short) (i * 4);
 			final int base6 = i * 6;
-			indices.put(base6+0, (short) (base4 + 0));
+			indices.put(base6, (short) (base4));
 			indices.put(base6+1, (short) (base4 + 1));
 			indices.put(base6+2, (short) (base4 + 2));
 
@@ -235,7 +235,7 @@ public class CCQuadParticleSystem extends CCParticleSystem implements Resource {
 	public void updateQuad(CCParticle p, CGPoint newPos) {
 		// colors
 		for (int i=0; i<4; ++i) {
-			colors.put(particleIdx * 16 + i*4 + 0, p.color.r);
+			colors.put(particleIdx * 16 + i * 4, p.color.r);
 			colors.put(particleIdx * 16 + i*4 + 1, p.color.g);
 			colors.put(particleIdx * 16 + i*4 + 2, p.color.b);
 			colors.put(particleIdx * 16 + i*4 + 3, p.color.a);
@@ -252,7 +252,7 @@ public class CCQuadParticleSystem extends CCParticleSystem implements Resource {
 			float x = newPos.x;
 			float y = newPos.y;
 
-			float r = (float)- ccMacros.CC_DEGREES_TO_RADIANS(p.rotation);
+			float r = - ccMacros.CC_DEGREES_TO_RADIANS(p.rotation);
 			float cr = (float) Math.cos(r);
 			float sr = (float) Math.sin(r);
 			float ax = x1 * cr - y1 * sr + x;
@@ -266,7 +266,7 @@ public class CCQuadParticleSystem extends CCParticleSystem implements Resource {
 			
 			final int base = particleIdx * 8;
 			// bottom-left vertex:
-			vertices.put(base + 0, ax);
+			vertices.put(base, ax);
 			vertices.put(base + 1, ay);
 			
 			// bottom-right vertex:
@@ -283,7 +283,7 @@ public class CCQuadParticleSystem extends CCParticleSystem implements Resource {
 		} else {
 			final int base = particleIdx * 8;
 			// bottom-left vertex:
-			vertices.put(base + 0, newPos.x - size_2);
+			vertices.put(base, newPos.x - size_2);
 			vertices.put(base + 1, newPos.y - size_2);
 			
 			// bottom-right vertex:

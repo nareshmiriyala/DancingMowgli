@@ -33,7 +33,7 @@ public class CCShatteredTiles3D extends CCTiledGrid3DAction {
     public void update(float time) {
         int i, j;
 
-        if ( once == false ) {
+        if (!once) {
             for( i = 0; i < gridSize.x; i++ ) {
                 for( j = 0; j < gridSize.y; j++ ) {
                     ccQuad3 coords = originalTile(ccGridSize.ccg(i,j));

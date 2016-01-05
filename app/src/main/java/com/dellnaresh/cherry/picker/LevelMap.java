@@ -76,7 +76,6 @@ public class LevelMap extends CCTMXTiledMap {
 					Object str = propertyNamed("StartDirection");
 					setBirdDir((str!=null && str.equals("1")) ? -1 : 1);
 					_bird.setPosition((x+0.5f-_birdDir*1.3f)*_tileSize.width, (_mapSize.height-y-0.5f)*_tileSize.height);
-					continue;
 				}
 			}
 		}

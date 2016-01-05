@@ -38,8 +38,6 @@ public class CCMenu extends CCLayer {
 
     /** conforms to CCRGBAProtocol protocol */
     private int        opacity_;
-    /** conforms to CCRGBAProtocol protocol */
-    private ccColor3B   color_;
 
     public CCMenuItem getSelectedItem() {
         return selectedItem;
@@ -92,7 +90,7 @@ public class CCMenu extends CCLayer {
      */
     @Override
     public CCNode addChild(CCNode child, int z, int tag) {
-    	return super.addChild((CCMenuItem)child, z, tag);
+    	return super.addChild(child, z, tag);
     }
 
     /** Override synthesized setOpacity to recurse items */
@@ -110,7 +108,8 @@ public class CCMenu extends CCLayer {
     }
 
     public void setColor(ccColor3B color) {
-        color_ = color;
+        /* conforms to CCRGBAProtocol protocol */
+        ccColor3B color_ = color;
         for (CCNode item: children_) {
             ((CCRGBAProtocol)item).setColor(color_);
         }
@@ -235,8 +234,8 @@ public class CCMenu extends CCLayer {
      */
     public void alignItemsInColumns(int columns[]) {
         ArrayList<Integer> rows = new ArrayList<Integer>();
-        for (int i = 0; i < columns.length; i++) {
-            rows.add(columns[i]);
+        for (int column : columns) {
+            rows.add(column);
         }
 
         int height = -5;
@@ -298,8 +297,8 @@ public class CCMenu extends CCLayer {
      */
     public void alignItemsInRows(int rows[]) {
         ArrayList<Integer> columns = new ArrayList<Integer>();
-        for (int i = 0; i < rows.length; i++) {
-            columns.add(rows[i]);
+        for (int row : rows) {
+            columns.add(row);
         }
 
         ArrayList<Integer> columnWidths = new ArrayList<Integer>();

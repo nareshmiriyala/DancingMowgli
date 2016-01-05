@@ -137,7 +137,7 @@ public class CCTextureAtlas {
             ByteBuffer cbb = ByteBuffer.allocateDirect(4 * capacity_ *ccColor4B.size * 4);
             cbb.order(ByteOrder.nativeOrder());
             colors = FastFloatBuffer.createBuffer(cbb);
-            for (int i = 0; i < 4 * ccColor4B.size * capacity_ * 1; i++) {
+            for (int i = 0; i < 4 * ccColor4B.size * capacity_; i++) {
                 colors.put(i, 1.0f);
             }
             colors.position(0);
@@ -149,14 +149,14 @@ public class CCTextureAtlas {
     public void initIndices() {
         for (int i = 0; i < capacity_; i++) {
         	if (ccConfig.CC_TEXTURE_ATLAS_USE_TRIANGLE_STRIP) {
-        		indices.put((short) (i * 6 + 0), (short) (i * 4 + 0));
-        		indices.put((short) (i * 6 + 1), (short) (i * 4 + 0));
+        		indices.put((short) (i * 6), (short) (i * 4));
+        		indices.put((short) (i * 6 + 1), (short) (i * 4));
         		indices.put((short) (i * 6 + 2), (short) (i * 4 + 2));
         		indices.put((short) (i * 6 + 3), (short) (i * 4 + 1));
         		indices.put((short) (i * 6 + 4), (short) (i * 4 + 3));
         		indices.put((short) (i * 6 + 5), (short) (i * 4 + 3));
         	} else {
-        		indices.put((short) (i * 6 + 0), (short) (i * 4 + 0));
+        		indices.put((short) (i * 6), (short) (i * 4));
         		indices.put((short) (i * 6 + 1), (short) (i * 4 + 1));
         		indices.put((short) (i * 6 + 2), (short) (i * 4 + 2));
 
@@ -494,7 +494,7 @@ public class CCTextureAtlas {
     	ccColor4B [] color = new ccColor4B[4];
         
         for(int j=0; j<4; ++j) {
-            color[j].r = (int)(255 * src.get(index * ccColor4B.size *4 + 4*j + 0));
+            color[j].r = (int)(255 * src.get(index * ccColor4B.size * 4 + 4 * j));
             color[j].g = (int)(255 * src.get(index * ccColor4B.size *4 + 4*j + 1));
             color[j].b = (int)(255 * src.get(index * ccColor4B.size *4 + 4*j + 2));
             color[j].a = (int)(255 * src.get(index * ccColor4B.size *4 + 4*j + 3));
@@ -505,7 +505,7 @@ public class CCTextureAtlas {
 
     private void putColor(FastFloatBuffer dst, ccColor4B color[], int index) {
     	for(int j=0; j<4; ++j) {
-    		dst.put(index * ccColor4B.size * 4 + 4*j + 0, color[j].r/255.f);
+    		dst.put(index * ccColor4B.size * 4 + 4 * j, color[j].r/255.f);
     		dst.put(index * ccColor4B.size * 4 + 4*j + 1, color[j].g/255.f);
     		dst.put(index * ccColor4B.size * 4 + 4*j + 2, color[j].b/255.f);
     		dst.put(index * ccColor4B.size * 4 + 4*j + 3, color[j].a/255.f);

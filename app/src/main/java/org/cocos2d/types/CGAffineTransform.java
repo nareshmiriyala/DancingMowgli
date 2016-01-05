@@ -842,9 +842,9 @@ public class CGAffineTransform {
             step = -2;
         }
         while (--length >= 0) {
-            double x = src[srcOff + 0];
+            double x = src[srcOff];
             double y = src[srcOff + 1];
-            dst[dstOff + 0] = x * m00 + y * m01 + m02;
+            dst[dstOff] = x * m00 + y * m01 + m02;
             dst[dstOff + 1] = x * m10 + y * m11 + m12;
             srcOff += step;
             dstOff += step;
@@ -876,9 +876,9 @@ public class CGAffineTransform {
             step = -2;
         }
         while (--length >= 0) {
-            double x = src[srcOff + 0];
+            double x = src[srcOff];
             double y = src[srcOff + 1];
-            dst[dstOff + 0] = (float) (x * m00 + y * m01 + m02);
+            dst[dstOff] = (float) (x * m00 + y * m01 + m02);
             dst[dstOff + 1] = (float) (x * m10 + y * m11 + m12);
             srcOff += step;
             dstOff += step;

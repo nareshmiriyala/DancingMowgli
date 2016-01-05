@@ -55,7 +55,7 @@ public class CCAnimation {
       @since v0.99.3
       */
     protected CCAnimation(String name) {
-        this(name, (ArrayList<CCSpriteFrame>)null);
+        this(name, null);
     }
 
 
