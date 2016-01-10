@@ -36,7 +36,7 @@ public class CCActionManager implements UpdateCallback {
 		}
     }
     
-    private ConcOneClassPool<HashElement> pool = new ConcOneClassPool<CCActionManager.HashElement>() {
+    private final ConcOneClassPool<HashElement> pool = new ConcOneClassPool<CCActionManager.HashElement>() {
     	@Override
     	protected HashElement allocate() {
     		return new HashElement();

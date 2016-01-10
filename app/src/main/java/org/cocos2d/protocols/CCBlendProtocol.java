@@ -8,8 +8,8 @@ import org.cocos2d.types.ccBlendFunc;
  */
 public interface CCBlendProtocol {
     /** set the source blending function for the texture */
-    public void setBlendFunc(ccBlendFunc blendFunc);
+    void setBlendFunc(ccBlendFunc blendFunc);
 
     /** returns the blending function used for the texture */
-    public ccBlendFunc getBlendFunc();
+    ccBlendFunc getBlendFunc();
 }

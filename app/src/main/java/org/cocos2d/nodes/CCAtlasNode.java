@@ -35,7 +35,7 @@ import org.cocos2d.types.ccColor3B;
 public abstract class CCAtlasNode extends CCNode
         implements CCRGBAProtocol, CCTextureProtocol {
     /// texture atlas
-    protected CCTextureAtlas textureAtlas_;
+    protected final CCTextureAtlas textureAtlas_;
     /// chars per row
     protected int itemsPerRow;
     /// chars per column
@@ -47,12 +47,12 @@ public abstract class CCAtlasNode extends CCNode
     protected float texStepY;
 
     /// width of each char
-    protected int itemWidth;
+    protected final int itemWidth;
     /// height of each char
-    protected int itemHeight;
+    protected final int itemHeight;
 
     // blend function
-    ccBlendFunc blendFunc_;
+    final ccBlendFunc blendFunc_;
 
     // texture RGBA
     int opacity_;

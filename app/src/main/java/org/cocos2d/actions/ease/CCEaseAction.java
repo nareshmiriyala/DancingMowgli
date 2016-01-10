@@ -9,7 +9,7 @@ import org.cocos2d.nodes.CCNode;
 public class CCEaseAction extends CCIntervalAction {
 	public static final float M_PI_X_2 = (float) (Math.PI * 2.0f);
 	
-    protected CCIntervalAction other;
+    protected final CCIntervalAction other;
 
     /** creates the action */
     public static CCEaseAction action(CCIntervalAction action) {

@@ -10,7 +10,7 @@ import org.cocos2d.nodes.CCNode;
 /** Runs actions sequentially, one after another
  */
 public class CCSequence extends CCIntervalAction {
-    private CCFiniteTimeAction[] actions;
+    private final CCFiniteTimeAction[] actions;
     private float split;
     private int last;
 

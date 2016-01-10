@@ -9,7 +9,7 @@ import java.util.Arrays;
    - Only one children will be active a time
  */
 public class CCMultiplexLayer extends CCLayer {
-    private ArrayList<CCLayer> layers;
+    private final ArrayList<CCLayer> layers;
 
     private int enabledLayer;
 

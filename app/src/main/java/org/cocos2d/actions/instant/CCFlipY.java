@@ -7,7 +7,7 @@ import org.cocos2d.nodes.CCSprite;
  @since v0.99.0
  */
 public class CCFlipY extends CCInstantAction {
-	boolean  flipY;
+	final boolean  flipY;
 
     public static CCFlipY action(boolean fy) {
         return new CCFlipY(fy);

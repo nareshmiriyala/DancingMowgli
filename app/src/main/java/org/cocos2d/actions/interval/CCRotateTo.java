@@ -8,7 +8,7 @@ import org.cocos2d.nodes.CCNode;
 */ 
 
 public class CCRotateTo extends CCIntervalAction {
-    private float dstAngle;
+    private final float dstAngle;
     private float diffAngle;
     private float startAngle;
 

@@ -15,10 +15,10 @@ import org.cocos2d.utils.pool.OneClassPool;
  * @author genius
  */
 public class ConcurrentArrayHashMap<K,V> {
-	private ArrayList<Entry> array;
-	private HashMap<K,Integer> map;
+	private final ArrayList<Entry> array;
+	private final HashMap<K,Integer> map;
 	
-	OneClassPool<Entry> pool = new OneClassPool<Entry>() {
+	final OneClassPool<Entry> pool = new OneClassPool<Entry>() {
 		@Override
 		protected Entry allocate() {
 			return new Entry();

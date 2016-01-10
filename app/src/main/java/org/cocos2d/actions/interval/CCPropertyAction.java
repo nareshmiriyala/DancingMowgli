@@ -27,8 +27,9 @@ import org.cocos2d.nodes.CCNode;
 public class CCPropertyAction extends CCIntervalAction {
 
     Method          setMethod_;   // setScale, like this
-    String          key_;
-    float			from_, to_;
+    final String          key_;
+    final float			from_;
+    final float to_;
     float			delta_;
 
     /** creates an initializes the action with the property name (key), and the from and to parameters. */

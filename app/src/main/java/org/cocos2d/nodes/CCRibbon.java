@@ -35,17 +35,17 @@ public class CCRibbon extends CCNode {
 
         private static final int COUNT = 50;
 
-        float[] verts = new float[COUNT * 3 * 2];
-        float[] coords = new float[COUNT * 2 * 2];
-        float[] colors = new float[COUNT * 4 * 2];
-        float[] creationTime = new float[COUNT];
+        final float[] verts = new float[COUNT * 3 * 2];
+        final float[] coords = new float[COUNT * 2 * 2];
+        final float[] colors = new float[COUNT * 4 * 2];
+        final float[] creationTime = new float[COUNT];
         boolean finished;
         int end;
         int begin;
 
-        FastFloatBuffer mVertices;
-        FastFloatBuffer mCoordinates;
-        FastFloatBuffer mColors;
+        final FastFloatBuffer mVertices;
+        final FastFloatBuffer mCoordinates;
+        final FastFloatBuffer mColors;
 
         public CCRibbonSegment() {
             ByteBuffer vfb = ByteBuffer.allocateDirect(COUNT * 3 * 2 * 4);
@@ -126,8 +126,8 @@ public class CCRibbon extends CCNode {
 
     }
 
-    ArrayList<CCRibbonSegment> segments_;
-    ArrayList<CCRibbonSegment> deletedSegments_;
+    final ArrayList<CCRibbonSegment> segments_;
+    final ArrayList<CCRibbonSegment> deletedSegments_;
 
     CGPoint lastPoint1_;
     CGPoint lastPoint2_;
@@ -135,7 +135,7 @@ public class CCRibbon extends CCNode {
     int vertCount_;
     float texVPos_;
     float curTime_;
-    float fadeTime_;
+    final float fadeTime_;
     float delta_;
     float lastWidth_;
     float lastSign_;
@@ -145,10 +145,10 @@ public class CCRibbon extends CCNode {
     CCTexture2D texture_;
 
     /** Texture lenghts in pixels */
-    float textureLength_;
+    final float textureLength_;
 
     /** color used by the Ribbon (RGBA) */
-    ccColor4B color_;
+    final ccColor4B color_;
 
     /** GL blendind function */
     ccBlendFunc blendFunc_;

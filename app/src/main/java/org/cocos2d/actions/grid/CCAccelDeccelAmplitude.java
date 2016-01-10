@@ -7,10 +7,10 @@ import org.cocos2d.nodes.CCNode;
 
 /** CCAccelDeccelAmplitude action */
 public class CCAccelDeccelAmplitude extends CCIntervalAction {
-	/** amplitude rate */	
-	float			rate;
+	/** amplitude rate */
+	final float			rate;
 	
-	CCIntervalAction other;
+	final CCIntervalAction other;
 	
 
 	/** creates the action with an inner action that has the amplitude property, and a duration time */

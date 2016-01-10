@@ -8,7 +8,7 @@ import org.cocos2d.protocols.CCRGBAProtocol;
  * @warning This action doesn't support "reverse"
  */
 public class CCFadeTo extends CCIntervalAction {
-    int toOpacity;
+    final int toOpacity;
     int fromOpacity;
 
     /** creates an action with duration and opactiy */

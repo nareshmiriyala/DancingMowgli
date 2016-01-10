@@ -12,7 +12,7 @@ import android.view.MotionEvent;
 public class CCGLSurfaceView extends GLSurfaceView {
 	private static final int VIEWID = 0x1235;
     // private static final String LOG_TAG = CCGLSurfaceView.class.getSimpleName();
-    private CCTouchDispatcher mDispatcher;
+    private final CCTouchDispatcher mDispatcher;
 
     public CGSize frame;
 

@@ -22,7 +22,7 @@ public class CCKeyDispatcher {
 		dispatchEvents = b;
 	}
 
-	private static CCKeyDispatcher _sharedDispatcher = new CCKeyDispatcher();
+	private static final CCKeyDispatcher _sharedDispatcher = new CCKeyDispatcher();
 
 	public static CCKeyDispatcher sharedDispatcher() {
 		return _sharedDispatcher;

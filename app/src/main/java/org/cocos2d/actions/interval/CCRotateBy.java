@@ -10,7 +10,7 @@ import org.cocos2d.nodes.CCNode;
  * Rotates a CCNode object clockwise a number of degrees by modiying it's rotation attribute.
 */
 public class CCRotateBy extends CCIntervalAction {
-    private float angle;
+    private final float angle;
     private float startAngle;
 
     /** creates the action */

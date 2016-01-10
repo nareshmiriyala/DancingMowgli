@@ -7,13 +7,13 @@ import org.cocos2d.types.ccGridSize;
 /** CCTwirl action */
 public class CCTwirl extends CCGrid3DAction {
 	/** twirl center */
-	CGPoint	position;
+	final CGPoint	position;
 
-	int		twirls;
+	final int		twirls;
 	/** amplitude */
-	float	amplitude;
+	final float	amplitude;
 	/** amplitude rate */
-	float	amplitudeRate;
+	final float	amplitudeRate;
 	
 
 	/** creates the action with center position, number of twirls, amplitude, a grid size and duration */

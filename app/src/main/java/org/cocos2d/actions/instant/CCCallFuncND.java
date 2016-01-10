@@ -6,7 +6,7 @@ package org.cocos2d.actions.instant;
  * ND means: Node Data
  */
 public class CCCallFuncND extends CCCallFuncN {
-	protected Object data;
+	protected final Object data;
 
 	/** creates the action with the callback and the data to pass as an argument */
 	public static CCCallFuncND action(Object t, String s, Object d) {

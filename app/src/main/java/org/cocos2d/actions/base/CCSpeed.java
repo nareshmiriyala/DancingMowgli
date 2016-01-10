@@ -11,7 +11,7 @@ import org.cocos2d.nodes.CCNode;
  */
 public class CCSpeed extends CCAction {
 
-	protected CCIntervalAction other;
+	protected final CCIntervalAction other;
     /** alter the speed of the inner function in runtime */
     protected float speed;
 

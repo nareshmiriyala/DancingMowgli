@@ -17,11 +17,11 @@ import org.cocos2d.types.CGSize;
 
 public class LevelMap extends CCTMXTiledMap {
 	
-	private GameLayer _game;
+	private final GameLayer _game;
 
-	private CCTMXLayer _layer;
-	private CGSize _tileSize;
-	private CGSize _mapSize;
+	private final CCTMXLayer _layer;
+	private final CGSize _tileSize;
+	private final CGSize _mapSize;
 
 	private CCSprite _bird;
 	private CCAction _aniRun;

@@ -10,9 +10,9 @@ import org.cocos2d.types.CGPoint;
 /** Moves a CCNode object to the position x,y. x and y are absolute coordinates by modifying it's position attribute.
 */
 public class CCMoveTo extends CCIntervalAction {
-    private CGPoint endPosition;
-    private CGPoint startPosition;
-    protected CGPoint delta;
+    private final CGPoint endPosition;
+    private final CGPoint startPosition;
+    protected final CGPoint delta;
 
     /** creates the action */
     public static CCMoveTo action(float t, CGPoint pos) {

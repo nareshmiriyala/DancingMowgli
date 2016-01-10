@@ -62,7 +62,7 @@ public class CCTMXMapInfo {
 
 
 	// tmx filename
-	public String filename;
+	public final String filename;
 
 	// map orientation
 	public int	orientation;
@@ -74,19 +74,19 @@ public class CCTMXMapInfo {
 	public CGSize	tileSize;
 
 	// Layers
-	public ArrayList<CCTMXLayerInfo> layers;
+	public final ArrayList<CCTMXLayerInfo> layers;
 
 	// tilesets
-	public ArrayList<CCTMXTilesetInfo> tilesets;
+	public final ArrayList<CCTMXTilesetInfo> tilesets;
 
 	// ObjectGroups
-	public ArrayList<CCTMXObjectGroup> objectGroups;
+	public final ArrayList<CCTMXObjectGroup> objectGroups;
 
 	// properties
-	public HashMap<String, String> properties;
+	public final HashMap<String, String> properties;
 
 	// tile properties
-	public HashMap<String, HashMap<String, String>> tileProperties;
+	public final HashMap<String, HashMap<String, String>> tileProperties;
 
 
 	/** creates a TMX Format with a tmx file */

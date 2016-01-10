@@ -69,7 +69,7 @@ public class CCBitmapFontAtlas extends CCSpriteSheet implements CCLabelProtocol,
         //! ID of the character
         int charID;
         //! origin and size of the font
-        CGRect rect = CGRect.make(0, 0, 0, 0);
+        final CGRect rect = CGRect.make(0, 0, 0, 0);
         //! The X amount the image should be offset when drawing the image (in pixels)
         int xOffset;
         //! The Y amount the image should be offset when drawing the image (in pixels)
@@ -101,7 +101,7 @@ public class CCBitmapFontAtlas extends CCSpriteSheet implements CCLabelProtocol,
         // XXX: Creating a public interface so that the bitmapFontArray[] is accesible
         // The characters building up the font
         //public ccBitmapFontDef	bitmapFontArray[] = new ccBitmapFontDef[kCCBitmapFontAtlasMaxChars];
-    	public IntMap<ccBitmapFontDef>	bitmapFontArray = new IntMap<ccBitmapFontDef>();
+    	public final IntMap<ccBitmapFontDef>	bitmapFontArray = new IntMap<ccBitmapFontDef>();
     	
         // FNTConfig: Common Height
         public int commonHeight;
@@ -437,10 +437,10 @@ public class CCBitmapFontAtlas extends CCSpriteSheet implements CCLabelProtocol,
 
 
 	// string to render
-	TextBuilder		string_;
+    final TextBuilder		string_;
 	
 	static CCBitmapFontConfiguration parsed;
-	CCBitmapFontConfiguration	configuration_;
+	final CCBitmapFontConfiguration	configuration_;
 
 	// texture RGBA
 	int		opacity_;
@@ -460,7 +460,7 @@ public class CCBitmapFontAtlas extends CCSpriteSheet implements CCLabelProtocol,
         }
     }
 
-    ccColor3B	color_;
+    final ccColor3B	color_;
     /** conforms to CCRGBAProtocol protocol */
     public ccColor3B getColor() {
         return new ccColor3B(color_);

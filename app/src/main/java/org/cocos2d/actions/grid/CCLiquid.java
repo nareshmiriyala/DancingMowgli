@@ -7,11 +7,11 @@ import org.cocos2d.types.ccGridSize;
 
 /** CCLiquid action */
 public class CCLiquid extends CCGrid3DAction {
-	int waves;
+	final int waves;
 	/** amplitude */
-	float amplitude;
+	final float amplitude;
 	/** amplitude rate */
-	float amplitudeRate;
+	final float amplitudeRate;
 	
 	/** creates the action with amplitude, a grid and duration */
 	public static CCLiquid action(int wav, float amp, ccGridSize gridSize, float d) {

@@ -21,9 +21,9 @@ public class CCTMXLayerInfo  {
 	boolean			visible;
 	int				opacity	= 255;
 	boolean			ownTiles;
-	int				minGID;
-	int				maxGID;
-	HashMap<String, String>		properties;
+	final int				minGID;
+	final int				maxGID;
+	final HashMap<String, String>		properties;
 	CGPoint				offset;
 
 	public CCTMXLayerInfo()	{

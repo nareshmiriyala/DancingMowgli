@@ -3,7 +3,7 @@ package org.cocos2d.utils.pool;
 import org.cocos2d.utils.collections.ConcNodeCachingStack;
 
 public abstract class ConcOneClassPool<T> {
-	private ConcNodeCachingStack<T> objs;
+	private final ConcNodeCachingStack<T> objs;
 
 	public ConcOneClassPool() {
 		objs = new ConcNodeCachingStack<T>();

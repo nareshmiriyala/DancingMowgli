@@ -13,7 +13,7 @@ public class ConcNodeCachingStack<T> {
         volatile Node<T> next;
     }
     
-    volatile Node<T> head = null;
+    final Node<T> head = null;
     
     @SuppressWarnings("rawtypes")
 	private static final
@@ -29,7 +29,7 @@ public class ConcNodeCachingStack<T> {
 	/**
 	 * Second stack of free nodes for reuse.
 	 */
-    volatile Node<T> freeNode = null;
+    final Node<T> freeNode = null;
     
     @SuppressWarnings("rawtypes")
 	private static final

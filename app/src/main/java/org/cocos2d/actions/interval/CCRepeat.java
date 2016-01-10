@@ -11,9 +11,9 @@ import org.cocos2d.nodes.CCNode;
  * To repeat an action forever use the CCRepeatForever action.
  */
 public class CCRepeat extends CCIntervalAction {
-    private int times;
+    private final int times;
     private int total;
-    private CCFiniteTimeAction other;
+    private final CCFiniteTimeAction other;
 
     /** creates a CCRepeat action. Times is an unsigned integer between 1 and pow(2,30) */
     public static CCRepeat action(CCFiniteTimeAction action, int t) {

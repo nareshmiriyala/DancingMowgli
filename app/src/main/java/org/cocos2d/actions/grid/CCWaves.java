@@ -7,13 +7,13 @@ import org.cocos2d.types.ccGridSize;
 
 /** CCWaves action */
 public class CCWaves extends CCGrid3DAction {
-	int		waves;
+	final int		waves;
 	/** amplitude */
-	float	amplitude;
-	/** amplitude rate */	
-	float	amplitudeRate;
-	boolean	vertical;
-	boolean	horizontal;
+	final float	amplitude;
+	/** amplitude rate */
+	final float	amplitudeRate;
+	final boolean	vertical;
+	final boolean	horizontal;
 
 
 	/** initializes the action with amplitude, horizontal sin, vertical sin, a grid and duration */

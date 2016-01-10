@@ -85,8 +85,8 @@ public class CCTouchDispatcher {
     /** Listeners for raw MotionEvents */
     private final ArrayList<CCMotionEventProtocol> motionListeners;
    
-    private ArrayList<CCTargetedTouchHandler> targetedHandlers;
-    private ArrayList<CCTouchHandler> touchHandlers;
+    private final ArrayList<CCTargetedTouchHandler> targetedHandlers;
+    private final ArrayList<CCTouchHandler> touchHandlers;
     /** Whether or not the events are going to be dispatched. Default: YES */
     private boolean dispatchEvents;
     
@@ -98,7 +98,7 @@ public class CCTouchDispatcher {
         dispatchEvents = b;
     }
 
-    private static CCTouchDispatcher _sharedDispatcher = new CCTouchDispatcher();
+    private static final CCTouchDispatcher _sharedDispatcher = new CCTouchDispatcher();
 
     /** singleton of the CCTouchDispatcher */
     public static CCTouchDispatcher sharedDispatcher() {

@@ -5,8 +5,8 @@ import org.cocos2d.types.ccQuad3;
 
 /** CCShakyTiles3D action */
 public class CCShakyTiles3D extends CCTiledGrid3DAction {
-	int		randrange;
-	boolean	shakeZ;
+	final int		randrange;
+	final boolean	shakeZ;
 
 
     /** creates the action with a range, whether or not to shake Z vertices, a grid size, and duration */

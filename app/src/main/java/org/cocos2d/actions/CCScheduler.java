@@ -31,7 +31,7 @@ public class CCScheduler {
         public Object	target;				// not retained (retained by hashUpdateEntry)
         public int		priority;
         public boolean	paused;
-    };
+    }
 
     // Hash Element used for "selectors with interval"
     private static class tHashSelectorEntry {
@@ -56,12 +56,12 @@ public class CCScheduler {
 	// "updates with priority" stuff
 	//
     final ArrayList<tListEntry>    updatesNeg;	// list of priority < 0
-	ArrayList<tListEntry>    updates0;	// list priority == 0
-	ArrayList<tListEntry>    updatesPos;	// list priority > 0
+	final ArrayList<tListEntry>    updates0;	// list priority == 0
+	final ArrayList<tListEntry>    updatesPos;	// list priority > 0
 		
 	// Used for "selectors with interval"
-	ConcurrentArrayHashMap<Object, tHashSelectorEntry>  hashForSelectors;
-	ConcurrentHashMap<Object, tHashSelectorEntry>  hashForUpdates;
+    final ConcurrentArrayHashMap<Object, tHashSelectorEntry>  hashForSelectors;
+	final ConcurrentHashMap<Object, tHashSelectorEntry>  hashForUpdates;
     
     tListEntry							currentEntry;
     
@@ -70,7 +70,7 @@ public class CCScheduler {
 	
 	// Optimization
 //	Method			    impMethod;
-	String				updateSelector;
+    final String				updateSelector;
 
     /** Modifies the time of all scheduled callbacks.
       You can use this property to create a 'slow motion' or 'fast fordward' effect.

@@ -17,11 +17,11 @@ public class FastFloatBuffer {
     /**
      * Underlying data - give this to OpenGL
      */
-    public ByteBuffer bytes;
+    public final ByteBuffer bytes;
 
-    private FloatBuffer floats;
+    private final FloatBuffer floats;
 
-    private IntBuffer ints;
+    private final IntBuffer ints;
 
     private int bufferID = -1;
     private boolean loaded = false;

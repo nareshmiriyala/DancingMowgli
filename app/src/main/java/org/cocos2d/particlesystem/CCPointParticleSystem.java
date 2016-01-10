@@ -26,10 +26,10 @@ public class CCPointParticleSystem extends CCParticleSystem {
 	// Array of (x,y, ccColor4F) 
 	FastFloatBuffer vertices;
 	// Array of (size)
-	FastFloatBuffer sizeBuffer;
+    final FastFloatBuffer sizeBuffer;
 
 	// vertices buffer id
-	int	verticesID[];    
+    final int[]	verticesID;
 
     public CCPointParticleSystem(int numberOfParticles) {
         super(numberOfParticles);

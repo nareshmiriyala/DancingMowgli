@@ -23,11 +23,11 @@ public class CCTextureNode extends CCNode implements CCRGBAProtocol, CCNode.Coco
     protected CCTexture2D texture_;
 
     // blend func
-    private ccBlendFunc blendFunc_;
+    private final ccBlendFunc blendFunc_;
 
     // texture RGBA
     private int opacity_;
-    private ccColor3B color_;
+    private final ccColor3B color_;
 
     boolean opacityModifyRGB_;
 

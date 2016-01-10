@@ -206,7 +206,7 @@ public class CCNode {
     }
     
 	// anchor point in pixels
-	protected CGPoint anchorPointInPixels_;	
+	protected final CGPoint anchorPointInPixels_;
 
     /** The anchorPoint in absolute pixels.
       Since v0.8 you can only read it. If you wish to modify it, use anchorPoint instead
@@ -306,10 +306,11 @@ public class CCNode {
     }
     
     // #if	CC_NODE_TRANSFORM_USING_AFFINE_MATRIX
-	private float []	transformGL_; // [16];
+	private final float []	transformGL_; // [16];
 	
     // #endif
-    private CGAffineTransform transform_, inverse_;
+    private CGAffineTransform transform_;
+    private final CGAffineTransform inverse_;
 
 	// To reduce memory, place BOOLs that are not properties here:
     private boolean isTransformDirty_;
@@ -329,7 +330,7 @@ public class CCNode {
     }
 
 	// position of the node
-    protected CGPoint position_;
+    protected final CGPoint position_;
 
     /** Position (x,y) of the node in OpenGL coordinates.
       (0,0) is the left-bottom corner.
@@ -1257,7 +1258,7 @@ public class CCNode {
         children_ = Collections.synchronizedList(new ArrayList<CCNode>(4));
     }
 
-    private static Comparator<CCNode> zOrderComparator = new Comparator<CCNode>() {
+    private static final Comparator<CCNode> zOrderComparator = new Comparator<CCNode>() {
 
 		@Override
 		public int compare(CCNode o1, CCNode o2) {

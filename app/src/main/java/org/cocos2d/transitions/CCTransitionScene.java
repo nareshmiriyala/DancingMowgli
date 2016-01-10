@@ -17,13 +17,13 @@ public class CCTransitionScene extends CCScene {
      */
     public interface tOrientation {
         /// An horizontal orientation where the Left is nearer
-        public static int kOrientationLeftOver = 0;
+        int kOrientationLeftOver = 0;
         /// An horizontal orientation where the Right is nearer
-        public static int kOrientationRightOver = 1;
+        int kOrientationRightOver = 1;
         /// A vertical orientation where the Up is nearer
-        public static int kOrientationUpOver = 0;
+        int kOrientationUpOver = 0;
         /// A vertical orientation where the Bottom is nearer
-        public static int kOrientationDownOver = 1;
+        int kOrientationDownOver = 1;
     }
 
 
@@ -81,7 +81,7 @@ public class CCTransitionScene extends CCScene {
     }
 
     
-    private UpdateCallback setNewSceneCallback = new UpdateCallback() {
+    private final UpdateCallback setNewSceneCallback = new UpdateCallback() {
 		@Override
 		public void update(float d) {
 			setNewScene(d);

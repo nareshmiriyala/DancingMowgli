@@ -7,7 +7,7 @@ import org.cocos2d.types.CGPoint;
  * Places the node in a certain position
  */
 public class CCPlace extends CCInstantAction {
-    private CGPoint position;
+    private final CGPoint position;
 
     public static CCPlace action(CGPoint pnt) {
         return new CCPlace(pnt);

@@ -4,8 +4,8 @@ import org.cocos2d.nodes.CCNode;
 
 public class CCSkewBy extends CCSkewTo {
 
-	private float skewX;
-	private float skewY;
+	private final float skewX;
+	private final float skewY;
 
 	public static CCSkewBy action(float t, float dx, float dy) {
 		return new CCSkewBy(t, dx, dy);

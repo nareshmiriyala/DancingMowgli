@@ -9,7 +9,7 @@ import org.cocos2d.nodes.CCNode;
 */
 public class CCProgressTo extends CCIntervalAction 
 {
-	float to_;
+	final float to_;
 	float from_;
 
     /** Creates and initializes with a duration and a percent */

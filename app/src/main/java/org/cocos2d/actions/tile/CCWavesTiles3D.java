@@ -7,11 +7,11 @@ import org.cocos2d.types.ccQuad3;
 
 /** CCWavesTiles3D action. */
 public class CCWavesTiles3D extends CCTiledGrid3DAction {
-	int waves;
+	final int waves;
 /** waves amplitude */
-	float amplitude;
+final float amplitude;
 /** waves amplitude rate */
-	float amplitudeRate;
+final float amplitudeRate;
 
 
     /** creates the action with a number of waves, the waves amplitude, the grid size and the duration */

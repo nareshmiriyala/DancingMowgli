@@ -124,7 +124,7 @@ public class PlistParser extends DefaultHandler {
 	
 	private Object currentCollection;
 	
-	private ArrayList<Object> depthStack = new ArrayList<Object>();
+	private final ArrayList<Object> depthStack = new ArrayList<Object>();
 	
 	private PlistParser() {		
 	}
@@ -260,7 +260,7 @@ public class PlistParser extends DefaultHandler {
 	
 	private static final SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'hh:mm:ss'Z'");
 	
-	private StringBuilder characterData = new StringBuilder();
+	private final StringBuilder characterData = new StringBuilder();
 	
 	@Override
 	public void characters(char[] _chars, int _start, int _len) {

@@ -25,7 +25,7 @@ public class CCMenuItemLabel extends CCMenuItem implements CCRGBAProtocol {
     private ccColor3B colorBackup;
 
     /** the color that will be used to disable the item */
-    private ccColor3B disabledColor_;
+    private final ccColor3B disabledColor_;
 	private float originalScale_;
 
     /** creates a CCMenuItemLabel with a Label, target and selector */

@@ -20,7 +20,7 @@ import org.cocos2d.nodes.CCDirector;
 
 public class GLResourceHelper {
 	
-    private static GLResourceHelper _sharedResourceHelper = new GLResourceHelper();
+    private static final GLResourceHelper _sharedResourceHelper = new GLResourceHelper();
 
     /** singleton of the CCTouchDispatcher */
     public static GLResourceHelper sharedHelper() {
@@ -49,7 +49,7 @@ public class GLResourceHelper {
 		void load(Resource res);
 	}
 
-	private ConcurrentLinkedQueue<GLResorceTask> taskQueue;
+	private final ConcurrentLinkedQueue<GLResorceTask> taskQueue;
 	private final Map<Resource, GLResourceLoader> reloadMap;
 
 	

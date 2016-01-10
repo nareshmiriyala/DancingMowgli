@@ -12,14 +12,14 @@ import org.cocos2d.types.CGPoint;
 public class CCParallaxNode extends CCNode {
 
     /** array that holds the offset / ratio of the children */
-    private ArrayList<CCPointObject> parallaxArray_;
+    private final ArrayList<CCPointObject> parallaxArray_;
     private CGPoint lastPosition;
 
     static class CCPointObject {
-        private float ratioX_;
-        private float ratioY_;
-        private float offsetX_;
-        private float offsetY_;
+        private final float ratioX_;
+        private final float ratioY_;
+        private final float offsetX_;
+        private final float offsetY_;
         private CCNode child_;
 
         public CCPointObject(float ratioX, float ratioY, float offsetX, float offsetY) {

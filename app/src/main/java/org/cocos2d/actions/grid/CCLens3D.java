@@ -8,11 +8,11 @@ import org.cocos2d.types.ccGridSize;
 
 /** CCLens3D action */
 public class CCLens3D extends CCGrid3DAction {
-	CGPoint	position;
-	float	radius;
+	final CGPoint	position;
+	final float	radius;
 	
 	/** lens effect. Defaults to 0.7 - 0 means no effect, 1 is very strong effect */
-	float	lensEffect;
+	final float	lensEffect;
 
 	/** lens center position */	
 	CGPoint	lastPosition;

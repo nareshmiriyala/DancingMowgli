@@ -27,17 +27,17 @@ import android.view.MotionEvent;
 
 public class GameLayer extends CCLayer {
 
-	private int _levelMode;
+	private final int _levelMode;
 	private int _level;
 	
 	private int _score;
 	private boolean _touched;
 	
-	private LevelMap _map;
-	private CCColorLayer _mask;
-	private CCSprite _msg;
+	private final LevelMap _map;
+	private final CCColorLayer _mask;
+	private final CCSprite _msg;
 
-	private CCLabelAtlas _scoreLabel;
+	private final CCLabelAtlas _scoreLabel;
 	
 	public int state;
 	

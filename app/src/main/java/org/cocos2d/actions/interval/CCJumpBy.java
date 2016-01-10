@@ -8,9 +8,9 @@ import org.cocos2d.types.CGPoint;
 */
 public class CCJumpBy extends CCIntervalAction {
     protected CGPoint startPosition;
-    protected CGPoint delta;
-    protected float height;
-    protected int jumps;
+    protected final CGPoint delta;
+    protected final float height;
+    protected final int jumps;
 
     /** creates the action */
     public static CCJumpBy action(float time, CGPoint pos, float height, int jumps) {

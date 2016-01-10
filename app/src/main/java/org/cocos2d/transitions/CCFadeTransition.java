@@ -16,7 +16,7 @@ import org.cocos2d.types.ccColor4B;
  * Fade out the outgoing scene and then fade in the incoming scene.
  */
 public class CCFadeTransition extends CCTransitionScene {
-    ccColor4B color;
+    final ccColor4B color;
 
     /**
      * creates the transition with a duration and with an RGB color
