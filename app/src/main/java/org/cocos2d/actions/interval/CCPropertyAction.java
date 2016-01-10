@@ -67,11 +67,9 @@ public class CCPropertyAction extends CCIntervalAction {
         		setMethod_    = target.getClass().getMethod(key_, Float.TYPE);
         	}
         	setMethod_.invoke(target, to_  - delta_ * (1 - dt));
-    	} catch (NoSuchMethodException | IllegalArgumentException | InvocationTargetException e) {
+    	} catch (NoSuchMethodException | IllegalArgumentException | InvocationTargetException | IllegalAccessException e) {
     		e.printStackTrace();
-    	} catch (IllegalAccessException e) {
-			e.printStackTrace();
-		}
+    	}
     }
 
     @Override
