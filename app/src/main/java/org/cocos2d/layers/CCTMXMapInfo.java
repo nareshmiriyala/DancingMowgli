@@ -98,12 +98,12 @@ public class CCTMXMapInfo {
 	protected CCTMXMapInfo(String tmxFile) {
 		super();
 
-		tilesets= new ArrayList<CCTMXTilesetInfo>();
-		layers	= new ArrayList<CCTMXLayerInfo>();
+		tilesets= new ArrayList<>();
+		layers	= new ArrayList<>();
 		filename = tmxFile;
-		objectGroups 	= new ArrayList<CCTMXObjectGroup>();
-		properties 		= new HashMap<String, String>();
-		tileProperties 	= new HashMap<String, HashMap<String, String> >();
+		objectGroups 	= new ArrayList<>();
+		properties 		= new HashMap<>();
+		tileProperties 	= new HashMap<>();
 
 		// tmp vars
 		currentString = new StringBuilder();
@@ -224,7 +224,7 @@ public class CCTMXMapInfo {
 					break;
 				case "tile": {
 					CCTMXTilesetInfo info = tilesets.get(tilesets.size() - 1);
-					HashMap<String, String> dict = new HashMap<String, String>();
+					HashMap<String, String> dict = new HashMap<>();
 					parentGID = info.firstGid + Integer.parseInt(attributes.getValue("id"));
 					tileProperties.put(String.valueOf(parentGID), dict);
 					parentElement = TMXPropertyTile;
@@ -321,7 +321,7 @@ public class CCTMXMapInfo {
 
 					// The value for "type" was blank or not a valid class name
 					// Create an instance of TMXObjectInfo to store the object and its properties
-					HashMap<String, String> dict = new HashMap<String, String>();
+					HashMap<String, String> dict = new HashMap<>();
 
 					// Set the name of the object to the value for "name"
 					dict.put("name", attributes.getValue("name"));

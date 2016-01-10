@@ -4,7 +4,6 @@ import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.concurrent.ConcurrentHashMap;
 
-import org.cocos2d.config.ccConfig;
 import org.cocos2d.utils.collections.ConcurrentArrayHashMap;
 
 //
@@ -124,11 +123,11 @@ public class CCScheduler {
 //    	}
 
         // updates with priority
-        updates0   = new ArrayList<tListEntry>();
-        updatesNeg = new ArrayList<tListEntry>();
-        updatesPos = new ArrayList<tListEntry>();
-        hashForUpdates   = new ConcurrentHashMap<Object, tHashSelectorEntry>();
-        hashForSelectors = new ConcurrentArrayHashMap<Object, tHashSelectorEntry>();
+        updates0   = new ArrayList<>();
+        updatesNeg = new ArrayList<>();
+        updatesPos = new ArrayList<>();
+        hashForUpdates   = new ConcurrentHashMap<>();
+        hashForSelectors = new ConcurrentArrayHashMap<>();
 
         // selectors with interval
         currentTarget = null;
@@ -325,7 +324,7 @@ public class CCScheduler {
         }
 
         if( element.timers == null) {
-            element.timers = new ArrayList<CCTimer>();
+            element.timers = new ArrayList<>();
         }/* else if( element.timers.size() == element.timers )
             ccArrayDoubleCapacity(element->timers);
 		*/
@@ -355,7 +354,7 @@ public class CCScheduler {
         }
 
         if( element.timers == null) {
-            element.timers = new ArrayList<CCTimer>();
+            element.timers = new ArrayList<>();
         }/* else if( element.timers.size() == element.timers )
             ccArrayDoubleCapacity(element->timers);
 		*/
