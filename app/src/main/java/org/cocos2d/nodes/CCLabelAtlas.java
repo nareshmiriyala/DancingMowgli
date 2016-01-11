@@ -24,10 +24,10 @@ import org.cocos2d.utils.javolution.TextBuilder;
 public class CCLabelAtlas extends CCAtlasNode 
 	    implements CCLabelProtocol, CCNode.CocosNodeSize {
     /// string to render
-    final TextBuilder string_;
+    TextBuilder string_;
 
     /// the first char in the charmap
-    final char mapStartChar;
+    char mapStartChar;
 
     /** creates the CCLabelAtlas with a string,
      * a char map file(the atlas), the width and height of each element

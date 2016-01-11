@@ -9,16 +9,16 @@ import org.cocos2d.opengl.CCCamera;
  */
 public class CCOrbitCamera extends CCCameraAction {
     private float radius;
-    private final float deltaRadius;
+    private float deltaRadius;
     private float angleZ;
-    private final float deltaAngleZ;
+    private float deltaAngleZ;
     private float angleX;
-    private final float deltaAngleX;
+    private float deltaAngleX;
 
     private float radZ;
-    private final float radDeltaZ;
+    private float radDeltaZ;
     private float radX;
-    private final float radDeltaX;
+    private float radDeltaX;
 
     /** creates a CCOrbitCamera action with radius, delta-radius,  z, deltaZ, x, deltaX */
     public static CCOrbitCamera action(float t, float r, float dr, float z, float dz, float x, float dx) {

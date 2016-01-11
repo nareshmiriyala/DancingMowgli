@@ -3,7 +3,7 @@ package org.cocos2d.actions.interval;
 /** Blinks a CCNode object by modifying it's visible attribute
 */
 public class CCBlink extends CCIntervalAction {
-    private final int times;
+    private int times;
 
     /** creates the action */
     public static CCBlink action(float t, int b) {

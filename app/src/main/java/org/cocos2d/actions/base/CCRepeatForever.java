@@ -9,7 +9,7 @@ import org.cocos2d.nodes.CCNode;
  @warning This action can't be Sequenceable because it is not an IntervalAction
  */
 public class CCRepeatForever extends CCAction {
-    protected final CCIntervalAction other;
+    protected CCIntervalAction other;
 
     /** creates the action */
     public static CCRepeatForever action(CCIntervalAction action) {

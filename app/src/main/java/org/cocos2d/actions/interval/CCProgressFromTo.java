@@ -8,8 +8,8 @@ import org.cocos2d.nodes.CCNode;
  @since v0.99.1
  */
 public class CCProgressFromTo extends CCIntervalAction {
-	final float to_;
-	final float from_;
+	float to_;
+	float from_;
 
     /** Creates and initializes the action with a duration, a "from" percentage and a "to" percentage */
     public static CCProgressFromTo action(float t, float fromPercentage, float toPercentage) {

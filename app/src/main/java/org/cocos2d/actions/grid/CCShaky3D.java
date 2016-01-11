@@ -7,8 +7,8 @@ import org.cocos2d.types.ccGridSize;
 
 /** CCShaky3D action */
 public class CCShaky3D extends CCGrid3DAction {
-	final int randrange;
-	final boolean	shakeZ;
+	int randrange;
+	boolean	shakeZ;
 
 
 	/** creates the action with a range, shake Z vertices, a grid and duration */

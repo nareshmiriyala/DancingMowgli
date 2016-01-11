@@ -9,15 +9,15 @@ import org.cocos2d.types.ccGridSize;
 /** CCRipple3D action */
 public class CCRipple3D extends CCGrid3DAction {
 	/** center position */
-	final CGPoint	position;
+	CGPoint	position;
 	
-	final float	radius;
-	final int		waves;
+	float	radius;
+	int		waves;
 
 	/** amplitude */
-	final float	amplitude;
+	float	amplitude;
 	/** amplitude rate */
-	final float	amplitudeRate;
+	float	amplitudeRate;
 	
 	/** creates the action with radius, number of waves, amplitude, a grid size and duration */
 	public static CCRipple3D action(CGPoint pos, float radius, 

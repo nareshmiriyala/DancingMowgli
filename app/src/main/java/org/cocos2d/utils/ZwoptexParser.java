@@ -18,8 +18,8 @@ import org.xml.sax.helpers.XMLReaderFactory;
 
 public class ZwoptexParser extends DefaultHandler {
 
-	private final HashMap<String, Object> frames;
-	private final HashMap<String, Object> metadata;
+	private HashMap<String, Object> frames;
+	private HashMap<String, Object> metadata;
 
 	private Integer dict_depth;
 	private Boolean mode_set_key;

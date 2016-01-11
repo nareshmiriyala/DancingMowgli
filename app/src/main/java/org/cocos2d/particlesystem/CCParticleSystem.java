@@ -105,7 +105,7 @@ public abstract class CCParticleSystem extends CCNode implements CCTextureProtoc
 	 */
 	static class CCParticle {
 		static class ParticleModeA {
-			final CGPoint		dir = new CGPoint();
+			CGPoint		dir = new CGPoint();
 			float		radialAccel;
 			float		tangentialAccel;
 		}
@@ -118,11 +118,11 @@ public abstract class CCParticleSystem extends CCNode implements CCTextureProtoc
 			float		deltaRadius;
 		}
 
-		final CGPoint				pos = new CGPoint();
-		final CGPoint				startPos = new CGPoint();
+		CGPoint				pos = new CGPoint();
+		CGPoint				startPos = new CGPoint();
 
-		final ccColor4F	color = new ccColor4F();
-		final ccColor4F	deltaColor = new ccColor4F();
+		ccColor4F	color = new ccColor4F();
+		ccColor4F	deltaColor = new ccColor4F();
 
 		float		size;
 		float		deltaSize;
@@ -140,7 +140,7 @@ public abstract class CCParticleSystem extends CCNode implements CCTextureProtoc
 	// Mode A:Gravity + Tangential Accel + Radial Accel
 	class ModeA {
 		// gravity of the particles
-		final CGPoint gravity = CGPoint.zero();
+		CGPoint gravity = CGPoint.zero();
 
 		// The speed the particles will have.
 		float speed;
@@ -156,7 +156,7 @@ public abstract class CCParticleSystem extends CCNode implements CCTextureProtoc
 		float radialAccel;
 		// Radial acceleration variance
 		float radialAccelVar;
-	}
+	};
 
 	// Mode B: circular movement (gravity, radial accel and tangential accel don't are not used in this mode)
 	class ModeB {
@@ -172,7 +172,7 @@ public abstract class CCParticleSystem extends CCNode implements CCTextureProtoc
 		float rotatePerSecond;
 		// Variance in degrees for rotatePerSecond
 		float rotatePerSecondVar;
-	}
+	};
 
 	protected int id;
 	
@@ -332,7 +332,7 @@ public abstract class CCParticleSystem extends CCNode implements CCTextureProtoc
 	}
 
 	// blend function
-	final ccBlendFunc	blendFunc = new ccBlendFunc(ccConfig.CC_BLEND_SRC, ccConfig.CC_BLEND_DST);
+	ccBlendFunc	blendFunc = new ccBlendFunc(ccConfig.CC_BLEND_SRC, ccConfig.CC_BLEND_DST);
 
 	// movment type: free or grouped
 //	protected int	positionType;
@@ -1170,7 +1170,8 @@ public abstract class CCParticleSystem extends CCNode implements CCTextureProtoc
 
     //! should be overriden by subclasses
     public void updateQuad(CCParticle particle, CGPoint pos) {
-	}
+        ;
+    }
 
     public void postStep() {
         // should be overriden

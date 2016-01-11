@@ -7,9 +7,9 @@ import org.cocos2d.types.ccQuad3;
 
 /** CCShatteredTiles3D action */
 public class CCShatteredTiles3D extends CCTiledGrid3DAction {
-	final int		randrange;
+	int		randrange;
 	boolean	once;
-	final boolean	shatterZ;
+	boolean	shatterZ;
 
     /** creates the action with a range, whether of not to shatter Z vertices, a grid size and duration */
     public static CCShatteredTiles3D action(int range, boolean sz, ccGridSize gridSize, float d) {

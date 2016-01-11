@@ -16,7 +16,7 @@ import org.cocos2d.types.CGSize;
  */
 public class CCFollow extends CCAction {
 	/* node to follow */
-	final CCNode	followedNode_;
+	CCNode	followedNode_;
 	
 	/* whether camera should be limited to certain area */
 	/** alter behavior - turn on/off boundary */
@@ -32,8 +32,8 @@ public class CCFollow extends CCAction {
 	boolean boundaryFullyCovered;
 	
 	/* fast access to the screen dimensions */
-	final CGPoint halfScreenSize;
-	final CGPoint fullScreenSize;
+	CGPoint halfScreenSize;
+	CGPoint fullScreenSize;
 	
 	/* world boundaries */
 	float leftBoundary;

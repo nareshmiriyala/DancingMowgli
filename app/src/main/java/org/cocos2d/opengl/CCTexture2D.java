@@ -134,7 +134,7 @@ public class CCTexture2D implements Resource {
     /** hight in pixels */
     private int mHeight;
     
-    private final Bitmap.Config _format;
+    private Bitmap.Config _format;
 
     /** texture max S */
     private float _maxS;
@@ -142,7 +142,7 @@ public class CCTexture2D implements Resource {
     /** texture max T */
     private float _maxT;
 
-    private final CCTexParams _texParams;
+    private CCTexParams _texParams;
     
 //    /** this object is responsible for loading Bitmap for texture */
 //    private GLResourceHelper.GLResourceLoader mLoader;
@@ -365,7 +365,7 @@ public class CCTexture2D implements Resource {
         return v;
     }
 
-    private static final HashMap<String, Typeface> typefaces = new HashMap<String, Typeface>();
+    private static HashMap<String, Typeface> typefaces = new HashMap<String, Typeface>();
     /** Initializes a texture from a string with dimensions, alignment, font name and font size */
     public void initWithText(String text, CGSize dimensions, CCLabel.TextAlignment alignment, String fontname, float fontSize) {
     	Typeface typeface;

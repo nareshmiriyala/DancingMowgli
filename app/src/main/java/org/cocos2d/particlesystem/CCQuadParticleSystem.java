@@ -36,11 +36,11 @@ import org.cocos2d.utils.FastFloatBuffer;
 public class CCQuadParticleSystem extends CCParticleSystem implements Resource {
 	// ccV2F_C4F_T2F_Quad	quads;		// quads to be rendered
 
-	final FastFloatBuffer         texCoords;
-	final FastFloatBuffer         vertices;
-	final FastFloatBuffer         colors;
+	FastFloatBuffer         texCoords;
+	FastFloatBuffer         vertices;
+	FastFloatBuffer         colors;
 
-	final ShortBuffer			indices;	// indices
+	ShortBuffer			indices;	// indices
 	int					quadsIDs[];	// VBO id
 	public static final int QuadSize = 3;
 	
@@ -48,10 +48,10 @@ public class CCQuadParticleSystem extends CCParticleSystem implements Resource {
 
 	private static class QuadParticleLoader implements GLResourceHelper.GLResourceLoader {
 
-		private final WeakReference<CCQuadParticleSystem> weakRef;
+		private WeakReference<CCQuadParticleSystem> weakRef;
     	
     	public QuadParticleLoader(CCQuadParticleSystem holder) {
-    		weakRef = new WeakReference<>(holder);
+    		weakRef = new WeakReference<CCQuadParticleSystem>(holder);
 		}
 		
 		@Override
@@ -221,7 +221,7 @@ public class CCQuadParticleSystem extends CCParticleSystem implements Resource {
 		for( int i=0;i< totalParticles;i++) {
 			final short base4 = (short) (i * 4);
 			final int base6 = i * 6;
-			indices.put(base6, base4);
+			indices.put(base6, (short) (base4));
 			indices.put(base6+1, (short) (base4 + 1));
 			indices.put(base6+2, (short) (base4 + 2));
 

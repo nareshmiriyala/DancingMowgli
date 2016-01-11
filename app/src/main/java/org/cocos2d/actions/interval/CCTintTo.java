@@ -9,7 +9,7 @@ import org.cocos2d.types.ccColor3B;
  @since v0.7.2
 */
 public class CCTintTo extends CCIntervalAction {
-	protected final ccColor3B to;
+	protected ccColor3B to;	
     protected ccColor3B from;
 
     /** creates an action with duration and color */

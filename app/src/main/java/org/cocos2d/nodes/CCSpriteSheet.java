@@ -35,7 +35,7 @@ public class CCSpriteSheet extends CCNode implements CCTextureProtocol {
     public static final int defaultCapacity = 29;
 
     /** returns the TextureAtlas that is used */
-    protected final CCTextureAtlas	textureAtlas_;
+    protected CCTextureAtlas	textureAtlas_;
     public CCTextureAtlas getTextureAtlas() {
         return textureAtlas_;
     }
@@ -47,7 +47,7 @@ public class CCSpriteSheet extends CCNode implements CCTextureProtocol {
     }
 
     /** descendants (children, gran children, etc) */
-    final ArrayList<CCSprite>	descendants_;
+    ArrayList<CCSprite>	descendants_;
 
     /** creates a CCSpriteSheet with a texture2d and a default capacity of 29 children.
       The capacity will be increased in 33% in runtime if it run out of space.

@@ -1,7 +1,7 @@
 package org.cocos2d.types;
 
 public class CGRect {
-    public final CGPoint origin;
+    public CGPoint origin;
     public CGSize size;
 
     public CGRect() {
@@ -186,8 +186,8 @@ public class CGRect {
         MaxYEdge,
     }
 
-    private static final CGRect sRect = new CGRect();
-    private static final CGRect rRect = new CGRect();
+    private static CGRect sRect = new CGRect();
+    private static CGRect rRect = new CGRect();
 
     public static void divideRect(final CGRect aRect, CGRect[] slice, CGRect[] remainder, float amount, CGRect.Edge edge) {
 

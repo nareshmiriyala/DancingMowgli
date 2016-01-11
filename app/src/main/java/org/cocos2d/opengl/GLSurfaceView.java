@@ -663,7 +663,7 @@ public class GLSurfaceView extends SurfaceView implements SurfaceHolder.Callback
     }
 
     private class DefaultContextFactory implements EGLContextFactory {
-        private final int EGL_CONTEXT_CLIENT_VERSION = 0x3098;
+        private int EGL_CONTEXT_CLIENT_VERSION = 0x3098;
 
         public EGLContext createContext(EGL10 egl, EGLDisplay display, EGLConfig config) {
             int[] attrib_list = {EGL_CONTEXT_CLIENT_VERSION, mEGLContextClientVersion,
@@ -759,7 +759,7 @@ public class GLSurfaceView extends SurfaceView implements SurfaceHolder.Callback
         abstract EGLConfig chooseConfig(EGL10 egl, EGLDisplay display,
                 EGLConfig[] configs);
 
-        protected final int[] mConfigSpec;
+        protected int[] mConfigSpec;
 
         private int[] filterConfigSpec(int[] configSpec) {
             if (mEGLContextClientVersion != 2) {
@@ -839,14 +839,14 @@ public class GLSurfaceView extends SurfaceView implements SurfaceHolder.Callback
             return defaultValue;
         }
 
-        private final int[] mValue;
+        private int[] mValue;
         // Subclasses can adjust these values:
         protected int mRedSize;
         protected int mGreenSize;
         protected int mBlueSize;
-        protected final int mAlphaSize;
-        protected final int mDepthSize;
-        protected final int mStencilSize;
+        protected int mAlphaSize;
+        protected int mDepthSize;
+        protected int mStencilSize;
         }
 
     /**
@@ -1449,14 +1449,14 @@ public class GLSurfaceView extends SurfaceView implements SurfaceHolder.Callback
         private int mRenderMode;
         private boolean mRequestRender;
         private boolean mRenderComplete;
-        private final ArrayList<Runnable> mEventQueue = new ArrayList<Runnable>();
+        private ArrayList<Runnable> mEventQueue = new ArrayList<Runnable>();
         private GL10 mGL;
         private boolean mHasFocus;
         private boolean mSafeMode = false;
 
         // End of member variables protected by the sGLThreadManager monitor.
 
-        private final Renderer mRenderer;
+        private Renderer mRenderer;
         private EglHelper mEglHelper;
     }
 
@@ -1489,7 +1489,7 @@ public class GLSurfaceView extends SurfaceView implements SurfaceHolder.Callback
             }
         }
 
-        private final StringBuilder mBuilder = new StringBuilder();
+        private StringBuilder mBuilder = new StringBuilder();
     }
 
 

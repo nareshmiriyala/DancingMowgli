@@ -10,7 +10,7 @@ import org.cocos2d.types.CGPoint;
  */
 public class CCBezierBy extends CCIntervalAction {
 
-    protected final CCBezierConfig config;
+    protected CCBezierConfig config;
     protected CGPoint startPosition;
 
     /** creates the action with a duration and a bezier configuration */

@@ -8,7 +8,7 @@ import org.cocos2d.nodes.CCNode;
 
 /** CCReuseGrid action */
 public class CCReuseGrid extends CCInstantAction {
-	final int t;
+	int t;
 	
 	/** creates an action with the number of times that the current grid will be reused */
 	public static CCReuseGrid action(int times) {

@@ -20,7 +20,7 @@ public class CCPVRTexture {
 	private static final int kPVRTextureFlagTypePVRTC_4 = 25;
 
 	static class PVRTexHeader {
-		final ByteBuffer bb;
+		ByteBuffer bb;
 		public PVRTexHeader(ByteBuffer b) {
 			bb = b;
 			bb.rewind();
@@ -84,7 +84,7 @@ public class CCPVRTexture {
 	
 	ArrayList<Buffer> _imageData;
 	
-	final int[] _name;
+	int _name[];	
 	
 	int _width;
 	public int getWidth() {

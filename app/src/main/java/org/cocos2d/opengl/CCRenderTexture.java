@@ -28,9 +28,9 @@ public class CCRenderTexture extends CCNode {
 	public static final int kImageFormatPNG = 1;
 
 
-	final int			 [] fbo_ = new int[1];
-	final int			 [] oldFBO_ = new int[1];
-	final CCTexture2D		texture_;
+	int			 [] fbo_ = new int[1];
+	int			 [] oldFBO_ = new int[1];
+	CCTexture2D		texture_;
 
     /** sprite being used */
 	protected CCSprite		sprite_;

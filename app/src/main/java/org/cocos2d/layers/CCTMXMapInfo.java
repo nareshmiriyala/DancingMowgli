@@ -62,7 +62,7 @@ public class CCTMXMapInfo {
 
 
 	// tmx filename
-	public final String filename;
+	public String filename;
 
 	// map orientation
 	public int	orientation;
@@ -74,19 +74,19 @@ public class CCTMXMapInfo {
 	public CGSize	tileSize;
 
 	// Layers
-	public final ArrayList<CCTMXLayerInfo> layers;
+	public ArrayList<CCTMXLayerInfo> layers;
 
 	// tilesets
-	public final ArrayList<CCTMXTilesetInfo> tilesets;
+	public ArrayList<CCTMXTilesetInfo> tilesets;
 
 	// ObjectGroups
-	public final ArrayList<CCTMXObjectGroup> objectGroups;
+	public ArrayList<CCTMXObjectGroup> objectGroups;
 
 	// properties
-	public final HashMap<String, String> properties;
+	public HashMap<String, String> properties;
 
 	// tile properties
-	public final HashMap<String, HashMap<String, String>> tileProperties;
+	public HashMap<String, HashMap<String, String>> tileProperties;
 
 
 	/** creates a TMX Format with a tmx file */
@@ -98,12 +98,12 @@ public class CCTMXMapInfo {
 	protected CCTMXMapInfo(String tmxFile) {
 		super();
 
-		tilesets= new ArrayList<>();
-		layers	= new ArrayList<>();
+		tilesets= new ArrayList<CCTMXTilesetInfo>();
+		layers	= new ArrayList<CCTMXLayerInfo>();
 		filename = tmxFile;
-		objectGroups 	= new ArrayList<>();
-		properties 		= new HashMap<>();
-		tileProperties 	= new HashMap<>();
+		objectGroups 	= new ArrayList<CCTMXObjectGroup>();
+		properties 		= new HashMap<String, String>();
+		tileProperties 	= new HashMap<String, HashMap<String, String> >();
 
 		// tmp vars
 		currentString = new StringBuilder();
@@ -224,7 +224,7 @@ public class CCTMXMapInfo {
 					break;
 				case "tile": {
 					CCTMXTilesetInfo info = tilesets.get(tilesets.size() - 1);
-					HashMap<String, String> dict = new HashMap<>();
+					HashMap<String, String> dict = new HashMap<String, String>();
 					parentGID = info.firstGid + Integer.parseInt(attributes.getValue("id"));
 					tileProperties.put(String.valueOf(parentGID), dict);
 					parentElement = TMXPropertyTile;
@@ -321,7 +321,7 @@ public class CCTMXMapInfo {
 
 					// The value for "type" was blank or not a valid class name
 					// Create an instance of TMXObjectInfo to store the object and its properties
-					HashMap<String, String> dict = new HashMap<>();
+					HashMap<String, String> dict = new HashMap<String, String>();
 
 					// Set the name of the object to the value for "name"
 					dict.put("name", attributes.getValue("name"));

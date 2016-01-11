@@ -9,7 +9,7 @@ import org.cocos2d.nodes.CCNode;
 public class CCDeccelAmplitude extends CCIntervalAction {
 	/** amplitude rate */
 	float			rate;
-	final CCIntervalAction other;
+	CCIntervalAction other;
 	
 	public void setRate(float r){
 		rate = r;

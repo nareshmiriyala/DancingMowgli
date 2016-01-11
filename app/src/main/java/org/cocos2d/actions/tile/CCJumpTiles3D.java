@@ -10,11 +10,11 @@ import org.cocos2d.types.ccQuad3;
  A sin function is executed to move the tiles across the Z axis
  */
 public class CCJumpTiles3D extends CCTiledGrid3DAction {
-	final int jumps;
+	int jumps;
 /** amplitude of the sin*/
-final float amplitude;
+	float amplitude;
 /** amplitude rate */
-final float amplitudeRate;
+	float amplitudeRate;
 
 
     /** creates the action with the number of jumps, the sin amplitude, the grid size and the duration */

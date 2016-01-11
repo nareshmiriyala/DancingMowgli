@@ -24,9 +24,9 @@ import org.cocos2d.types.ccColor4B;
  * @since v0.8.1
  */
 public class CCMotionStreak extends CCNode implements UpdateCallback/*implements CocosNodeTexture*/ {
-    final CCRibbon ribbon_;
-    final float segThreshold_;
-    final float width_;
+    CCRibbon ribbon_;
+    float segThreshold_;
+    float width_;
     CGPoint lastLocation_;
 
     /**

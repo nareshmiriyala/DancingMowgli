@@ -345,7 +345,7 @@ public class CCDirector implements GLSurfaceView.Renderer {
     }
 
     /* scheduled CCScenes */
-    private final ArrayList<CCScene> CCScenesStack_;
+    private ArrayList<CCScene> CCScenesStack_;
 
     /* last time the main loop was updated */
     private long lastUpdate_;
@@ -394,7 +394,7 @@ public class CCDirector implements GLSurfaceView.Renderer {
     }*/
 
 	/* screen, different than surface size */
-	private final CGSize	screenSize_;
+	private CGSize	screenSize_;
 
 	/* screen, different than surface size */
 	private CGSize	surfaceSize_;
@@ -427,7 +427,7 @@ public class CCDirector implements GLSurfaceView.Renderer {
     }
 
 	/* contentScaleFactor could be simulated */
-	private final boolean isContentScaleSupported_;
+	private boolean isContentScaleSupported_;
 
 	private float accumDtForProfiler_;
 
@@ -470,7 +470,7 @@ public class CCDirector implements GLSurfaceView.Renderer {
         displayFPS = value;
     }
 
-    private static final CCDirector _sharedDirector = new CCDirector();
+    private static CCDirector _sharedDirector = new CCDirector();
 
     /** returns a shared instance of the director */
     public static CCDirector sharedDirector() {
@@ -1407,7 +1407,7 @@ public class CCDirector implements GLSurfaceView.Renderer {
         }
     }
 
-	private final TextBuilder fpsBuilder = new TextBuilder();
+	private TextBuilder fpsBuilder = new TextBuilder();
 	
     private void showFPS(GL10 gl) {
 

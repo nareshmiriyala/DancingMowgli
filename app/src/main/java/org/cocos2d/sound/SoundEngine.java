@@ -14,11 +14,11 @@ import android.media.SoundPool;
 public class SoundEngine {
 	// effects are sounds that less than 5 seconds, better in 3 seconds
 	final IntMap<Integer> effectsMap = new IntMap<Integer>();
-	final IntMap<Integer> streamsMap = new IntMap<Integer>();
+	IntMap<Integer> streamsMap = new IntMap<Integer>();
 	
 	// sounds are background sounds, usually longer than 5 seconds
 	final IntMap<MediaPlayer> soundsMap = new IntMap<MediaPlayer>();
-	final SoundPool sp = new SoundPool(5, AudioManager.STREAM_MUSIC, 0);
+	SoundPool sp = new SoundPool(5, AudioManager.STREAM_MUSIC, 0);
 	int lastSndId = -1;
 	Float prevEffectsVolume = null;
 	Float prevSoundsVolume = null;

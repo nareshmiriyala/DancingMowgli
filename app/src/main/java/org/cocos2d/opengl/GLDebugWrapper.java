@@ -20,7 +20,7 @@ public class GLDebugWrapper implements GLSurfaceView.GLWrapper {
 
     static class MyGLImplementation implements GL, GL10 {
 
-        private final GL10 gl;
+        private GL10 gl;
 
         MyGLImplementation(GL10 gl) {
             this.gl = gl;

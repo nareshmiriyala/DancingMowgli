@@ -9,5 +9,5 @@ public interface CCTransitionEaseScene {
     /** returns the Ease action that will be performed on a linear action.
       @since v0.8.2
       */
-    CCIntervalAction easeAction(CCIntervalAction action);
+    public CCIntervalAction easeAction(CCIntervalAction action);
 }

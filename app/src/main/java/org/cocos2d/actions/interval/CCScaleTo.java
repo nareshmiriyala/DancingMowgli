@@ -10,8 +10,8 @@ public class CCScaleTo extends CCIntervalAction {
     protected float scaleY;
     protected float startScaleX;
     protected float startScaleY;
-    protected final float endScaleX;
-    protected final float endScaleY;
+    protected float endScaleX;
+    protected float endScaleY;
     protected float deltaX;
     protected float deltaY;
 

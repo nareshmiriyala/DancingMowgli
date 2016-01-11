@@ -32,11 +32,11 @@ public class CCActionManager implements UpdateCallback {
         boolean paused;
         
         public HashElement() {
-        	actions = new ArrayList<>(4);
+        	actions = new ArrayList<CCAction>(4);
 		}
     }
     
-    private final ConcOneClassPool<HashElement> pool = new ConcOneClassPool<CCActionManager.HashElement>() {
+    private ConcOneClassPool<HashElement> pool = new ConcOneClassPool<CCActionManager.HashElement>() {
     	@Override
     	protected HashElement allocate() {
     		return new HashElement();
@@ -72,7 +72,7 @@ public class CCActionManager implements UpdateCallback {
 
     private CCActionManager() {
     	CCScheduler.sharedScheduler().scheduleUpdate(this, 0, false);
-    	targets = new ConcurrentArrayHashMap<>();
+    	targets = new ConcurrentArrayHashMap<CCNode, HashElement>();
     }
     
 //    @Override

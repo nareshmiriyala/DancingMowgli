@@ -10,8 +10,8 @@ import org.cocos2d.types.ccQuad3;
  Turn off the files in random order
  */
 public class CCTurnOffTiles extends CCTiledGrid3DAction {
-	final Random rand;
-	final int	seed;
+	Random rand;
+	int	seed;
 	int tilesCount;
 	int tilesOrder[];
 

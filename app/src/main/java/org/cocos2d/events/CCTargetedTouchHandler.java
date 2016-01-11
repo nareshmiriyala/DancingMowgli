@@ -6,9 +6,9 @@ import org.cocos2d.protocols.CCTouchDelegateProtocol;
 
 public class CCTargetedTouchHandler extends CCTouchHandler {
 
-	final boolean swallowsTouches;
+	boolean swallowsTouches;
 	
-	private final ArrayList<Integer> claimedSet;
+	private ArrayList<Integer> claimedSet;
 	
 	public CCTargetedTouchHandler(CCTouchDelegateProtocol delegate, int priority, boolean swallow) {
 		super(delegate, priority);

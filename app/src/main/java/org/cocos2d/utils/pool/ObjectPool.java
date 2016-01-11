@@ -5,7 +5,7 @@ import java.util.HashMap;
 @SuppressWarnings({ "rawtypes", "unchecked" })
 public class ObjectPool {
 
-	private final HashMap<Class<?>, OneClassPool<?>> lists;
+	private HashMap<Class<?>, OneClassPool<?>> lists;
 
 	public ObjectPool() {
 		lists = new HashMap<Class<?>, OneClassPool<?>>();

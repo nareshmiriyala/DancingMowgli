@@ -31,7 +31,7 @@ public class CGSize {
 		height = h;
 	}
 	
-	private static final CGSize ZERO_SIZE = CGSize.zero();
+	private static CGSize ZERO_SIZE = CGSize.zero();
 	public static CGSize getZero() {
 		return ZERO_SIZE;
 	}

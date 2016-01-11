@@ -25,11 +25,11 @@ public class CCTMXObjectGroup  {
 	public CGPoint	positionOffset;
 
 	/** array of the objects */
-	public final ArrayList<HashMap<String, String> > objects;
+	public ArrayList<HashMap<String, String> > objects;
 
 
 	/** list of properties stored in a dictionary */
-	public final HashMap<String, String> properties;
+	public HashMap<String, String> properties;
 
 
 	/** return the value for the specific property name */

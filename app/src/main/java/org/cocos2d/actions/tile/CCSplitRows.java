@@ -10,7 +10,7 @@ import org.cocos2d.types.ccQuad3;
 
 /** CCSplitRows action */
 public class CCSplitRows extends CCTiledGrid3DAction {
-	final int		rows;
+	int		rows;
 	CGSize	winSize;
 
     /** creates the action with the number of rows to split and the duration */

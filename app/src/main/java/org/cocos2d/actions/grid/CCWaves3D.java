@@ -5,11 +5,11 @@ import org.cocos2d.types.ccGridSize;
 
 /** CCWaves3D action */
 public class CCWaves3D extends CCGrid3DAction {
-	final int waves;
+	int waves;
 	/** amplitude of the wave */
-	final float amplitude;
+	float amplitude;
 	/** amplitude rate of the wave */
-	final float amplitudeRate;
+	float amplitudeRate;
 	
 	public static CCWaves3D action(int wav, float amp, ccGridSize gSize, float d) {
 		return new CCWaves3D(wav, amp, gSize, d);

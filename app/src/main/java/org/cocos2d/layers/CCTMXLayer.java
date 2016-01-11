@@ -48,28 +48,28 @@ import org.cocos2d.utils.CCFormatter;
  */
 public class CCTMXLayer extends CCSpriteSheet {
 	/** Tilset information for the layer */
-	public final CCTMXTilesetInfo	tileset;
+	public	CCTMXTilesetInfo	tileset;
 
 	/** name of the layer */
-	public final String				layerName;
+	public	String				layerName;
 
 	/** size of the layer in tiles */
-	public final CGSize				layerSize;
+	public 	CGSize				layerSize;
 
 	/** size of the map's tile (could be differnt from the tile's size) */
-	public final CGSize				mapTileSize;
+	public	CGSize				mapTileSize;
 
 	/** pointer to the map of tiles */
 	public	IntBuffer			tiles;
 
 
 	/** Layer orientation, which is the same as the map orientation */
-	public final int					layerOrientation_;
+	public	int					layerOrientation_;
 
 	/** properties from the layer. They can be added using Tiled */
-	public final HashMap<String, String>		properties;
+	public	HashMap<String, String>		properties;
 
-	final int					opacity_; // TMX Layer supports opacity
+	int					opacity_; // TMX Layer supports opacity
 
 	int					minGID_;
 	int					maxGID_;

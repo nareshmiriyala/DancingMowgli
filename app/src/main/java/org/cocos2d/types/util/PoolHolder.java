@@ -19,7 +19,7 @@ import org.cocos2d.utils.pool.OneClassPool;
  */
 public final class PoolHolder {
 	
-    private static final ThreadLocal<PoolHolder> instance = new ThreadLocal<PoolHolder>() {
+    private static ThreadLocal<PoolHolder> instance = new ThreadLocal<PoolHolder>() {
     	@Override
     	protected PoolHolder initialValue() {
     		return new PoolHolder();
@@ -30,13 +30,13 @@ public final class PoolHolder {
 		return instance.get();
 	}
 	
-	private final ObjectPool objectPool;
+	private ObjectPool objectPool;
 	
-	private final OneClassPool<CGPoint> pointPool;
-	private final OneClassPool<ccQuad2> ccQuad2Pool;
-	private final OneClassPool<ccQuad3> ccQuad3Pool;
-	private final OneClassPool<CGRect> rectPool;
-	private final OneClassPool<CGAffineTransform> affineTransformPool;
+	private OneClassPool<CGPoint> pointPool;
+	private OneClassPool<ccQuad2> ccQuad2Pool;
+	private OneClassPool<ccQuad3> ccQuad3Pool;
+	private OneClassPool<CGRect> rectPool;
+	private OneClassPool<CGAffineTransform> affineTransformPool;
 	
 	private PoolHolder() {
 		objectPool = new ObjectPool();

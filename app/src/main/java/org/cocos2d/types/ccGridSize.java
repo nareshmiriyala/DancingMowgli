@@ -2,8 +2,8 @@ package org.cocos2d.types;
 
 //! A 2D grid_ size
 public class ccGridSize {
-    public final int x;
-    public final int y;
+    public int x;
+    public int y;
 
     //! helper function to create a ccGridSize
     public static ccGridSize ccg(final int x, final int y) {

@@ -12,9 +12,9 @@ import org.cocos2d.nodes.CCNode;
  * Calls a 'callback'
  */
 public class CCCallFunc extends CCInstantAction {
-    protected final Object targetCallback;
-    protected final String selector;
-    protected final Class<?>[] partypes;
+    protected Object targetCallback;
+    protected String selector;
+    protected Class<?> partypes[];
 
     protected Method invocation;
 

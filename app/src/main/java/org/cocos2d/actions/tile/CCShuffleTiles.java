@@ -11,8 +11,8 @@ import org.cocos2d.types.ccQuad3;
   Shuffle the tiles in random order
   */
 public class CCShuffleTiles extends CCTiledGrid3DAction {
-    final Random rand;
-    final int	seed;
+    Random rand;
+    int	seed;
     int tilesCount;
     int tilesOrder[];
     Tile tiles[];

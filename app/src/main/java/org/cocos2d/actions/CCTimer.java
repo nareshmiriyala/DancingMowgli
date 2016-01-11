@@ -8,7 +8,7 @@ public class CCTimer {
     //
     /** Light weight timer */
 
-    private final Object target;
+    private Object target;
     private String selector;
     private Method invocation;
     

@@ -4,6 +4,7 @@ import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.concurrent.ConcurrentHashMap;
 
+import org.cocos2d.config.ccConfig;
 import org.cocos2d.utils.collections.ConcurrentArrayHashMap;
 
 //
@@ -30,7 +31,7 @@ public class CCScheduler {
         public Object	target;				// not retained (retained by hashUpdateEntry)
         public int		priority;
         public boolean	paused;
-    }
+    };
 
     // Hash Element used for "selectors with interval"
     private static class tHashSelectorEntry {
@@ -55,12 +56,12 @@ public class CCScheduler {
 	// "updates with priority" stuff
 	//
     final ArrayList<tListEntry>    updatesNeg;	// list of priority < 0
-	final ArrayList<tListEntry>    updates0;	// list priority == 0
-	final ArrayList<tListEntry>    updatesPos;	// list priority > 0
+	ArrayList<tListEntry>    updates0;	// list priority == 0
+	ArrayList<tListEntry>    updatesPos;	// list priority > 0
 		
 	// Used for "selectors with interval"
-    final ConcurrentArrayHashMap<Object, tHashSelectorEntry>  hashForSelectors;
-	final ConcurrentHashMap<Object, tHashSelectorEntry>  hashForUpdates;
+	ConcurrentArrayHashMap<Object, tHashSelectorEntry>  hashForSelectors;
+	ConcurrentHashMap<Object, tHashSelectorEntry>  hashForUpdates;
     
     tListEntry							currentEntry;
     
@@ -69,7 +70,7 @@ public class CCScheduler {
 	
 	// Optimization
 //	Method			    impMethod;
-    final String				updateSelector;
+	String				updateSelector;
 
     /** Modifies the time of all scheduled callbacks.
       You can use this property to create a 'slow motion' or 'fast fordward' effect.
@@ -123,11 +124,11 @@ public class CCScheduler {
 //    	}
 
         // updates with priority
-        updates0   = new ArrayList<>();
-        updatesNeg = new ArrayList<>();
-        updatesPos = new ArrayList<>();
-        hashForUpdates   = new ConcurrentHashMap<>();
-        hashForSelectors = new ConcurrentArrayHashMap<>();
+        updates0   = new ArrayList<tListEntry>();
+        updatesNeg = new ArrayList<tListEntry>();
+        updatesPos = new ArrayList<tListEntry>();
+        hashForUpdates   = new ConcurrentHashMap<Object, tHashSelectorEntry>();
+        hashForSelectors = new ConcurrentArrayHashMap<Object, tHashSelectorEntry>();
 
         // selectors with interval
         currentTarget = null;
@@ -324,7 +325,7 @@ public class CCScheduler {
         }
 
         if( element.timers == null) {
-            element.timers = new ArrayList<>();
+            element.timers = new ArrayList<CCTimer>();
         }/* else if( element.timers.size() == element.timers )
             ccArrayDoubleCapacity(element->timers);
 		*/
@@ -354,7 +355,7 @@ public class CCScheduler {
         }
 
         if( element.timers == null) {
-            element.timers = new ArrayList<>();
+            element.timers = new ArrayList<CCTimer>();
         }/* else if( element.timers.size() == element.timers )
             ccArrayDoubleCapacity(element->timers);
 		*/

@@ -9,11 +9,11 @@ import org.cocos2d.types.CGRect;
 /** an Animation object used within Sprites to perform animations */
 public class CCAnimation {
     /** name of the animation */
-    private final String name_;
+    private String name_;
     /** delay between frames in seconds. */
-    private final float delay_;
+    private float delay_;
     /** array of frames */
-    final ArrayList<CCSpriteFrame> frames_;
+    ArrayList<CCSpriteFrame> frames_;
 
     public String name() {
         return name_;

@@ -8,7 +8,7 @@ import org.cocos2d.actions.interval.CCIntervalAction;
  */
 public class CCEaseRateAction extends CCEaseAction {
 	/** rate value for the actions */
-    final float rate;
+	float rate;
 
 	/** Creates the action with the inner action and the rate parameter */
 	public static CCEaseRateAction action(CCIntervalAction action, float rate) {

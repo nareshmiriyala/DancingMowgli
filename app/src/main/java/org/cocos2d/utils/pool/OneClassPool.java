@@ -3,7 +3,7 @@ package org.cocos2d.utils.pool;
 import java.util.ArrayList;
 
 public abstract class OneClassPool<T> {
-	private final ArrayList<T> objs;
+	private ArrayList<T> objs;
 
 	public OneClassPool() {
 		objs = new ArrayList<T>();

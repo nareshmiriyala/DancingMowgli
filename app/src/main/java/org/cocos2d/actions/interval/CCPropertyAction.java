@@ -27,9 +27,8 @@ import org.cocos2d.nodes.CCNode;
 public class CCPropertyAction extends CCIntervalAction {
 
     Method          setMethod_;   // setScale, like this
-    final String          key_;
-    final float			from_;
-    final float to_;
+    String          key_;
+    float			from_, to_;
     float			delta_;
 
     /** creates an initializes the action with the property name (key), and the from and to parameters. */
@@ -67,9 +66,11 @@ public class CCPropertyAction extends CCIntervalAction {
         		setMethod_    = target.getClass().getMethod(key_, Float.TYPE);
         	}
         	setMethod_.invoke(target, to_  - delta_ * (1 - dt));
-    	} catch (NoSuchMethodException | IllegalArgumentException | InvocationTargetException | IllegalAccessException e) {
+    	} catch (NoSuchMethodException | IllegalArgumentException | InvocationTargetException e) {
     		e.printStackTrace();
-    	}
+    	} catch (IllegalAccessException e) {
+			e.printStackTrace();
+		}
     }
 
     @Override

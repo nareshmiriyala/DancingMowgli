@@ -27,8 +27,8 @@ public class CCMenuItem extends CCNode {
     /** returns whether or not the item is selected @since v0.8.2 */
     protected boolean isSelected_;
 
-    protected final Object targetCallback;
-    protected final String selector;
+    protected Object targetCallback;
+    protected String selector;
 
     private Method invocation;
 

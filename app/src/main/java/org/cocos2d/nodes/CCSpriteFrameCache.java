@@ -22,7 +22,7 @@ import org.cocos2d.utils.PlistParser;
  @since v0.9
  */
 public class CCSpriteFrameCache {
-    final HashMap<String, CCSpriteFrame> spriteFrames;
+    HashMap<String, CCSpriteFrame> spriteFrames;
 
     private static CCSpriteFrameCache sharedSpriteFrameCache_= null;
 

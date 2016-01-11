@@ -8,8 +8,8 @@ import org.cocos2d.nodes.CCDirector;
 import org.cocos2d.opengl.CCTexture2D;
 /** FBO class that grabs the the contents of the screen */
 public class CCGrabber {
-	final int[]		fbo = new int[1];
-	final int[]		oldFBO = new int[1];
+	int		fbo[] = new int[1];
+	int		oldFBO[] = new int[1];
 
 	public CCGrabber() {
 		// generate FBO

@@ -25,7 +25,7 @@ import org.cocos2d.types.ccGridSize;
  * @since v0.8.2
  */
 public class CCPageTurnTransition extends CCTransitionScene {
-    protected final boolean back_;
+    protected boolean back_;
 
     /**
      * creates a base transition with duration and incoming scene

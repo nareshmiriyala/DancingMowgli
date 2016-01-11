@@ -18,7 +18,7 @@ import org.cocos2d.types.CGSize;
   */
 public class CCSpriteFrame {
     /** rect of the frame */
-    final CGRect			rect_;
+    CGRect			rect_;
     public CGRect getRect() {
     	return CGRect.make(rect_);
     }
@@ -28,7 +28,7 @@ public class CCSpriteFrame {
     }
     
     /** offset of the frame */
-    final CGPoint			offset_;
+    CGPoint			offset_;
     public CGPoint getOffset() {
     	return CGPoint.make(offset_.x, offset_.y);
     }
@@ -38,15 +38,15 @@ public class CCSpriteFrame {
     }
     
     /** original size of the trimmed image */
-    final CGSize			originalSize_;
+    CGSize			originalSize_;
     /** texture of the frame */
-    final CCTexture2D		texture_;
+    CCTexture2D		texture_;
     public CCTexture2D getTexture() {
     	return texture_;
     }
     
     /** Flag shows that Zwoptex rotated texture for optimizations */
-    final Boolean rotated_;
+    Boolean rotated_;
     public Boolean getRotated() {
     	return rotated_;
     }

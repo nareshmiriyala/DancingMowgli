@@ -14,10 +14,10 @@ import org.cocos2d.opengl.CCTexture2D;
 
 public interface CCTextureProtocol extends CCBlendProtocol {
     /** returns the used texture */
-    CCTexture2D getTexture();
+    public CCTexture2D getTexture();
 
     /** sets a new texture. it will be retained */
-    void setTexture(CCTexture2D texture);
+    public void setTexture(CCTexture2D texture);
 
 }
 

@@ -7,7 +7,7 @@ import org.cocos2d.layers.CCScene;
  * Possible orientation: LeftOver, RightOver, UpOver, DownOver
  */
 public class CCOrientedTransitionScene extends CCTransitionScene {
-    final int orientation;
+    int orientation;
 
     /** creates a base transition with duration and incoming scene */
     public static CCOrientedTransitionScene transition(float t, CCScene s, int o) {

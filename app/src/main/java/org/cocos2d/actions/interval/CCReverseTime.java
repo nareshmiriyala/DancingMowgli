@@ -11,7 +11,7 @@ import org.cocos2d.nodes.CCNode;
  scope is not recommended.
 */
 public class CCReverseTime extends CCIntervalAction {
-    private final CCFiniteTimeAction other;
+    private CCFiniteTimeAction other;
 
     /** creates the action */
     public static CCReverseTime action(CCFiniteTimeAction action) {

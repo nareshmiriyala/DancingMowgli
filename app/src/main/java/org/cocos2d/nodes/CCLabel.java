@@ -23,10 +23,10 @@ public class CCLabel extends CCSprite implements CCLabelProtocol {
         RIGHT
     }
 
-    private final CGSize _dimensions;
-    private final TextAlignment _alignment;
-    private final String _fontName;
-    private final float _fontSize;
+    private CGSize _dimensions;
+    private TextAlignment _alignment;
+    private String _fontName;
+    private float _fontSize;
     private String _string; 
 
     /** creates a CCLabel from a fontname, alignment, dimension and font size */
@@ -59,7 +59,7 @@ public class CCLabel extends CCSprite implements CCLabelProtocol {
 
     private static class StringReloader implements GLResourceHelper.GLResourceLoader {
     	
-    	private final WeakReference<CCLabel> label;
+    	private WeakReference<CCLabel> label;
     	
     	public StringReloader(CCLabel holder) {
     		label = new WeakReference<CCLabel>(holder);
