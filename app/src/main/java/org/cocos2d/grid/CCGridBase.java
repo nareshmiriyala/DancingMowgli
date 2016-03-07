@@ -139,7 +139,7 @@ public abstract class CCGridBase {
     }
 
     public String toString() {
-        return new CCFormatter().format("<%s : Dimensions = %dx%d>",
+        return CCFormatter.format("<%s : Dimensions = %dx%d>",
         			CCGridBase.class, gridSize_.x, gridSize_.y);
     }
 

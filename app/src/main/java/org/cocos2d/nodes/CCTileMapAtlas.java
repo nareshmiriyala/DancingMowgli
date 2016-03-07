@@ -141,7 +141,7 @@ public class CCTileMapAtlas extends CCAtlasNode {
 
             // TODO: this method consumes a lot of memory
             // a tree of something like that shall be implemented
-            int num = posToAtlasIndex.get(new CCFormatter().format("%d,%d", pos.x, pos.y));
+            int num = posToAtlasIndex.get(CCFormatter.format("%d,%d", pos.x, pos.y));
             updateAtlas(pos, tile, num);
         }
     }
@@ -194,7 +194,7 @@ public class CCTileMapAtlas extends CCAtlasNode {
                     if (value.r != 0) {
                         updateAtlas(ccGridSize.ccg(x, y), value, total);
 
-                        String key = new CCFormatter().format("%d,%d", x, y);
+                        String key = CCFormatter.format("%d,%d", x, y);
                         posToAtlasIndex.put(key, total);
 
                         total++;
