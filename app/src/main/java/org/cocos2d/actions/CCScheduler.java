@@ -31,7 +31,7 @@ public class CCScheduler {
         public Object	target;				// not retained (retained by hashUpdateEntry)
         public int		priority;
         public boolean	paused;
-    };
+    }
 
     // Hash Element used for "selectors with interval"
     private static class tHashSelectorEntry {

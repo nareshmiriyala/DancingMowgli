@@ -156,7 +156,7 @@ public abstract class CCParticleSystem extends CCNode implements CCTextureProtoc
 		float radialAccel;
 		// Radial acceleration variance
 		float radialAccelVar;
-	};
+	}
 
 	// Mode B: circular movement (gravity, radial accel and tangential accel don't are not used in this mode)
 	class ModeB {
@@ -172,7 +172,7 @@ public abstract class CCParticleSystem extends CCNode implements CCTextureProtoc
 		float rotatePerSecond;
 		// Variance in degrees for rotatePerSecond
 		float rotatePerSecondVar;
-	};
+	}
 
 	protected int id;
 	
@@ -1170,8 +1170,7 @@ public abstract class CCParticleSystem extends CCNode implements CCTextureProtoc
 
     //! should be overriden by subclasses
     public void updateQuad(CCParticle particle, CGPoint pos) {
-        ;
-    }
+	}
 
     public void postStep() {
         // should be overriden
