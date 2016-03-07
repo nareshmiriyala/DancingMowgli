@@ -91,8 +91,7 @@ public class CCGrabber {
 
 	@Override
 	public void finalize() throws Throwable  {
-		if (!(CCDirector.gl instanceof GL11ExtensionPack)) {
-        } else {
+		if ((CCDirector.gl instanceof GL11ExtensionPack)) {
             GL11ExtensionPack gl = (GL11ExtensionPack) CCDirector.gl;
             ccMacros.CCLOGINFO("cocos2d: deallocing %@", this.toString());
             try {

@@ -51,42 +51,50 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 
-/**Class that creates and handle the main Window and manages how
-and when to execute the Scenes.
- 
- The CCDirector is also resposible for:
-  - initializing the OpenGL ES context
-  - setting the OpenGL ES pixel format (default on is RGB565)
-  - setting the OpenGL ES buffer depth (default one is 0-bit)
-  - setting the projection (default one is 2D)
-  - setting the orientation (default one is Protrait)
- 
- Since the CCDirector is a singleton, the standard way to use it is by calling:
-  - [[CCDirector sharedDirector] xxxx];
- 
- The CCDirector also sets the default OpenGL ES context:
-  - GL_TEXTURE_2D is enabled
-  - GL_VERTEX_ARRAY is enabled
-  - GL_COLOR_ARRAY is enabled
-  - GL_TEXTURE_COORD_ARRAY is enabled
-*/
+/**
+ * Class that creates and handle the main Window and manages how
+ * and when to execute the Scenes.
+ * <p/>
+ * The CCDirector is also resposible for:
+ * - initializing the OpenGL ES context
+ * - setting the OpenGL ES pixel format (default on is RGB565)
+ * - setting the OpenGL ES buffer depth (default one is 0-bit)
+ * - setting the projection (default one is 2D)
+ * - setting the orientation (default one is Protrait)
+ * <p/>
+ * Since the CCDirector is a singleton, the standard way to use it is by calling:
+ * - [[CCDirector sharedDirector] xxxx];
+ * <p/>
+ * The CCDirector also sets the default OpenGL ES context:
+ * - GL_TEXTURE_2D is enabled
+ * - GL_VERTEX_ARRAY is enabled
+ * - GL_COLOR_ARRAY is enabled
+ * - GL_TEXTURE_COORD_ARRAY is enabled
+ */
 public class CCDirector implements GLSurfaceView.Renderer {
-	private static final String LOG_TAG = CCDirector.class.getSimpleName();
-	
+    private static final String LOG_TAG = CCDirector.class.getSimpleName();
+
     /** @typedef tPixelFormat
-      Possible Pixel Formats for the EAGLView
-      */
-    /** RGB565 pixel format. No alpha. 16-bit. (Default) */
+    Possible Pixel Formats for the EAGLView
+     */
+    /**
+     * RGB565 pixel format. No alpha. 16-bit. (Default)
+     */
     public static final int kCCPixelFormatRGB565 = 0;
-    /** RGBA format. 32-bit. Needed for some 3D effects. It is not as fast as the RGB565 format. */
+    /**
+     * RGBA format. 32-bit. Needed for some 3D effects. It is not as fast as the RGB565 format.
+     */
     public static final int kCCPixelFormatRGBA8888 = 1;
-    /** default pixel format */
+    /**
+     * default pixel format
+     */
     public static final int kCCPixelFormatDefault = kCCPixelFormatRGB565;
 
-    /** @typedef tDepthBufferFormat
-      Possible DepthBuffer Formats for the EAGLView.
-      Use 16 or 24 bit depth buffers if you are going to use real 3D objects.
-      */
+    /**
+     * @typedef tDepthBufferFormat
+     * Possible DepthBuffer Formats for the EAGLView.
+     * Use 16 or 24 bit depth buffers if you are going to use real 3D objects.
+     */
     /// A Depth Buffer of 0 bits will be used (default)
     public static final int kCCDepthBufferNone = 0;
     /// A depth buffer of 16 bits will be used
@@ -94,9 +102,10 @@ public class CCDirector implements GLSurfaceView.Renderer {
     /// A depth buffer of 24 bits will be used
     public static final int kCCDepthBuffer24 = 2;
 
-    /** @typedef ccDirectorProjection
-      Possible OpenGL projections used by director
-      */
+    /**
+     * @typedef ccDirectorProjection
+     * Possible OpenGL projections used by director
+     */
     /// sets a 2D projection (orthogonal projection)
     public static final int kCCDirectorProjection2D = 1;
 
@@ -109,9 +118,11 @@ public class CCDirector implements GLSurfaceView.Renderer {
     /// Detault projection is 3D projection
     public static final int kCCDirectorProjectionDefault = kCCDirectorProjection3D;
 
-    /** Sets an OpenGL projection
-      @since v0.8.2
-      */
+    /**
+     * Sets an OpenGL projection
+     *
+     * @since v0.8.2
+     */
     private int projection_ = kCCDirectorProjectionDefault;
 
     public int getProjection() {
@@ -126,40 +137,41 @@ public class CCDirector implements GLSurfaceView.Renderer {
                 gl.glLoadIdentity();
                 gl.glOrthof(0, size.width, 0, size.height, -1000, 1000);
                 gl.glMatrixMode(GL_MODELVIEW);
-                gl.glLoadIdentity();			
+                gl.glLoadIdentity();
                 break;
 
             case kCCDirectorProjection3D:
                 gl.glMatrixMode(GL_PROJECTION);
                 gl.glLoadIdentity();
-                GLU.gluPerspective(gl, 60, size.width/size.height, 0.5f, 1500.0f);
-                
-                gl.glMatrixMode(GL_MODELVIEW);	
+                GLU.gluPerspective(gl, 60, size.width / size.height, 0.5f, 1500.0f);
+
+                gl.glMatrixMode(GL_MODELVIEW);
                 gl.glLoadIdentity();
-                GLU.gluLookAt(gl, size.width/2, size.height/2, getZEye(),
-                          size.width/2, size.height/2, 0,
-                          0.0f, 1.0f, 0.0f);	
-                
+                GLU.gluLookAt(gl, size.width / 2, size.height / 2, getZEye(),
+                        size.width / 2, size.height / 2, 0,
+                        0.0f, 1.0f, 0.0f);
+
                 break;
-                
+
             case kCCDirectorProjectionCustom:
                 // if custom, ignore it. The user is resposible for setting the correct projection
                 break;
-                
+
             default:
-            	ccMacros.CCLOG(LOG_TAG, "cocos2d: Director: unrecognized projecgtion");
+                ccMacros.CCLOG(LOG_TAG, "cocos2d: Director: unrecognized projecgtion");
                 break;
         }
         projection_ = p;
     }
-   
+
 
     /** @typedef ccDirectorType
-      Possible Director Types.
-      @since v0.8.2
-      */
-    /** Will use a Director that triggers the main loop from an NSTimer object
-     *
+    Possible Director Types.
+     @since v0.8.2
+     */
+    /**
+     * Will use a Director that triggers the main loop from an NSTimer object
+     * <p/>
      * Features and Limitations:
      * - Integrates OK with UIKit objects
      * - It the slowest director
@@ -167,8 +179,9 @@ public class CCDirector implements GLSurfaceView.Renderer {
      */
     public static final int kCCDirectorTypeNSTimer = 1;
 
-    /** will use a Director that triggers the main loop from a custom main loop.
-     *
+    /**
+     * will use a Director that triggers the main loop from a custom main loop.
+     * <p/>
      * Features and Limitations:
      * - Faster than NSTimer Director
      * - It doesn't integrate well with UIKit objecgts
@@ -176,8 +189,9 @@ public class CCDirector implements GLSurfaceView.Renderer {
      */
     public static final int kCCDirectorTypeMainLoop = 2;
 
-    /** Will use a Director that triggers the main loop from a thread, but the main loop will be executed on the main thread.
-     *
+    /**
+     * Will use a Director that triggers the main loop from a thread, but the main loop will be executed on the main thread.
+     * <p/>
      * Features and Limitations:
      * - Faster than NSTimer Director
      * - It doesn't integrate well with UIKit objecgts
@@ -185,30 +199,34 @@ public class CCDirector implements GLSurfaceView.Renderer {
      */
     public static final int kCCDirectorTypeThreadMainLoop = 3;
 
-    /** Will use a Director that synchronizes timers with the refresh rate of the display.
-     *
+    /**
+     * Will use a Director that synchronizes timers with the refresh rate of the display.
+     * <p/>
      * Features and Limitations:
      * - Faster than NSTimer Director
      * - Only available on 3.1+
      * - Scheduled timers and drawing are synchronizes with the refresh rate of the display
      * - Integrates OK with UIKit objects
      * - The interval update can be 1/60, 1/30, 1/15
-     */	
+     */
     public static final int kCCDirectorTypeDisplayLink = 4;
 
-    /** Default director is the NSTimer directory */
+    /**
+     * Default director is the NSTimer directory
+     */
     public static final int kCCDirectorTypeDefault = kCCDirectorTypeNSTimer;
 
-    /** @typedef ccDeviceOrientation
-      Possible device orientations
-      */
-        /// Device oriented vertically, home button on the bottom
+    /**
+     * @typedef ccDeviceOrientation
+     * Possible device orientations
+     */
+    /// Device oriented vertically, home button on the bottom
     public static final int kCCDeviceOrientationPortrait = Configuration.ORIENTATION_PORTRAIT;
 
     /// Device oriented vertically, home button on the top
     ///    kCCDeviceOrientationPortraitUpsideDown = UIDeviceOrientationPortraitUpsideDown,
 
-        /// Device oriented horizontally, home button on the right
+    /// Device oriented horizontally, home button on the right
     public static final int kCCDeviceOrientationLandscapeLeft = Configuration.ORIENTATION_LANDSCAPE;
 
     /// Device oriented horizontally, home button on the left
@@ -232,18 +250,22 @@ public class CCDirector implements GLSurfaceView.Renderer {
 
 
     private int depthBufferFormat_;
-    /** Change depth buffer format of the render buffer.
-      Call this class method before attaching it to a UIWindow/UIView
-      Default depth buffer: 0 (none).  Supported: kCCDepthBufferNone, kCCDepthBuffer16, and kCCDepthBuffer24
 
-      @deprecated Set the depth buffer format when creating the EAGLView. This method will be removed in v1.0
-      */
+    /**
+     * Change depth buffer format of the render buffer.
+     * Call this class method before attaching it to a UIWindow/UIView
+     * Default depth buffer: 0 (none).  Supported: kCCDepthBufferNone, kCCDepthBuffer16, and kCCDepthBuffer24
+     *
+     * @deprecated Set the depth buffer format when creating the EAGLView. This method will be removed in v1.0
+     */
     public void setDepthBufferFormat(int db) {
-	    assert (!isOpenGLAttached()):"Can't change the depth buffer format after the director was initialized";
+        assert (!isOpenGLAttached()) : "Can't change the depth buffer format after the director was initialized";
         depthBufferFormat_ = db;
     }
 
-    /** Pixel format used to create the context */
+    /**
+     * Pixel format used to create the context
+     */
     private int pixelFormat_;
 
     public int getPixelFormat() {
@@ -251,34 +273,37 @@ public class CCDirector implements GLSurfaceView.Renderer {
     }
 
     /// XXX: missing description
-    public float getZEye () {
-	    return ( screenSize_.height / 1.1566f ); //screenSize_.height
+    public float getZEye() {
+        return (screenSize_.height / 1.1566f); //screenSize_.height
     }
 
-    /** Uses a new pixel format for the EAGLView.
-      Call this class method before attaching it to a UIView
-      Default pixel format: kRGB565. Supported pixel formats: kRGBA8 and kRGB565
-
-      @deprecated Set the pixel format when creating the EAGLView. This method will be removed in v1.0
-    */
+    /**
+     * Uses a new pixel format for the EAGLView.
+     * Call this class method before attaching it to a UIView
+     * Default pixel format: kRGB565. Supported pixel formats: kRGBA8 and kRGB565
+     *
+     * @deprecated Set the pixel format when creating the EAGLView. This method will be removed in v1.0
+     */
     @Deprecated
     public void setPixelFormat(int p) {
-	    assert (!this.isOpenGLAttached()):"Can't change the pixel format after the director was initialized";	
+        assert (!this.isOpenGLAttached()) : "Can't change the pixel format after the director was initialized";
         pixelFormat_ = p;
     }
 
     /* orientation */
-    int	deviceOrientation_;
+    int deviceOrientation_;
 
-    /** The device orientattion */
+    /**
+     * The device orientattion
+     */
     public int getDeviceOrientation() {
         return deviceOrientation_;
     }
 
     public void setDeviceOrientation(int orientation) {
-        if( deviceOrientation_ != orientation ) {
+        if (deviceOrientation_ != orientation) {
             deviceOrientation_ = orientation;
-            switch( deviceOrientation_) {
+            switch (deviceOrientation_) {
                 case kCCDeviceOrientationPortrait:
                     theApp.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
                     break;
@@ -295,12 +320,12 @@ public class CCDirector implements GLSurfaceView.Renderer {
     // rotates the screen if an orientation differnent than Portrait is used
     private void applyOrientation(GL10 gl) {
         CGSize s = surfaceSize_;
-         float h = s.height / 2;
-         float w = s.width / 2;
+        float h = s.height / 2;
+        float w = s.width / 2;
 
         // XXX it's using hardcoded values.
         // What if the the screen size changes in the future?
-        switch ( deviceOrientation_ ) {
+        switch (deviceOrientation_) {
             case kCCDeviceOrientationPortrait:
                 // nothing
                 break;
@@ -321,7 +346,9 @@ public class CCDirector implements GLSurfaceView.Renderer {
     /* is the running scene paused */
     private boolean isPaused;
 
-    /** Whether or not the Director is paused */
+    /**
+     * Whether or not the Director is paused
+     */
     public boolean getIsPaused() {
         return isPaused;
     }
@@ -332,14 +359,16 @@ public class CCDirector implements GLSurfaceView.Renderer {
     /* will be the next 'runningCCScene' in the next frame */
     private CCScene nextCCScene_;
 
-	/* If YES, then "old" CCScene will receive the cleanup message */
-    private boolean	sendCleanupToCCScene_;
+    /* If YES, then "old" CCScene will receive the cleanup message */
+    private boolean sendCleanupToCCScene_;
 
-    /** Whether or not the replaced CCScene will receive the cleanup message.
-      If the new CCScene is pushed, then the old CCScene won't receive the "cleanup" message.
-      If the new CCScene replaces the old one, the it will receive the "cleanup" message.
-      @since v0.99.0
-    */
+    /**
+     * Whether or not the replaced CCScene will receive the cleanup message.
+     * If the new CCScene is pushed, then the old CCScene won't receive the "cleanup" message.
+     * If the new CCScene replaces the old one, the it will receive the "cleanup" message.
+     *
+     * @since v0.99.0
+     */
     public boolean getSendCleanupToScene() {
         return sendCleanupToCCScene_;
     }
@@ -355,14 +384,18 @@ public class CCDirector implements GLSurfaceView.Renderer {
 
     /* whether or not the next delta time will be zero */
     private boolean nextDeltaTimeZero_;
-    public boolean getNextDeltaTimeZero(){
+
+    public boolean getNextDeltaTimeZero() {
         return nextDeltaTimeZero_;
     }
+
     public void setNextDeltaTimeZero(boolean dtz) {
         nextDeltaTimeZero_ = dtz;
     }
 
-    /** The EAGLView, where everything is rendered */
+    /**
+     * The EAGLView, where everything is rendered
+     */
     private GLSurfaceView openGLView_;
 
     /**
@@ -393,28 +426,30 @@ public class CCDirector implements GLSurfaceView.Renderer {
         }
     }*/
 
-	/* screen, different than surface size */
-	private CGSize	screenSize_;
+    /* screen, different than surface size */
+    private CGSize screenSize_;
 
-	/* screen, different than surface size */
-	private CGSize	surfaceSize_;
-	
-	/* content scale factor */
-	private float contentScaleFactor_;
-    /** The size in pixels of the surface. It could be different than the screen size.
-      High-res devices might have a higher surface size than the screen size.
-      In non High-res device the contentScale will be emulated.
+    /* screen, different than surface size */
+    private CGSize surfaceSize_;
 
-    Warning: Emulation of High-Res on iOS < 4 is an EXPERIMENTAL feature.
+    /* content scale factor */
+    private float contentScaleFactor_;
 
-    @since v0.99.4
-    */
+    /**
+     * The size in pixels of the surface. It could be different than the screen size.
+     * High-res devices might have a higher surface size than the screen size.
+     * In non High-res device the contentScale will be emulated.
+     * <p/>
+     * Warning: Emulation of High-Res on iOS < 4 is an EXPERIMENTAL feature.
+     *
+     * @since v0.99.4
+     */
     public void setContentScaleFactor(GL10 gl, float scaleFactor) {
-        if( scaleFactor != contentScaleFactor_ ) {
+        if (scaleFactor != contentScaleFactor_) {
             contentScaleFactor_ = scaleFactor;
-            surfaceSize_ = CGSize.make( screenSize_.width * scaleFactor, screenSize_.height * scaleFactor );
+            surfaceSize_ = CGSize.make(screenSize_.width * scaleFactor, screenSize_.height * scaleFactor);
 
-            if( openGLView_!= null )
+            if (openGLView_ != null)
                 this.updateContentScaleFactor();
 
             // update projection
@@ -426,10 +461,10 @@ public class CCDirector implements GLSurfaceView.Renderer {
         return contentScaleFactor_;
     }
 
-	/* contentScaleFactor could be simulated */
-	private boolean isContentScaleSupported_;
+    /* contentScaleFactor could be simulated */
+    private boolean isContentScaleSupported_;
 
-	private float accumDtForProfiler_;
+    private float accumDtForProfiler_;
 
     /**
      * The current running CCScene. Director can only run one CCScene at the time
@@ -463,7 +498,7 @@ public class CCDirector implements GLSurfaceView.Renderer {
     /**
      * Whether or not to display the FPS on the bottom-left corner
      */
-	/* display FPS ? */
+    /* display FPS ? */
     private boolean displayFPS;
 
     public void setDisplayFPS(boolean value) {
@@ -472,14 +507,16 @@ public class CCDirector implements GLSurfaceView.Renderer {
 
     private static CCDirector _sharedDirector = new CCDirector();
 
-    /** returns a shared instance of the director */
+    /**
+     * returns a shared instance of the director
+     */
     public static CCDirector sharedDirector() {
 //        if (_sharedDirector != null)
-            return _sharedDirector;
+        return _sharedDirector;
 
-		//
-		// Default Director is TimerDirector
-		// 
+        //
+        // Default Director is TimerDirector
+        //
 //        synchronized (CCDirector.class) {
 //            if (_sharedDirector == null) {
 //                _sharedDirector = new CCDirector();
@@ -488,21 +525,22 @@ public class CCDirector implements GLSurfaceView.Renderer {
 //        }
     }
 
-    /** There are 4 types of Director.
-      - kCCDirectorTypeNSTimer (default)
-      - kCCDirectorTypeMainLoop
-      - kCCDirectorTypeThreadMainLoop
-      - kCCDirectorTypeDisplayLink
-
-      Each Director has it's own benefits, limitations.
-      If you are using SDK 3.1 or newer it is recommed to use the DisplayLink director
-
-      This method should be called before any other call to the director.
-
-      It will return NO if the director type is kCCDirectorTypeDisplayLink and the running SDK is < 3.1. Otherwise it will return YES.
-
-      @since v0.8.2
-      */
+    /**
+     * There are 4 types of Director.
+     * - kCCDirectorTypeNSTimer (default)
+     * - kCCDirectorTypeMainLoop
+     * - kCCDirectorTypeThreadMainLoop
+     * - kCCDirectorTypeDisplayLink
+     * <p/>
+     * Each Director has it's own benefits, limitations.
+     * If you are using SDK 3.1 or newer it is recommed to use the DisplayLink director
+     * <p/>
+     * This method should be called before any other call to the director.
+     * <p/>
+     * It will return NO if the director type is kCCDirectorTypeDisplayLink and the running SDK is < 3.1. Otherwise it will return YES.
+     *
+     * @since v0.8.2
+     */
     /*public static boolean setDirectorType(int directorType) {
         assert _sharedDirector==null 
             : "A Director was alloced. setDirectorType must be the first call to Director";
@@ -542,48 +580,49 @@ public class CCDirector implements GLSurfaceView.Renderer {
 //
 //		FastDirector.sharedDirector();
 //	}
-
     protected CCDirector() {
-	    ccMacros.CCLOG(LOG_TAG, "cocos2d: " + ccConfig.cocos2dVersion);
+        ccMacros.CCLOG(LOG_TAG, "cocos2d: " + ccConfig.cocos2dVersion);
 //        synchronized (CCDirector.class) {
-		    ccMacros.CCLOG(LOG_TAG, "cocos2d: Using Director Type:" + this.getClass());
+        ccMacros.CCLOG(LOG_TAG, "cocos2d: Using Director Type:" + this.getClass());
 
-            // default values
-            pixelFormat_ = kCCPixelFormatDefault;
-            depthBufferFormat_ = 0;
+        // default values
+        pixelFormat_ = kCCPixelFormatDefault;
+        depthBufferFormat_ = 0;
 
-            //Create a full-screen window
+        //Create a full-screen window
 
-            // CCScenes
-            runningCCScene_ = null;
-            nextCCScene_ = null;
-	
-            oldAnimationInterval_ = animationInterval_ = 1.0 / kDefaultFPS;
-            CCScenesStack_ = new ArrayList<>(10);
+        // CCScenes
+        runningCCScene_ = null;
+        nextCCScene_ = null;
 
-            // landscape
-            deviceOrientation_ = kCCDeviceOrientationPortrait;
+        oldAnimationInterval_ = animationInterval_ = 1.0 / kDefaultFPS;
+        CCScenesStack_ = new ArrayList<>(10);
 
-            // FPS
-            displayFPS = false;
-            frames_ = 0;
+        // landscape
+        deviceOrientation_ = kCCDeviceOrientationPortrait;
 
-            // paused?
-            isPaused = false;
+        // FPS
+        displayFPS = false;
+        frames_ = 0;
 
-            // for iphone 4?
-            contentScaleFactor_ = 1;
+        // paused?
+        isPaused = false;
 
-            screenSize_  = CGSize.zero();
-        	surfaceSize_ = CGSize.zero();
-            isContentScaleSupported_ = false;
+        // for iphone 4?
+        contentScaleFactor_ = 1;
+
+        screenSize_ = CGSize.zero();
+        surfaceSize_ = CGSize.zero();
+        isContentScaleSupported_ = false;
 //        }
     }
 
-    /** sets the OpenGL default values */
-    public void setGLDefaultValues (GL10 gl) {
+    /**
+     * sets the OpenGL default values
+     */
+    public void setGLDefaultValues(GL10 gl) {
         // This method SHOULD be called only after openGLView_ was initialized
-        assert openGLView_!=null:"openGLView_ must be initialized";
+        assert openGLView_ != null : "openGLView_ must be initialized";
 
         setAlphaBlending(gl, true);
         setDepthTest(gl, false);
@@ -593,14 +632,14 @@ public class CCDirector implements GLSurfaceView.Renderer {
         gl.glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 
         if (ccConfig.CC_DIRECTOR_FAST_FPS) {
-            if (FPSLabel_==null) {
+            if (FPSLabel_ == null) {
                 // CCTexture2DPixelFormat currentFormat = CCTexture2D.defaultAlphaPixelFormat();
                 // CCTexture2D.setDefaultAlphaPixelFormat(kCCTexture2DPixelFormat_RGBA4444);
                 FPSLabel_ = CCLabelAtlas.label("00.0", "fps_images.png", 16, 24, '.');
                 // CCTexture2D.setDefaultAlphaPixelFormat(currentFormat);
                 FPSLabel_.setPosition(50, 2);
             }
-        }	// CC_DIRECTOR_FAST_FPS
+        }    // CC_DIRECTOR_FAST_FPS
     }
 
     /*
@@ -618,9 +657,9 @@ public class CCDirector implements GLSurfaceView.Renderer {
     }*/
 
     public void onSurfaceChanged(GL10 gl, int width, int height) {
-    	CCDirector.gl = gl;
-    	surfaceSize_.set(width, height);
-    	
+        CCDirector.gl = gl;
+        surfaceSize_.set(width, height);
+
         gl.glViewport(0, 0, width, height);
         setProjection(projection_);
 
@@ -634,7 +673,7 @@ public class CCDirector implements GLSurfaceView.Renderer {
     }
 
     public void onSurfaceCreated(GL10 gl, EGLConfig config) {
-    	CCDirector.gl = gl;
+        CCDirector.gl = gl;
 
         /*
          * By default, OpenGL enables features that improve quality
@@ -649,10 +688,10 @@ public class CCDirector implements GLSurfaceView.Renderer {
         */
         gl.glHint(GL_PERSPECTIVE_CORRECTION_HINT, GL_FASTEST);
 
-        setGLDefaultValues(gl); 
+        setGLDefaultValues(gl);
 
-    	// reload all GL resources here
-    	GLResourceHelper.sharedHelper().reloadResources();    	
+        // reload all GL resources here
+        GLResourceHelper.sharedHelper().reloadResources();
     }
 
     public void onDrawFrame(GL10 gl) {
@@ -664,73 +703,70 @@ public class CCDirector implements GLSurfaceView.Renderer {
 //        synchronized(this) {
 //		if (_sharedDirector == null)
 //		return;
-		
-    	GLResourceHelper.sharedHelper().setInUpdate(true);
-    	
-		CCTouchDispatcher.sharedDispatcher().update();
-		//added by Ishaq 
-		CCKeyDispatcher.sharedDispatcher().update();
-		drawCCScene(gl);
-		
-		GLResourceHelper.sharedHelper().setInUpdate(false);
-		
-		waitForFPS();
+
+        GLResourceHelper.sharedHelper().setInUpdate(true);
+
+        CCTouchDispatcher.sharedDispatcher().update();
+        //added by Ishaq
+        CCKeyDispatcher.sharedDispatcher().update();
+        drawCCScene(gl);
+
+        GLResourceHelper.sharedHelper().setInUpdate(false);
+
+        waitForFPS();
 //        }
-    }    
+    }
 
     private double sleepInterval = 0;
-    
-	private void waitForFPS() {
-		if (animationInterval_ >= dt) {
-			sleepInterval = animationInterval_ - dt + sleepInterval;
-			SystemClock.sleep( (long)(sleepInterval * 1000) );
 
-		} else {
-			sleepInterval = 0;
-		}
-	}
+    private void waitForFPS() {
+        if (animationInterval_ >= dt) {
+            sleepInterval = animationInterval_ - dt + sleepInterval;
+            SystemClock.sleep((long) (sleepInterval * 1000));
 
-    /** Draw the CCScene.
-      This method is called every frame. Don't call it manually.
-      */
-    public void drawCCScene (GL10 gl) {
+        } else {
+            sleepInterval = 0;
+        }
+    }
+
+    /**
+     * Draw the CCScene.
+     * This method is called every frame. Don't call it manually.
+     */
+    public void drawCCScene(GL10 gl) {
     	
         /* calculate "global" dt */
         calculateDeltaTime();
         
         /* tick before glClear: issue #533 */
-        if(!isPaused) {
-        	CCScheduler.sharedScheduler().tick(dt);
+        if (!isPaused) {
+            CCScheduler.sharedScheduler().tick(dt);
         }
 
         gl.glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-        
+
         GLResourceHelper.sharedHelper().update(gl);
         
         /* to avoid flickr, nextCCScene MUST be here: after tick and before draw.
          XXX: Which bug is this one. It seems that it can't be reproduced with v0.9 */
-        if( nextCCScene_ != null)
-        	setNextScene();
-        
+        if (nextCCScene_ != null)
+            setNextScene();
+
         gl.glPushMatrix();
 
         applyOrientation(gl);
-        
+
         // By default enable VertexArray, ColorArray, TextureCoordArray and Texture2D
         ccMacros.CC_ENABLE_DEFAULT_GL_STATES(gl);
         
         /* draw the CCScene */
-        if(runningCCScene_ != null)
-        	runningCCScene_.visit(gl);
-        if( displayFPS )
-        	showFPS(gl);
+        if (runningCCScene_ != null)
+            runningCCScene_.visit(gl);
+        if (displayFPS)
+            showFPS(gl);
 
-        if (ccConfig.CC_ENABLE_PROFILERS) {
-        //    showProfilers();
-        }
-        
         ccMacros.CC_DISABLE_DEFAULT_GL_STATES(gl);
-        
+
         gl.glPopMatrix();
     	
         /* swap buffers */
@@ -751,8 +787,10 @@ public class CCDirector implements GLSurfaceView.Renderer {
 
         lastUpdate_ = now;
     }
-    
-    /** returns the size of the OpenGL view in pixels, according to the landspace */
+
+    /**
+     * returns the size of the OpenGL view in pixels, according to the landspace
+     */
     public CGSize winSize() {
         /*if( deviceOrientation_ == kCCDeviceOrientationLandscapeLeft) {
             // swap x,y in landscape mode
@@ -763,22 +801,24 @@ public class CCDirector implements GLSurfaceView.Renderer {
 
         return CGSize.make(screenSize_.width, screenSize_.height);
     }
-    
+
     public CGSize winSizeRef() {
-    	return screenSize_;
+        return screenSize_;
     }
 
-    /** returns the display size of the OpenGL view in pixels */
+    /**
+     * returns the display size of the OpenGL view in pixels
+     */
     public CGSize displaySize() {
         return CGSize.make(surfaceSize_.width, surfaceSize_.height);
     }
-    
+
     public boolean getLandscape() {
         return deviceOrientation_ == kCCDeviceOrientationLandscapeLeft;
     }
 
     public void setLandscape(boolean on) {
-        if ( on )
+        if (on)
             setDeviceOrientation(kCCDeviceOrientationLandscapeLeft);
         else
             setDeviceOrientation(kCCDeviceOrientationPortrait);
@@ -791,29 +831,33 @@ public class CCDirector implements GLSurfaceView.Renderer {
         // return openGLView_.getParent() != null;
     }
 
-    /** detach the cocos2d view from the view/window */
+    /**
+     * detach the cocos2d view from the view/window
+     */
     @Deprecated
     private boolean detach() {
 
         // detach or attach to a view or a window
-        assert isOpenGLAttached():
-        "FATAL: Director: Can't detach the OpenGL View, because it is not attached. Attach it first.";
+        assert isOpenGLAttached() :
+                "FATAL: Director: Can't detach the OpenGL View, because it is not attached. Attach it first.";
 
-       // remove from the superview
-       ViewGroup vg = (ViewGroup)openGLView_.getParent();
-       vg.removeView(vg);
-       
-       assert (!isOpenGLAttached()) :
-       "FATAL: Director: Can't detach the OpenGL View, it is still attached to the superview.";
+        // remove from the superview
+        ViewGroup vg = (ViewGroup) openGLView_.getParent();
+        vg.removeView(vg);
+
+        assert (!isOpenGLAttached()) :
+                "FATAL: Director: Can't detach the OpenGL View, it is still attached to the superview.";
 
 
-       return true;
+        return true;
     }
 
-    /** attach in UIWindow using the full frame.
-      It will create a EAGLView.
-      @deprecated set setOpenGLView instead. Will be removed in v1.0
-      */
+    /**
+     * attach in UIWindow using the full frame.
+     * It will create a EAGLView.
+     *
+     * @deprecated set setOpenGLView instead. Will be removed in v1.0
+     */
     @Deprecated
     public boolean attachInWindow(View window) {
         return attachInView(window);
@@ -827,18 +871,19 @@ public class CCDirector implements GLSurfaceView.Renderer {
         */
     }
 
-    /** attach in UIView using the full frame.
-      It will create a EAGLView.
-
-      deprecated set setOpenGLView instead. Will be removed in v1.0
-    */
+    /**
+     * attach in UIView using the full frame.
+     * It will create a EAGLView.
+     * <p/>
+     * deprecated set setOpenGLView instead. Will be removed in v1.0
+     */
     public boolean attachInView(View view) {
 
 //        CCRect rect = new CCRect(view.getScrollX(), view.getScrollY(), view.getWidth(), view.getHeight());
         WindowManager w = theApp.getWindowManager();
         CGRect rect = CGRect.make(0, 0, w.getDefaultDisplay().getWidth(), w.getDefaultDisplay().getHeight());
         // CGRect rect = CGRect.make(view.getLeft(), view.getBottom(), view.getWidth(), view.getHeight());
-        
+
         return initOpenGLViewWithView(view, rect);
 
         /*
@@ -851,11 +896,12 @@ public class CCDirector implements GLSurfaceView.Renderer {
         */
     }
 
-    /** attach in UIView using the given frame.
-      It will create a EAGLView and use it.
-
-      @deprecated set setOpenGLView instead. Will be removed in v1.0
-    */
+    /**
+     * attach in UIView using the given frame.
+     * It will create a EAGLView and use it.
+     *
+     * @deprecated set setOpenGLView instead. Will be removed in v1.0
+     */
     @Deprecated
     public boolean attachInView(View view, CGRect rect) {
         return initOpenGLViewWithView(view, rect);
@@ -869,59 +915,54 @@ public class CCDirector implements GLSurfaceView.Renderer {
         return NO;
         */
     }
-    
+
     /**
      * attach in UIView using the given frame, and ration.
      * ratio = width / height
-     * It is the easiest way to port from iPhone ration 480f/320f 
+     * It is the easiest way to port from iPhone ration 480f/320f
      * to any android device but not the best.
      * It will create a EAGLView and use it.
-     * 
+     *
      * @param view
      * @param ration
      * @return
      */
-    
-    public boolean attachInView(View view, float ration)
-    {
-    	return initOpenGLViewWithView(view, getAppFrameRect(ration));
+
+    public boolean attachInView(View view, float ration) {
+        return initOpenGLViewWithView(view, getAppFrameRect(ration));
     }
-    
-    private CGRect getAppFrameRect(float targetRatio)
-    {
-    	 WindowManager w = theApp.getWindowManager();
-    	 CGSize size = CGSize.make(w.getDefaultDisplay().getWidth(), w.getDefaultDisplay().getHeight());
-         
-         float currentRation = size.width / size.height;
-         CGSize newSize = CGSize.make(size.width, size.height);
-         CGPoint offset = CGPoint.make(0, 0);
-         
-         if (currentRation > targetRatio)
-         {
-        	 newSize.width = targetRatio * size.height;
-        	 offset.x = (size.width - newSize.width) / 2;
-         }
-         	else if (currentRation < targetRatio)
-         {
-         		newSize.height = size.width / targetRatio;
-         		offset.y = (size.height - newSize.height) / 2;
-         }
+
+    private CGRect getAppFrameRect(float targetRatio) {
+        WindowManager w = theApp.getWindowManager();
+        CGSize size = CGSize.make(w.getDefaultDisplay().getWidth(), w.getDefaultDisplay().getHeight());
+
+        float currentRation = size.width / size.height;
+        CGSize newSize = CGSize.make(size.width, size.height);
+        CGPoint offset = CGPoint.make(0, 0);
+
+        if (currentRation > targetRatio) {
+            newSize.width = targetRatio * size.height;
+            offset.x = (size.width - newSize.width) / 2;
+        } else if (currentRation < targetRatio) {
+            newSize.height = size.width / targetRatio;
+            offset.y = (size.height - newSize.height) / 2;
+        }
 
         return CGRect.make(offset, newSize);
     }
-    
-	public void setScreenSize(float width, float height) {
-		screenSize_.set(width, height);
-	}
-	
+
+    public void setScreenSize(float width, float height) {
+        screenSize_.set(width, height);
+    }
+
     private boolean initOpenGLViewWithView(View view, CGRect rect) {
         surfaceSize_.set(rect.size);
         screenSize_.set(surfaceSize_);
-        
+
 //        try {
         if (openGLView_ != view) {
-        	openGLView_ = (GLSurfaceView) view;
-        	openGLView_.setRenderer(this);
+            openGLView_ = (GLSurfaceView) view;
+            openGLView_.setRenderer(this);
 //        	openGLView_.setRenderMode(GLSurfaceView.RENDERMODE_WHEN_DIRTY);
         }
 //
@@ -934,35 +975,7 @@ public class CCDirector implements GLSurfaceView.Renderer {
 //            }
 //
 //            // check if the view is not initialized
-        if (openGLView_ != null) {
-//                openGLView_.setRenderMode(GLSurfaceView.RENDERMODE_WHEN_DIRTY);
 
-//                // define the pixel format
-//                NSString	*pFormat = kEAGLColorFormatRGB565;
-//                GLuint		depthFormat = 0;
-//
-//                if(pixelFormat_==kRGBA8)
-//                    pFormat = kEAGLColorFormatRGBA8;
-//
-//                // alloc and init the opengl view
-//                openGLView_ = [[EAGLView alloc] initWithFrame:rect pixelFormat:pFormat depthFormat:depthFormat preserveBackbuffer:NO];
-//
-//                // check if the view was alloced and initialized
-//                if(openGLView_ == null)
-//                {
-//                    // the view was not created
-//                    throw new OpenGLViewCantInit("Could not alloc and init the OpenGL View.");
-//                }
-//
-//                // set autoresizing enabled when attaching the glview to another view
-//                openGLView_.setAutoresizesEAGLSurface(true);
-//
-//                // set the touch delegate of the glview to self
-//                openGLView_.setTouchDelegate(this);
-        } else {
-//                // set the (new) frame of the glview
-//                openGLView_.setFrame(rect);
-        }
 //
 //            // check if the superview has touchs enabled and enable it in our view
 //            if([view isUserInteractionEnabled])
@@ -1017,101 +1030,106 @@ public class CCDirector implements GLSurfaceView.Renderer {
         }
     }
 
-    /** converts a UIKit coordinate to an OpenGL coordinate
-      Useful to convert (multi) touchs coordinates to the current layout (portrait or landscape)
-      */
+    /**
+     * converts a UIKit coordinate to an OpenGL coordinate
+     * Useful to convert (multi) touchs coordinates to the current layout (portrait or landscape)
+     */
     public CGPoint convertToGL(CGPoint uiPoint) {
-    	float newX = uiPoint.x / surfaceSize_.width * screenSize_.width;
+        float newX = uiPoint.x / surfaceSize_.width * screenSize_.width;
         float newY = screenSize_.height - uiPoint.y / surfaceSize_.height * screenSize_.height;
-        
+
         CGPoint ret = null;
         switch (deviceOrientation_) {
             case kCCDeviceOrientationPortrait:
                 ret = CGPoint.ccp(newX, newY);
-            	//ret = CGPoint.ccp(newY, newX);
+                //ret = CGPoint.ccp(newY, newX);
                 break;
 
             case kCCDeviceOrientationLandscapeLeft:
                 // ret = CGPoint.ccp(uiPoint.y, uiPoint.x);
-            	ret = CGPoint.ccp(newX, newY);
+                ret = CGPoint.ccp(newX, newY);
                 break;
 
             default:
                 return null;
         }
 
-	    if (contentScaleFactor_ != 1 && isContentScaleSupported_ )
-		    ret = CGPoint.ccpMult(ret, contentScaleFactor_);
+        if (contentScaleFactor_ != 1 && isContentScaleSupported_)
+            ret = CGPoint.ccpMult(ret, contentScaleFactor_);
         return ret;
     }
-    
+
     /**
      * Optimizaed version of convertToGL(CGPoint uiPoint).
+     *
      * @param uiPoint - point for conversion
-     * @param ret - result point
+     * @param ret     - result point
      */
     public void convertToGL(CGPoint uiPoint, CGPoint ret) {
-    	convertToGL(uiPoint.x, uiPoint.y, ret);
+        convertToGL(uiPoint.x, uiPoint.y, ret);
     }
-    
+
     /**
      * Optimizaed version of convertToGL(CGPoint uiPoint).
+     *
      * @param uiX - X coordinate of point for conversion
      * @param uiY - Y coordinate of point for conversion
      * @param ret - result point
      */
     public void convertToGL(float uiX, float uiY, CGPoint ret) {
-    	float newX = uiX / surfaceSize_.width * screenSize_.width;
+        float newX = uiX / surfaceSize_.width * screenSize_.width;
         float newY = screenSize_.height - uiY / surfaceSize_.height * screenSize_.height;
-        
+
         switch (deviceOrientation_) {
             case kCCDeviceOrientationPortrait:
                 ret.set(newX, newY);
-            	//ret.set(newY, newX);
+                //ret.set(newY, newX);
                 break;
 
             case kCCDeviceOrientationLandscapeLeft:
                 // ret = CGPoint.ccp(uiPoint.y, uiPoint.x);
-            	ret.set(newX, newY);
+                ret.set(newX, newY);
                 break;
         }
 
-	    if (contentScaleFactor_ != 1 && isContentScaleSupported_ )
-		    CGPointUtil.mult(ret, contentScaleFactor_);
+        if (contentScaleFactor_ != 1 && isContentScaleSupported_)
+            CGPointUtil.mult(ret, contentScaleFactor_);
     }
 
-    /** converts an OpenGL coordinate to a UIKit coordinate
-      Useful to convert node points to window points for calls such as glScissor
-    */
+    /**
+     * converts an OpenGL coordinate to a UIKit coordinate
+     * Useful to convert node points to window points for calls such as glScissor
+     */
     public CGPoint convertToUI(CGPoint glPoint) {
         CGSize winSize = surfaceSize_;
-        int oppositeY = (int)(winSize.height - glPoint.y);
+        int oppositeY = (int) (winSize.height - glPoint.y);
 
         CGPoint uiPoint = null;
-        switch ( deviceOrientation_) {
+        switch (deviceOrientation_) {
             case kCCDeviceOrientationPortrait:
                 uiPoint = CGPoint.ccp(glPoint.x, oppositeY);
-            	//uiPoint = CGPoint.ccp(oppositeY, glPoint.x);
+                //uiPoint = CGPoint.ccp(oppositeY, glPoint.x);
                 break;
 
             case kCCDeviceOrientationLandscapeLeft:
                 // uiPoint = CGPoint.ccp(glPoint.y, glPoint.x);
-            	uiPoint = CGPoint.ccp(glPoint.x, oppositeY);
+                uiPoint = CGPoint.ccp(glPoint.x, oppositeY);
                 break;
             default:
                 return null;
         }
 
-        uiPoint = CGPoint.ccpMult(uiPoint, 1/contentScaleFactor_);
+        uiPoint = CGPoint.ccpMult(uiPoint, 1 / contentScaleFactor_);
         return uiPoint;
     }
 
     // Director CCScene Management
 
-    /**Enters the Director's main loop with the given CCScene. 
+    /**
+     * Enters the Director's main loop with the given CCScene.
      * Call it to run only your FIRST CCScene.
      * Don't call it if there is already a running CCScene.
-    */
+     */
     public void runWithScene(CCScene CCScene) {
         assert CCScene != null : "Argument must be non-null";
         assert runningCCScene_ == null : "You can't run a CCScene if another CCScene is running. Use replaceCCScene or pushCCScene instead";
@@ -1120,37 +1138,40 @@ public class CCDirector implements GLSurfaceView.Renderer {
 //        startAnimation();
     }
 
-    /** Replaces the running CCScene with a new one. The running CCScene is terminated.
+    /**
+     * Replaces the running CCScene with a new one. The running CCScene is terminated.
      * ONLY call it if there is a running CCScene.
-    */
+     */
     public void replaceScene(CCScene CCScene) {
         assert CCScene != null : "Argument must be non-null";
 
         int index = CCScenesStack_.size();
 
-	    sendCleanupToCCScene_ = true;
+        sendCleanupToCCScene_ = true;
         CCScenesStack_.set(index - 1, CCScene);
         nextCCScene_ = CCScene;
     }
 
-    /**Suspends the execution of the running CCScene, pushing it on the stack of suspended CCScenes.
+    /**
+     * Suspends the execution of the running CCScene, pushing it on the stack of suspended CCScenes.
      * The new CCScene will be executed.
-     * Try to avoid big stacks of pushed CCScenes to reduce memory allocation. 
+     * Try to avoid big stacks of pushed CCScenes to reduce memory allocation.
      * ONLY call it if there is a running CCScene.
-    */
+     */
     public void pushScene(CCScene CCScene) {
         assert CCScene != null : "Argument must be non-null";
 
-	    sendCleanupToCCScene_ = false;
+        sendCleanupToCCScene_ = false;
 
         CCScenesStack_.add(CCScene);
         nextCCScene_ = CCScene;
     }
 
-    /**Pops out a CCScene from the queue.
+    /**
+     * Pops out a CCScene from the queue.
      * This CCScene will replace the running one.
      * The running CCScene will be deleted.
-     *   If there are no more CCScenes in the stack the execution is terminated.
+     * If there are no more CCScenes in the stack the execution is terminated.
      * ONLY call it if there is a running CCScene.
      */
     public void popScene() {
@@ -1166,55 +1187,58 @@ public class CCDirector implements GLSurfaceView.Renderer {
         }
     }
 
-    /** Removes cached all cocos2d cached data.
-      It will purge the CCTextureCache, CCSpriteFrameCache, CCBitmapFont cache
-      @since v0.99.3
-      */
-    
+    /**
+     * Removes cached all cocos2d cached data.
+     * It will purge the CCTextureCache, CCSpriteFrameCache, CCBitmapFont cache
+     *
+     * @since v0.99.3
+     */
+
     public void purgeCachedData() {
         //CCBitmapFontAtlas .purgeCachedData();
         CCSpriteFrameCache.purgeSharedSpriteFrameCache();
         CCTextureCache.purgeSharedTextureCache();
-        
+
     }
 
-    /** Ends the execution, releases the running CCScene.
-      It doesn't remove the OpenGL view from its parent. You have to do it manually.
-    */
+    /**
+     * Ends the execution, releases the running CCScene.
+     * It doesn't remove the OpenGL view from its parent. You have to do it manually.
+     */
     public void end() {
 //    	synchronized(CCDirector.class) {
 //    		if (_sharedDirector == null) {
 //    			return;
 //    		}
-		
-		if (runningCCScene_ != null) {
-			runningCCScene_.onExit();
-			runningCCScene_.cleanup();
-			runningCCScene_ = null;
-		}
-		nextCCScene_ = null;
 
-		// remove all objects.
-		// runWithCCScene might be executed after 'end'.
-		CCScenesStack_.clear();
+        if (runningCCScene_ != null) {
+            runningCCScene_.onExit();
+            runningCCScene_.cleanup();
+            runningCCScene_ = null;
+        }
+        nextCCScene_ = null;
 
-		// don't release the event handlers
-		// They are needed in case the director is run again
-		CCTouchDispatcher.sharedDispatcher().removeAllDelegates();
+        // remove all objects.
+        // runWithCCScene might be executed after 'end'.
+        CCScenesStack_.clear();
+
+        // don't release the event handlers
+        // They are needed in case the director is run again
+        CCTouchDispatcher.sharedDispatcher().removeAllDelegates();
 
 //		stopAnimation();
-		// detach();
+        // detach();
 
-		// Purge bitmap cache
-		// CCBitmapFontAtlas.purgeCachedData();
+        // Purge bitmap cache
+        // CCBitmapFontAtlas.purgeCachedData();
 
-		// Purge all managers
-		CCSpriteFrameCache.purgeSharedSpriteFrameCache();
-		// CCScheduler.purgeSharedScheduler();
-		// CCActionManager.purgeSharedManager();
-		CCTextureCache.purgeSharedTextureCache();
+        // Purge all managers
+        CCSpriteFrameCache.purgeSharedSpriteFrameCache();
+        // CCScheduler.purgeSharedScheduler();
+        // CCActionManager.purgeSharedManager();
+        CCTextureCache.purgeSharedTextureCache();
 
-    		// OpenGL view
+        // OpenGL view
 //    		openGLView_ = null;
 //    		_sharedDirector = null;
 //            if (FPSLabel_ != null)
@@ -1227,19 +1251,19 @@ public class CCDirector implements GLSurfaceView.Renderer {
         boolean newIsTransition = nextCCScene_ instanceof CCTransitionScene;
 
         // If it is not a transition, call onExit
-        if( runningCCScene_ != null && ! newIsTransition ) {
+        if (runningCCScene_ != null && !newIsTransition) {
             runningCCScene_.onExit();
 
             // issue #709. the root node (CCScene) should receive the cleanup message too
             // otherwise it might be leaked.
-            if( sendCleanupToCCScene_ )
+            if (sendCleanupToCCScene_)
                 runningCCScene_.cleanup();
         }
 
         runningCCScene_ = nextCCScene_;
         nextCCScene_ = null;
 
-        if( ! runningIsTransition ) {
+        if (!runningIsTransition) {
             runningCCScene_.onEnter();
             runningCCScene_.onEnterTransitionDidFinish();
         }
@@ -1249,22 +1273,23 @@ public class CCDirector implements GLSurfaceView.Renderer {
      * this should be called from activity when activity pause
      */
     public void onPause() {
-    	openGLView_.onPause();
-    	pause();
+        openGLView_.onPause();
+        pause();
     }
 
     /**
      * this should be called from activity when activity resume
      */
     public void onResume() {
-    	openGLView_.onResume();
-    	resume();
+        openGLView_.onResume();
+        resume();
     }
-    
-    /** Pauses the running CCScene.
-      The running CCScene will be _drawed_ but all scheduled timers will be paused
-      While paused, the draw rate will be 4 FPS to reduce CPU consuption
-    */
+
+    /**
+     * Pauses the running CCScene.
+     * The running CCScene will be _drawed_ but all scheduled timers will be paused
+     * While paused, the draw rate will be 4 FPS to reduce CPU consuption
+     */
     public void pause() {
         if (isPaused)
             return;
@@ -1276,10 +1301,11 @@ public class CCDirector implements GLSurfaceView.Renderer {
         isPaused = true;
     }
 
-    /** Resumes the paused CCScene
-      The scheduled timers will be activated again.
-      The "delta time" will be 0 (as if the game wasn't paused)
-    */
+    /**
+     * Resumes the paused CCScene
+     * The scheduled timers will be activated again.
+     * The "delta time" will be 0 (as if the game wasn't paused)
+     */
     public void resume() {
         if (!isPaused)
             return;
@@ -1293,9 +1319,9 @@ public class CCDirector implements GLSurfaceView.Renderer {
     }
 
     /** The main loop is triggered again.
-      Call this function only if [stopAnimation] was called earlier
-      @warning Dont' call this function to start the main loop. To run the main loop call runWithCCScene
-    */
+     Call this function only if [stopAnimation] was called earlier
+     @warning Dont' call this function to start the main loop. To run the main loop call runWithCCScene
+     */
 //    public void startAnimation() {
 //        assert animationTimer_ != null : "AnimationTimer must be null. Calling startAnimation twice?";
 //
@@ -1315,14 +1341,16 @@ public class CCDirector implements GLSurfaceView.Renderer {
 //    }
 
     /** Stops the animation. Nothing will be drawn. The main loop won't be triggered anymore.
-      If you wan't to pause your animation call [pause] instead.
-    */
+     If you wan't to pause your animation call [pause] instead.
+     */
 //    public void stopAnimation() {
 //    	animationTimer_.cancel();
 //        animationTimer_ = null;
 //    }
 
-    /** enables/disables OpenGL alpha blending */
+    /**
+     * enables/disables OpenGL alpha blending
+     */
     public void setAlphaBlending(GL10 gl, boolean on) {
         if (on) {
             gl.glEnable(GL_BLEND);
@@ -1332,13 +1360,15 @@ public class CCDirector implements GLSurfaceView.Renderer {
         }
     }
 
-    /** enables/disables OpenGL depth test */
+    /**
+     * enables/disables OpenGL depth test
+     */
     public void setDepthTest(GL10 gl, boolean on) {
-        if (on){
-		    gl.glClearDepthf(1.0f);
+        if (on) {
+            gl.glClearDepthf(1.0f);
             gl.glEnable(GL_DEPTH_TEST);
-		    gl.glDepthFunc(GL_LEQUAL);
-		    gl.glHint(GL_PERSPECTIVE_CORRECTION_HINT, GL_NICEST);
+            gl.glDepthFunc(GL_LEQUAL);
+            gl.glHint(GL_PERSPECTIVE_CORRECTION_HINT, GL_NICEST);
         } else {
             gl.glDisable(GL_DEPTH_TEST);
         }
@@ -1402,8 +1432,8 @@ public class CCDirector implements GLSurfaceView.Renderer {
         }
     }
 
-	private TextBuilder fpsBuilder = new TextBuilder();
-	
+    private TextBuilder fpsBuilder = new TextBuilder();
+
     private void showFPS(GL10 gl) {
 
         float frameRate_;
@@ -1418,18 +1448,18 @@ public class CCDirector implements GLSurfaceView.Renderer {
                 frameRate_ = frames_ / accumDt_;
                 frames_ = 0;
                 accumDt_ = 0;
-                
+
                 int fpsInt = (int) frameRate_;
-                int fpsFract = (int)( (frameRate_ - fpsInt) * 10 );
-                
+                int fpsFract = (int) ((frameRate_ - fpsInt) * 10);
+
                 fpsBuilder.reset();
                 fpsBuilder.append(fpsInt);
                 fpsBuilder.append('.');
                 fpsBuilder.append(fpsFract);
-                
+
                 FPSLabel_.setString(fpsBuilder);
             }
-            
+
             FPSLabel_.draw(gl);
         } else {
             // display the FPS using a manually generated Texture (very slow)
@@ -1452,9 +1482,9 @@ public class CCDirector implements GLSurfaceView.Renderer {
             // Default GL states: GL_TEXTURE_2D, GL_VERTEX_ARRAY, GL_COLOR_ARRAY, GL_TEXTURE_COORD_ARRAY
             // Needed states: GL_TEXTURE_2D, GL_VERTEX_ARRAY, GL_TEXTURE_COORD_ARRAY
             // Unneeded states: GL_COLOR_ARRAY
-            
+
             gl.glDisableClientState(GL_COLOR_ARRAY);
-	        gl.glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+            gl.glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
             gl.glColor4f(224.f / 255, 224.f / 255, 244.f / 255, 200.f / 255);
             texture.drawAtPoint(gl, CGPoint.ccp(5, 2));
 
@@ -1465,31 +1495,31 @@ public class CCDirector implements GLSurfaceView.Renderer {
         }
     }
 
-    public boolean onKeyDown(KeyEvent event){
-    	if (!CCKeyDispatcher.sharedDispatcher().getDispatchEvents())
-    		return false;
-    	CCKeyDispatcher.sharedDispatcher().queueMotionEvent(event);
-    	return true;
+    public boolean onKeyDown(KeyEvent event) {
+        if (!CCKeyDispatcher.sharedDispatcher().getDispatchEvents())
+            return false;
+        CCKeyDispatcher.sharedDispatcher().queueMotionEvent(event);
+        return true;
     }
-    
-	//added by Ishaq 
-	public boolean onKeyUp(KeyEvent event){
-    	if (!CCKeyDispatcher.sharedDispatcher().getDispatchEvents())
-    		return false;
 
-    	CCKeyDispatcher.sharedDispatcher().queueMotionEvent(event);
-    	return true;
+    //added by Ishaq
+    public boolean onKeyUp(KeyEvent event) {
+        if (!CCKeyDispatcher.sharedDispatcher().getDispatchEvents())
+            return false;
+
+        CCKeyDispatcher.sharedDispatcher().queueMotionEvent(event);
+        return true;
     }
-	
-	//added by Ishaq 
-	public void setIsEnableKeyEvent(boolean b){
-		CCKeyDispatcher.sharedDispatcher().setDispatchEvents(b);
-	}
-	
-	//added by Ishaq 
-	public boolean isEnableKeyEvent(){
-		return CCKeyDispatcher.sharedDispatcher().getDispatchEvents();
-	}
+
+    //added by Ishaq
+    public void setIsEnableKeyEvent(boolean b) {
+        CCKeyDispatcher.sharedDispatcher().setDispatchEvents(b);
+    }
+
+    //added by Ishaq
+    public boolean isEnableKeyEvent() {
+        return CCKeyDispatcher.sharedDispatcher().getDispatchEvents();
+    }
 
     public static GL10 gl;
 }
