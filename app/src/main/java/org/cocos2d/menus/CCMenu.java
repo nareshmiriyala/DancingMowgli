@@ -232,7 +232,7 @@ public class CCMenu extends CCLayer {
      * align items in rows of columns
      */
     public void alignItemsInColumns(int columns[]) {
-        ArrayList<Integer> rows = new ArrayList<Integer>();
+        ArrayList<Integer> rows = new ArrayList<>();
         for (int column : columns) {
             rows.add(column);
         }
@@ -295,13 +295,13 @@ public class CCMenu extends CCLayer {
      * align items in columns of rows
      */
     public void alignItemsInRows(int rows[]) {
-        ArrayList<Integer> columns = new ArrayList<Integer>();
+        ArrayList<Integer> columns = new ArrayList<>();
         for (int row : rows) {
             columns.add(row);
         }
 
-        ArrayList<Integer> columnWidths = new ArrayList<Integer>();
-        ArrayList<Integer> columnHeights = new ArrayList<Integer>();
+        ArrayList<Integer> columnWidths = new ArrayList<>();
+        ArrayList<Integer> columnHeights = new ArrayList<>();
 
         int width = -10, columnHeight = -5;
         int column = 0, columnWidth = 0, rowsOccupied = 0, columnRows;

@@ -52,7 +52,7 @@ public class ConcNodeCachingStack<T> {
         do {
             ret = freeNode;
             if (ret == null) 
-                return new Node<T>();
+                return new Node<>();
             newFree = ret.next;
         } while ( !casNewNode(ret,newFree) );
         return ret;

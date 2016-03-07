@@ -10,7 +10,7 @@ import java.util.concurrent.locks.ReentrantLock;
  */
 public class ConcArrayStack<T> {
 
-	private ArrayList<T> array = new ArrayList<T>();
+	private ArrayList<T> array = new ArrayList<>();
 	private final ReentrantLock lock = new ReentrantLock();
 	
 	public void push(T obj) {

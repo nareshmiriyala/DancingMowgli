@@ -51,7 +51,7 @@ public class CCQuadParticleSystem extends CCParticleSystem implements Resource {
 		private WeakReference<CCQuadParticleSystem> weakRef;
     	
     	public QuadParticleLoader(CCQuadParticleSystem holder) {
-    		weakRef = new WeakReference<CCQuadParticleSystem>(holder);
+    		weakRef = new WeakReference<>(holder);
 		}
 		
 		@Override

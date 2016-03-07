@@ -24,7 +24,7 @@ public class CCMenuItemToggle extends CCMenuItem {
     private ArrayList<CCMenuItem> subItems_;
     public ArrayList<CCMenuItem> getSubItemsRef() {
     	if (subItems_ == null) {
-    		subItems_ = new ArrayList<CCMenuItem>();
+    		subItems_ = new ArrayList<>();
     	}
     	return subItems_;	
     }
@@ -43,7 +43,7 @@ public class CCMenuItemToggle extends CCMenuItem {
     protected CCMenuItemToggle(CCNode t, String sel, CCMenuItem... items) {
         super(t, sel);
 
-        subItems_ = new ArrayList<CCMenuItem>(items.length);
+        subItems_ = new ArrayList<>(items.length);
 
         subItems_.addAll(Arrays.asList(items));
 

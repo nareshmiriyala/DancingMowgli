@@ -46,7 +46,7 @@ public class Cocos2D extends ListActivity {
     }
 
     protected List<?> getData(String prefix) {
-        List<Map<String,?>> myData = new ArrayList<Map<String,?>>();
+        List<Map<String,?>> myData = new ArrayList<>();
 
 
         Intent mainIntent = new Intent(Intent.ACTION_MAIN, null);
@@ -107,7 +107,7 @@ public class Cocos2D extends ListActivity {
     }
 
     protected void addItem(List<Map<String,?>> data, String name, Intent intent) {
-        Map<String, Object> temp = new HashMap<String, Object>();
+        Map<String, Object> temp = new HashMap<>();
         temp.put("title", name);
         temp.put("intent", intent);
         data.add(temp);

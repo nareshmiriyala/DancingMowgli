@@ -559,7 +559,7 @@ public class CCDirector implements GLSurfaceView.Renderer {
             nextCCScene_ = null;
 	
             oldAnimationInterval_ = animationInterval_ = 1.0 / kDefaultFPS;
-            CCScenesStack_ = new ArrayList<CCScene>(10);
+            CCScenesStack_ = new ArrayList<>(10);
 
             // landscape
             deviceOrientation_ = kCCDeviceOrientationPortrait;

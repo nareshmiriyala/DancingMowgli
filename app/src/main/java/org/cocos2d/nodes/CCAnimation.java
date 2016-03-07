@@ -75,7 +75,7 @@ public class CCAnimation {
     protected CCAnimation(String name, float delay, ArrayList<CCSpriteFrame> frames) {
         delay_ = delay;
         name_ = name;
-        frames_ = new ArrayList<CCSpriteFrame>();
+        frames_ = new ArrayList<>();
         if (frames != null)
         	frames_.addAll(frames);
     }
@@ -123,7 +123,7 @@ public class CCAnimation {
 
     public CCAnimation(String n, float d, CCTexture2D... textures) {
         name_ = n;
-        frames_ = new ArrayList<CCSpriteFrame>();
+        frames_ = new ArrayList<>();
         delay_ = d;
 
         if (textures != null) {

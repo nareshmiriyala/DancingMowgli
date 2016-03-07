@@ -696,7 +696,7 @@ public class CCSprite extends CCNode implements CCRGBAProtocol, CCTextureProtoco
     }
 
     private void initAnimationDictionary() {
-        animations_ = new HashMap<String, CCAnimation>();
+        animations_ = new HashMap<>();
     }
 
     private void setTextureRect(CGRect rect, CGSize size, Boolean rotated) {

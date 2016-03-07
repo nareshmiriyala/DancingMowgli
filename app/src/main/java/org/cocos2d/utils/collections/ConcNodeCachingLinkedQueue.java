@@ -47,7 +47,7 @@ public class ConcNodeCachingLinkedQueue<E> {
 	 * Pointer to header node, initialized to a dummy node.  The first
 	 * actual node is at head.getNext().
 	 */
-	private volatile Node<E> head = new Node<E>();
+	private volatile Node<E> head = new Node<>();
 	
 	/** Pointer to last node on list **/
 	private volatile Node<E> tail = head;  
@@ -79,7 +79,7 @@ public class ConcNodeCachingLinkedQueue<E> {
         do {
             ret = freeNode;
             if (ret == null) 
-                return new Node<E>();
+                return new Node<>();
             newFree = ret.next;
         } while ( !casNewNode(ret,newFree) );
         return ret;

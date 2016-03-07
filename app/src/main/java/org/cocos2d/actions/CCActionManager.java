@@ -32,7 +32,7 @@ public class CCActionManager implements UpdateCallback {
         boolean paused;
         
         public HashElement() {
-        	actions = new ArrayList<CCAction>(4);
+        	actions = new ArrayList<>(4);
 		}
     }
     
@@ -72,7 +72,7 @@ public class CCActionManager implements UpdateCallback {
 
     private CCActionManager() {
     	CCScheduler.sharedScheduler().scheduleUpdate(this, 0, false);
-    	targets = new ConcurrentArrayHashMap<CCNode, HashElement>();
+    	targets = new ConcurrentArrayHashMap<>();
     }
     
 //    @Override

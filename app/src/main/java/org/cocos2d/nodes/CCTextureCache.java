@@ -3,7 +3,6 @@ package org.cocos2d.nodes;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.lang.ref.SoftReference;
 import java.lang.ref.WeakReference;
 import java.util.HashMap;
 
@@ -47,7 +46,7 @@ public class CCTextureCache {
         assert _sharedTextureCache == null : "Attempted to allocate a second instance of a singleton.";
 
         synchronized (CCTextureCache.class) {
-            textures = new HashMap<String, WeakReference<CCTexture2D> >(10);
+            textures = new HashMap<>(10);
         }
     }
 
@@ -67,7 +66,7 @@ public class CCTextureCache {
 
         if (tex == null) {
             tex = createTextureFromFilePath(path);
-            textures.put(path, new WeakReference<CCTexture2D>(tex));
+            textures.put(path, new WeakReference<>(tex));
         }
         return tex;
     }
@@ -85,7 +84,7 @@ public class CCTextureCache {
 
         if (tex == null) {
             tex = createTextureFromFilePathExternal(path);
-            textures.put( path, new WeakReference<CCTexture2D>(tex) );
+            textures.put( path, new WeakReference<>(tex) );
         }
         return tex;
     }
@@ -124,7 +123,7 @@ public class CCTextureCache {
 				}
 			});
 	    	if( key!= null ) {
-	    		textures.put(key, new WeakReference<CCTexture2D>(texNew) );
+	    		textures.put(key, new WeakReference<>(texNew) );
 	    	}
 	    	
 	    	return texNew;
@@ -185,13 +184,13 @@ public class CCTextureCache {
     public void addTexture(CCTexture2D tex) {
     	if (tex == null)
     		return;
-    	textures.put(String.valueOf(tex.hashCode()), new WeakReference<CCTexture2D>(tex));
+    	textures.put(String.valueOf(tex.hashCode()), new WeakReference<>(tex));
     }
     
     public void addTexture(CCTexture2D tex, String name) {
     	if (tex == null)
     		return;
-    	textures.put(name, new WeakReference<CCTexture2D>(tex));
+    	textures.put(name, new WeakReference<>(tex));
     }
 
     /** Deletes a texture from the cache given a its key name

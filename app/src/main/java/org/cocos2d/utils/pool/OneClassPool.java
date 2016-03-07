@@ -6,7 +6,7 @@ public abstract class OneClassPool<T> {
 	private ArrayList<T> objs;
 
 	public OneClassPool() {
-		objs = new ArrayList<T>();
+		objs = new ArrayList<>();
 	}
 
 	protected abstract T allocate();

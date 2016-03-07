@@ -59,7 +59,7 @@ public class CCParallaxNode extends CCNode {
     }
 
     protected CCParallaxNode() {
-        parallaxArray_ = new ArrayList<CCPointObject>(5);
+        parallaxArray_ = new ArrayList<>(5);
         lastPosition = CGPoint.make(-100,-100);
     }
 

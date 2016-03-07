@@ -110,7 +110,7 @@ public class CCAnimate extends CCIntervalAction {
     
     @Override
     public CCAnimate reverse() {
-    	ArrayList<CCSpriteFrame> ao = new ArrayList<CCSpriteFrame>();
+    	ArrayList<CCSpriteFrame> ao = new ArrayList<>();
     	for (CCSpriteFrame o: animation.frames()) {
     		ao.add(0, o);
     	}

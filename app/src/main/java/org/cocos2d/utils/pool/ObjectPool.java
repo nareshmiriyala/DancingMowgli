@@ -8,7 +8,7 @@ public class ObjectPool {
 	private HashMap<Class<?>, OneClassPool<?>> lists;
 
 	public ObjectPool() {
-		lists = new HashMap<Class<?>, OneClassPool<?>>();
+		lists = new HashMap<>();
 	}
 
 	public <T> OneClassPool<T> registerPool(Class<T> clazz, OneClassPool<T> newPool) {

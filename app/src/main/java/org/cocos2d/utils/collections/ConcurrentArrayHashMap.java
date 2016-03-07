@@ -36,8 +36,8 @@ public class ConcurrentArrayHashMap<K,V> {
 	}
 	
 	public ConcurrentArrayHashMap() {
-		array = new ArrayList<Entry>();
-		map = new HashMap<K,Integer>();
+		array = new ArrayList<>();
+		map = new HashMap<>();
 	}
 	
 	public synchronized void put(K key, V value) {

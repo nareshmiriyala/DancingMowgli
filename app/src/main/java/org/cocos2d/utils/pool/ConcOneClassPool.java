@@ -6,7 +6,7 @@ public abstract class ConcOneClassPool<T> {
 	private ConcNodeCachingStack<T> objs;
 
 	public ConcOneClassPool() {
-		objs = new ConcNodeCachingStack<T>();
+		objs = new ConcNodeCachingStack<>();
 	}
 
 	protected abstract T allocate();

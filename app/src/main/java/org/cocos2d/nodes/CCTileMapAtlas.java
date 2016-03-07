@@ -67,7 +67,7 @@ public class CCTileMapAtlas extends CCAtlasNode {
         // workaround for super() must be the first statement in constructor
         textureAtlas_.resizeCapacity(itemsToRender);
 
-        posToAtlasIndex = new HashMap<String, Integer>(itemsToRender);
+        posToAtlasIndex = new HashMap<>(itemsToRender);
         updateAtlasValues();
         setContentSize(CGSize.make(tgaInfo.width * itemWidth, tgaInfo.height * itemHeight));
     }

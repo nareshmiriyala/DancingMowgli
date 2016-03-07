@@ -62,7 +62,7 @@ public class CCLabel extends CCSprite implements CCLabelProtocol {
     	private WeakReference<CCLabel> label;
     	
     	public StringReloader(CCLabel holder) {
-    		label = new WeakReference<CCLabel>(holder);
+    		label = new WeakReference<>(holder);
 		}
     	
     	@Override

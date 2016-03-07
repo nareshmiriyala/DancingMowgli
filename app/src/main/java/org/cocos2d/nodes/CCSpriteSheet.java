@@ -89,8 +89,8 @@ public class CCSpriteSheet extends CCNode implements CCTextureProtocol {
         updateBlendFunc();
 
         // no lazy alloc in this node
-        children_ = new ArrayList<CCNode>();
-        descendants_ = new ArrayList<CCSprite>();
+        children_ = new ArrayList<>();
+        descendants_ = new ArrayList<>();
     }
 
     /** initializes a CCSpriteSheet with a file image (.png, .jpeg, .pvr, etc) and a capacity of children.

@@ -161,8 +161,8 @@ public class CCRibbon extends CCNode {
     /** init the ribbon */
     protected CCRibbon(float w, String path, float l, ccColor4B color, float fade) {
 
-        segments_ = new ArrayList<CCRibbonSegment>();
-        deletedSegments_ = new ArrayList<CCRibbonSegment>();
+        segments_ = new ArrayList<>();
+        deletedSegments_ = new ArrayList<>();
 
         /* 1 initial segment */
         CCRibbonSegment seg = new CCRibbonSegment();

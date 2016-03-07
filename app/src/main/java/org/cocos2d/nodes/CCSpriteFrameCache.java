@@ -35,7 +35,7 @@ public class CCSpriteFrameCache {
     }
 
     protected CCSpriteFrameCache() {
-        spriteFrames = new HashMap<String, CCSpriteFrame>();
+        spriteFrames = new HashMap<>();
     }
 
     public CCSpriteFrame spriteFrameByName(String name) {
