@@ -21,13 +21,13 @@ public interface CCTouchDelegateProtocol {
     /** Return YES to claim the touch.
       @since v0.8
     */
-    public boolean ccTouchesBegan(MotionEvent event);
+    boolean ccTouchesBegan(MotionEvent event);
 
-    public boolean ccTouchesMoved(MotionEvent event);
+    boolean ccTouchesMoved(MotionEvent event);
 
-    public boolean ccTouchesEnded(MotionEvent event);
+    boolean ccTouchesEnded(MotionEvent event);
 
-    public boolean ccTouchesCancelled(MotionEvent event);
+    boolean ccTouchesCancelled(MotionEvent event);
 
 }
 

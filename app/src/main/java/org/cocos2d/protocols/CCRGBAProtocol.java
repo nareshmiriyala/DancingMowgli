@@ -8,21 +8,21 @@ public interface CCRGBAProtocol {
     /** sets Color
      @since v0.8
      */
-    public void setColor(ccColor3B color);
+    void setColor(ccColor3B color);
 
     /** returns the color
      @since v0.8
      */
-    public ccColor3B getColor();
+    ccColor3B getColor();
 
     /// returns the opacity
-    public int getOpacity();
+    int getOpacity();
 
     /** sets the opacity.
      @warning If the the texture has premultiplied alpha then, the R, G and B channels will be modifed.
      Values goes from 0 to 255, where 255 means fully opaque.
      */
-    public void setOpacity(int opacity);
+    void setOpacity(int opacity);
 
     /** sets the premultipliedAlphaOpacity property.
      If set to NO then opacity will be applied as: glColor(R,G,B,opacity);
@@ -31,12 +31,12 @@ public interface CCRGBAProtocol {
         Otherwise the default value is NO
      @since v0.8
      */
-    public void setOpacityModifyRGB(boolean b);
+    void setOpacityModifyRGB(boolean b);
 
     /** returns whether or not the opacity will be applied using glColor(R,G,B,opacity)
         or glColor(opacity, opacity, opacity, opacity);
      @since v0.8
      */
-    public boolean doesOpacityModifyRGB();
+    boolean doesOpacityModifyRGB();
 }
 

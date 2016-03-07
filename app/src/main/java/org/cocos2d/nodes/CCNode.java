@@ -1247,9 +1247,9 @@ public class CCNode {
     }
 
     public interface CocosNodeSize {
-        public float getWidth();
+        float getWidth();
 
-        public float getHeight();
+        float getHeight();
     }
 
     // lazy allocs
