@@ -218,7 +218,7 @@ public class CCQuadParticleSystem extends CCParticleSystem implements Resource {
 		for( int i=0;i< totalParticles;i++) {
 			final short base4 = (short) (i * 4);
 			final int base6 = i * 6;
-			indices.put(base6, (short) (base4));
+			indices.put(base6, base4);
 			indices.put(base6+1, (short) (base4 + 1));
 			indices.put(base6+2, (short) (base4 + 2));
 

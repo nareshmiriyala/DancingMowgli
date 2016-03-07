@@ -297,7 +297,7 @@ public class CCSpriteSheet extends CCNode implements CCTextureProtocol {
         }
 
         // ignore self (spritesheet)
-        if( (CCNode)node != (CCNode)this) {
+        if( node != this) {
             node.atlasIndex = index;
             index++;
         }
