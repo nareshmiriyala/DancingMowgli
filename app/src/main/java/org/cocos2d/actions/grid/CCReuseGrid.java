@@ -6,28 +6,34 @@ import org.cocos2d.nodes.CCNode;
 
 ////////////////////////////////////////////////////////////
 
-/** CCReuseGrid action */
+/**
+ * CCReuseGrid action
+ */
 public class CCReuseGrid extends CCInstantAction {
-	int t;
-	
-	/** creates an action with the number of times that the current grid will be reused */
-	public static CCReuseGrid action(int times) {
-		return new CCReuseGrid(times);		
-	}
-	
-	/** initializes an action with the number of times that the current grid will be reused */
-	public CCReuseGrid(int times) {
-		super();
-		t = times;		
-	}
+    final int t;
 
-	@Override
-	public void start(CCNode aTarget) {
-		super.start(aTarget);
+    /**
+     * creates an action with the number of times that the current grid will be reused
+     */
+    public static CCReuseGrid action(int times) {
+        return new CCReuseGrid(times);
+    }
 
-		CCGridBase gb = target.getGrid();
-		if ( gb != null && gb.isActive() )
-			gb.setReuseGrid(gb.reuseGrid() + t);
-	}
+    /**
+     * initializes an action with the number of times that the current grid will be reused
+     */
+    public CCReuseGrid(int times) {
+        super();
+        t = times;
+    }
+
+    @Override
+    public void start(CCNode aTarget) {
+        super.start(aTarget);
+
+        CCGridBase gb = target.getGrid();
+        if (gb != null && gb.isActive())
+            gb.setReuseGrid(gb.reuseGrid() + t);
+    }
 
 }

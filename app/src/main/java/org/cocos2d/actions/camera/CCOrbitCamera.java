@@ -4,28 +4,33 @@ import org.cocos2d.config.ccMacros;
 import org.cocos2d.nodes.CCNode;
 import org.cocos2d.opengl.CCCamera;
 
-/** CCOrbitCamera action
+/**
+ * CCOrbitCamera action
  * Orbits the camera around the center of the screen using spherical coordinates
  */
 public class CCOrbitCamera extends CCCameraAction {
     private float radius;
-    private float deltaRadius;
+    private final float deltaRadius;
     private float angleZ;
-    private float deltaAngleZ;
+    private final float deltaAngleZ;
     private float angleX;
-    private float deltaAngleX;
+    private final float deltaAngleX;
 
     private float radZ;
-    private float radDeltaZ;
+    private final float radDeltaZ;
     private float radX;
-    private float radDeltaX;
+    private final float radDeltaX;
 
-    /** creates a CCOrbitCamera action with radius, delta-radius,  z, deltaZ, x, deltaX */
+    /**
+     * creates a CCOrbitCamera action with radius, delta-radius,  z, deltaZ, x, deltaX
+     */
     public static CCOrbitCamera action(float t, float r, float dr, float z, float dz, float x, float dx) {
         return new CCOrbitCamera(t, r, dr, z, dz, x, dx);
     }
 
-    /** initializes a CCOrbitCamera action with radius, delta-radius,  z, deltaZ, x, deltaX */
+    /**
+     * initializes a CCOrbitCamera action with radius, delta-radius,  z, deltaZ, x, deltaX
+     */
     protected CCOrbitCamera(float t, float r, float dr, float z, float dz, float x, float dx) {
         super(t);
 
@@ -75,7 +80,9 @@ public class CCOrbitCamera extends CCCameraAction {
         target.getCamera().setEye(i, j, k);
     }
 
-    /** positions the camera according to spherical coordinates */
+    /**
+     * positions the camera according to spherical coordinates
+     */
     private void spherical(float newRadius[], float zenith[], float azimuth[]) {
         float[] ex = new float[1], ey = new float[1], ez = new float[1];
         float[] cx = new float[1], cy = new float[1], cz = new float[1];
@@ -99,7 +106,7 @@ public class CCOrbitCamera extends CCCameraAction {
             r = 0.00000001f;
 
         zenith[0] = (float) Math.acos(z / r);
-        
+
         if (x < 0)
             azimuth[0] = (float) Math.PI - (float) Math.asin(y / s);
         else

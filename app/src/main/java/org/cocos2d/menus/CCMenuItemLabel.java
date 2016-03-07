@@ -1,7 +1,5 @@
 package org.cocos2d.menus;
 
-import javax.microedition.khronos.opengles.GL10;
-
 import org.cocos2d.actions.base.CCAction;
 import org.cocos2d.actions.interval.CCScaleTo;
 import org.cocos2d.nodes.CCLabel;
@@ -10,35 +8,46 @@ import org.cocos2d.protocols.CCLabelProtocol;
 import org.cocos2d.protocols.CCRGBAProtocol;
 import org.cocos2d.types.ccColor3B;
 
+import javax.microedition.khronos.opengles.GL10;
 
-/** An abstract class for "label" CCMenuItemLabel items 
- Any CCNode that supports the CCLabelProtocol protocol can be added.
- Supported nodes:
-   - CCBitmapFontAtlas
-   - CCLabelAtlas
-   - CCLabel
+
+/**
+ * An abstract class for "label" CCMenuItemLabel items
+ * Any CCNode that supports the CCLabelProtocol protocol can be added.
+ * Supported nodes:
+ * - CCBitmapFontAtlas
+ * - CCLabelAtlas
+ * - CCLabel
  */
 
 public class CCMenuItemLabel extends CCMenuItem implements CCRGBAProtocol {
-    /** Label that is rendered. It can be any CCNode that implements the CCLabelProtocol */
+    /**
+     * Label that is rendered. It can be any CCNode that implements the CCLabelProtocol
+     */
     private CCLabelProtocol label_;
     private ccColor3B colorBackup;
 
-    /** the color that will be used to disable the item */
-    private ccColor3B disabledColor_;
-	private float originalScale_;
+    /**
+     * the color that will be used to disable the item
+     */
+    private final ccColor3B disabledColor_;
+    private float originalScale_;
 
-    /** creates a CCMenuItemLabel with a Label, target and selector */
+    /**
+     * creates a CCMenuItemLabel with a Label, target and selector
+     */
     public static CCMenuItemLabel item(CCLabelProtocol label, CCNode target, String selector) {
         return new CCMenuItemLabel(label, target, selector);
     }
-    
+
     public static CCMenuItemLabel item(String text, CCNode target, String selector) {
-    	CCLabel lbl = CCLabel.makeLabel(text, "DroidSansMono", 30);
+        CCLabel lbl = CCLabel.makeLabel(text, "DroidSansMono", 30);
         return new CCMenuItemLabel(lbl, target, selector);
     }
 
-    /** initializes a CCMenuItemLabel with a Label, target and selector */
+    /**
+     * initializes a CCMenuItemLabel with a Label, target and selector
+     */
     protected CCMenuItemLabel(CCLabelProtocol label, CCNode target, String selector) {
         super(target, selector);
         originalScale_ = 1.0f;
@@ -79,13 +88,15 @@ public class CCMenuItemLabel extends CCMenuItem implements CCRGBAProtocol {
 
     public void setLabel(CCLabelProtocol label) {
         label_ = label;
-        setContentSize(((CCNode)label_).getContentSize());
+        setContentSize(((CCNode) label_).getContentSize());
     }
 
-    /** sets a new string to the inner label */
+    /**
+     * sets a new string to the inner label
+     */
     public void setString(String string) {
         label_.setString(string);
-        setContentSize(((CCNode)label_).getContentSize());
+        setContentSize(((CCNode) label_).getContentSize());
     }
 
     public void activate() {
@@ -123,9 +134,11 @@ public class CCMenuItemLabel extends CCMenuItem implements CCRGBAProtocol {
         }
     }
 
-    /** Enable or disabled the CCMenuItemFont
-     @warning setIsEnabled changes the RGB color of the font
-    */
+    /**
+     * Enable or disabled the CCMenuItemFont
+     *
+     * @warning setIsEnabled changes the RGB color of the font
+     */
     public void setIsEnabled(boolean enabled) {
         if (isEnabled_ != enabled) {
             if (!enabled) {
@@ -140,20 +153,20 @@ public class CCMenuItemLabel extends CCMenuItem implements CCRGBAProtocol {
     }
 
     public void draw(GL10 gl) {
-        ((CCNode)label_).draw(gl);
+        ((CCNode) label_).draw(gl);
     }
 
-	@Override
-	public boolean doesOpacityModifyRGB() {
-		// TODO Auto-generated method stub
-		return false;
-	}
+    @Override
+    public boolean doesOpacityModifyRGB() {
+        // TODO Auto-generated method stub
+        return false;
+    }
 
-	@Override
-	public void setOpacityModifyRGB(boolean b) {
-		// TODO Auto-generated method stub
-		
-	}
+    @Override
+    public void setOpacityModifyRGB(boolean b) {
+        // TODO Auto-generated method stub
+
+    }
 
 }
 

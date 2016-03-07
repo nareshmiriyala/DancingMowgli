@@ -4,19 +4,25 @@ import org.cocos2d.actions.interval.CCIntervalAction;
 import org.cocos2d.nodes.CCNode;
 
 
-/** Repeats an action for ever.
- To repeat the an action for a limited number of times use the Repeat action.
- @warning This action can't be Sequenceable because it is not an IntervalAction
+/**
+ * Repeats an action for ever.
+ * To repeat the an action for a limited number of times use the Repeat action.
+ *
+ * @warning This action can't be Sequenceable because it is not an IntervalAction
  */
 public class CCRepeatForever extends CCAction {
-    protected CCIntervalAction other;
+    protected final CCIntervalAction other;
 
-    /** creates the action */
+    /**
+     * creates the action
+     */
     public static CCRepeatForever action(CCIntervalAction action) {
         return new CCRepeatForever(action);
     }
 
-    /** initializes the action */
+    /**
+     * initializes the action
+     */
     protected CCRepeatForever(CCIntervalAction action) {
         other = action;
     }
@@ -37,8 +43,8 @@ public class CCRepeatForever extends CCAction {
         other.step(dt);
         if (other.isDone()) {
             float diff = dt + other.duration - other.getElapsed();
-        	other.start(target);
-        	other.step(diff);
+            other.start(target);
+            other.step(diff);
         }
     }
 
@@ -51,9 +57,9 @@ public class CCRepeatForever extends CCAction {
         return CCRepeatForever.action(other.reverse());
     }
 
-	@Override
-	public void update(float time) {
-		// TODO Auto-generated method stub
-		
-	}
+    @Override
+    public void update(float time) {
+        // TODO Auto-generated method stub
+
+    }
 }

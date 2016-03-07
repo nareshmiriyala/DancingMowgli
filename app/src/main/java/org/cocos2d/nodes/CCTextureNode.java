@@ -1,11 +1,5 @@
 package org.cocos2d.nodes;
 
-import static javax.microedition.khronos.opengles.GL10.GL_TEXTURE_2D;
-import static javax.microedition.khronos.opengles.GL10.GL_TEXTURE_COORD_ARRAY;
-import static javax.microedition.khronos.opengles.GL10.GL_VERTEX_ARRAY;
-
-import javax.microedition.khronos.opengles.GL10;
-
 import org.cocos2d.config.ccConfig;
 import org.cocos2d.opengl.CCTexture2D;
 import org.cocos2d.protocols.CCRGBAProtocol;
@@ -13,6 +7,12 @@ import org.cocos2d.types.CGPoint;
 import org.cocos2d.types.CGSize;
 import org.cocos2d.types.ccBlendFunc;
 import org.cocos2d.types.ccColor3B;
+
+import javax.microedition.khronos.opengles.GL10;
+
+import static javax.microedition.khronos.opengles.GL10.GL_TEXTURE_2D;
+import static javax.microedition.khronos.opengles.GL10.GL_TEXTURE_COORD_ARRAY;
+import static javax.microedition.khronos.opengles.GL10.GL_VERTEX_ARRAY;
 
 
 public class CCTextureNode extends CCNode implements CCRGBAProtocol, CCNode.CocosNodeSize {
@@ -23,11 +23,11 @@ public class CCTextureNode extends CCNode implements CCRGBAProtocol, CCNode.Coco
     protected CCTexture2D texture_;
 
     // blend func
-    private ccBlendFunc blendFunc_;
+    private final ccBlendFunc blendFunc_;
 
     // texture RGBA
     private int opacity_;
-    private ccColor3B color_;
+    private final ccColor3B color_;
 
     boolean opacityModifyRGB_;
 
@@ -115,13 +115,13 @@ public class CCTextureNode extends CCNode implements CCRGBAProtocol, CCNode.Coco
         return texture_.getHeight();
     }
 
-	@Override
-	public boolean doesOpacityModifyRGB() {
-		return opacityModifyRGB_;
-	}
+    @Override
+    public boolean doesOpacityModifyRGB() {
+        return opacityModifyRGB_;
+    }
 
-	@Override
-	public void setOpacityModifyRGB(boolean b) {
-		opacityModifyRGB_ = b;
-	}
+    @Override
+    public void setOpacityModifyRGB(boolean b) {
+        opacityModifyRGB_ = b;
+    }
 }

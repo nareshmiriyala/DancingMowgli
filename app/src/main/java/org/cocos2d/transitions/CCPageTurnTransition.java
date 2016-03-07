@@ -16,16 +16,16 @@ import org.cocos2d.types.ccGridSize;
 /**
  * A transition which peels back the bottom right hand corner of a scene
  * to transition to the scene beneath it simulating a page turn
- *
+ * <p/>
  * This uses a 3DAction so it's strongly recommended that depth buffering
  * is turned on in CCDirector using:
- *
- * 	[[CCDirector sharedDirector] setDepthBufferFormat:kDepthBuffer16];
+ * <p/>
+ * [[CCDirector sharedDirector] setDepthBufferFormat:kDepthBuffer16];
  *
  * @since v0.8.2
  */
 public class CCPageTurnTransition extends CCTransitionScene {
-    protected boolean back_;
+    protected final boolean back_;
 
     /**
      * creates a base transition with duration and incoming scene
@@ -55,42 +55,42 @@ public class CCPageTurnTransition extends CCTransitionScene {
     }
 
     public void onEnter() {
-	super.onEnter();
+        super.onEnter();
 
-	CGSize s = CCDirector.sharedDirector().winSize();
-	int x,y;
-	if( s.width > s.height) {
-		x=16;
-		y=12;
-	} else  {
-		x=12;
-		y=16;
-	}
+        CGSize s = CCDirector.sharedDirector().winSize();
+        int x, y;
+        if (s.width > s.height) {
+            x = 16;
+            y = 12;
+        } else {
+            x = 12;
+            y = 16;
+        }
 
-	CCIntervalAction action  = action(ccGridSize.ccg(x,y));
-	if (! back_ ) {
-		outScene.runAction(CCSequence.actions(
-							  action,
-							  CCCallFunc.action(this, "finish"),
-							  CCStopGrid.action()));
-	} else {
-		// to prevent initial flicker
-		inScene.setVisible(false);
-		inScene.runAction(CCSequence.actions(
-							 CCShow.action(),
-							 action,
-							 CCCallFunc.action(this, "finish"),
-							 CCStopGrid.action()));
-	}
+        CCIntervalAction action = action(ccGridSize.ccg(x, y));
+        if (!back_) {
+            outScene.runAction(CCSequence.actions(
+                    action,
+                    CCCallFunc.action(this, "finish"),
+                    CCStopGrid.action()));
+        } else {
+            // to prevent initial flicker
+            inScene.setVisible(false);
+            inScene.runAction(CCSequence.actions(
+                    CCShow.action(),
+                    action,
+                    CCCallFunc.action(this, "finish"),
+                    CCStopGrid.action()));
+        }
     }
 
     public CCIntervalAction action(ccGridSize v) {
-	if( back_ ) {
-		// Get hold of the PageTurn3DAction
-		return CCReverseTime.action(CCPageTurn3D.action(v, duration));
-	} else {
-		// Get hold of the PageTurn3DAction
-		return CCPageTurn3D.action(v, duration);
-	}
+        if (back_) {
+            // Get hold of the PageTurn3DAction
+            return CCReverseTime.action(CCPageTurn3D.action(v, duration));
+        } else {
+            // Get hold of the PageTurn3DAction
+            return CCPageTurn3D.action(v, duration);
+        }
     }
 }

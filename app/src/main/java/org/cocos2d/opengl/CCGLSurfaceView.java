@@ -1,18 +1,18 @@
 package org.cocos2d.opengl;
 
-import org.cocos2d.events.CCTouchDispatcher;
-import org.cocos2d.nodes.CCDirector;
-import org.cocos2d.types.CGSize;
-
 import android.app.Activity;
 import android.content.Context;
 import android.support.annotation.NonNull;
 import android.view.MotionEvent;
 
+import org.cocos2d.events.CCTouchDispatcher;
+import org.cocos2d.nodes.CCDirector;
+import org.cocos2d.types.CGSize;
+
 public class CCGLSurfaceView extends GLSurfaceView {
-	private static final int VIEWID = 0x1235;
+    private static final int VIEWID = 0x1235;
     // private static final String LOG_TAG = CCGLSurfaceView.class.getSimpleName();
-    private CCTouchDispatcher mDispatcher;
+    private final CCTouchDispatcher mDispatcher;
 
     public CGSize frame;
 
@@ -53,18 +53,18 @@ public class CCGLSurfaceView extends GLSurfaceView {
         		}
         );*/
     }
-    
+
     @Override
     protected void onLayout(boolean changed, int left, int top, int right, int bottom) {
-    	super.onLayout(changed, left, top, right, bottom);
-    	frame = CGSize.make(right - left, bottom - top);
-    }        
+        super.onLayout(changed, left, top, right, bottom);
+        frame = CGSize.make(right - left, bottom - top);
+    }
 
     @Override
     public boolean onTouchEvent(@NonNull MotionEvent event) {
-  	
-    	mDispatcher.queueMotionEvent(event);
-    	
+
+        mDispatcher.queueMotionEvent(event);
+
 //		switch (event.getAction()) {
 //		case MotionEvent.ACTION_CANCEL:
 //			mDispatcher.touchesCancelled(event);
@@ -79,15 +79,15 @@ public class CCGLSurfaceView extends GLSurfaceView {
 //			mDispatcher.touchesEnded(event);
 //			break;
 //		}
-		
-		synchronized (CCDirector.sharedDirector()) {
-			try {
-				CCDirector.sharedDirector().wait(20L);
-			} catch (InterruptedException e) {
-				// Do nothing
-			}
-		}
-    	
+
+        synchronized (CCDirector.sharedDirector()) {
+            try {
+                CCDirector.sharedDirector().wait(20L);
+            } catch (InterruptedException e) {
+                // Do nothing
+            }
+        }
+
         return true;
     }
 }

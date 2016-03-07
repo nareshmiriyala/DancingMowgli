@@ -8,17 +8,23 @@ import org.cocos2d.types.ccQuad3;
 
 ////////////////////////////////////////////////////////////
 
-/** CCSplitRows action */
+/**
+ * CCSplitRows action
+ */
 public class CCSplitRows extends CCTiledGrid3DAction {
-	int		rows;
-	CGSize	winSize;
+    final int rows;
+    CGSize winSize;
 
-    /** creates the action with the number of rows to split and the duration */
+    /**
+     * creates the action with the number of rows to split and the duration
+     */
     public static CCSplitRows action(int r, float d) {
         return new CCSplitRows(r, d);
     }
 
-    /** initializes the action with the number of rows to split and the duration */
+    /**
+     * initializes the action with the number of rows to split and the duration
+     */
     protected CCSplitRows(int r, float d) {
         super(ccGridSize.ccg(1, r), d);
         rows = r;
@@ -39,11 +45,11 @@ public class CCSplitRows extends CCTiledGrid3DAction {
     public void update(float time) {
         int j;
 
-        for( j = 0; j < gridSize.y; j++ ) {
-            ccQuad3 coords = originalTile(ccGridSize.ccg(0,j));
-            float	direction = 1;
+        for (j = 0; j < gridSize.y; j++) {
+            ccQuad3 coords = originalTile(ccGridSize.ccg(0, j));
+            float direction = 1;
 
-            if ( (j % 2 ) == 0 )
+            if ((j % 2) == 0)
                 direction = -1;
 
             coords.bl_x += direction * winSize.width * time;
@@ -51,7 +57,7 @@ public class CCSplitRows extends CCTiledGrid3DAction {
             coords.tl_x += direction * winSize.width * time;
             coords.tr_x += direction * winSize.width * time;
 
-            setTile(ccGridSize.ccg(0,j), coords);
+            setTile(ccGridSize.ccg(0, j), coords);
         }
     }
 

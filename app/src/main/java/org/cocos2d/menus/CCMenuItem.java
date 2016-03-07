@@ -1,17 +1,18 @@
 package org.cocos2d.menus;
 
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
-
 import org.cocos2d.nodes.CCNode;
 import org.cocos2d.types.CGPoint;
 import org.cocos2d.types.CGRect;
 import org.cocos2d.types.CGSize;
 
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 
-/** CCMenuItem base class
- *
- *  Subclass CCMenuItem (or any subclass) to create your custom CCMenuItem objects.
+
+/**
+ * CCMenuItem base class
+ * <p/>
+ * Subclass CCMenuItem (or any subclass) to create your custom CCMenuItem objects.
  */
 
 public class CCMenuItem extends CCNode {
@@ -24,16 +25,20 @@ public class CCMenuItem extends CCNode {
     public static final int kZoomActionTag = 0xc0c05002;
 
     protected boolean isEnabled_;
-    /** returns whether or not the item is selected @since v0.8.2 */
+    /**
+     * returns whether or not the item is selected @since v0.8.2
+     */
     protected boolean isSelected_;
 
-    protected Object targetCallback;
-    protected String selector;
+    protected final Object targetCallback;
+    protected final String selector;
 
     private Method invocation;
 
 
-    /** Creates a CCMenuItem with a target/selector */
+    /**
+     * Creates a CCMenuItem with a target/selector
+     */
     public static CCMenuItem item(Object target, String selector) {
         return new CCMenuItem(target, selector);
     }
@@ -49,12 +54,12 @@ public class CCMenuItem extends CCNode {
 
         invocation = null;
         if (rec != null && cb != null) {
-        	Class<?> cls = rec.getClass();
-        	try {
-        		invocation = cls.getMethod(cb, Object.class);
-        	} catch (SecurityException | NoSuchMethodException e) {
-        		e.printStackTrace();
-        	}
+            Class<?> cls = rec.getClass();
+            try {
+                invocation = cls.getMethod(cb, Object.class);
+            } catch (SecurityException | NoSuchMethodException e) {
+                e.printStackTrace();
+            }
         }
 
         isEnabled_ = true;
@@ -66,17 +71,17 @@ public class CCMenuItem extends CCNode {
      */
     public void activate() {
         if (isEnabled_) {
-        	if (targetCallback != null & invocation != null) {
-        		try {
-        			invocation.invoke(targetCallback, this);
-        		} catch (IllegalArgumentException | IllegalAccessException e) {
-        			// TODO Auto-generated catch block
-        			e.printStackTrace();
-        		} catch (InvocationTargetException e) {
-        			// TODO Auto-generated catch block
-        			e.printStackTrace();
-        		}
-        	}
+            if (targetCallback != null & invocation != null) {
+                try {
+                    invocation.invoke(targetCallback, this);
+                } catch (IllegalArgumentException | IllegalAccessException e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                } catch (InvocationTargetException e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                }
+            }
         }
     }
 
@@ -112,11 +117,11 @@ public class CCMenuItem extends CCNode {
      * Returns the outside box
      */
     public CGRect rect() {
-    	CGPoint pos = getPositionRef();
-    	CGPoint pnt = getAnchorPointRef();
-    	CGSize size = getContentSizeRef();
+        CGPoint pos = getPositionRef();
+        CGPoint pnt = getAnchorPointRef();
+        CGSize size = getContentSizeRef();
         return CGRect.make(pos.x - size.width * pnt.x, pos.y -
-                size.height * pnt.y,
+                        size.height * pnt.y,
                 size.width, size.height);
     }
 
@@ -125,11 +130,11 @@ public class CCMenuItem extends CCNode {
      * No garbage version.
      */
     public void rect(CGRect ret) {
-    	CGPoint pos = getPositionRef();
-    	CGPoint pnt = getAnchorPointRef();
-    	CGSize size = getContentSizeRef();
+        CGPoint pos = getPositionRef();
+        CGPoint pnt = getAnchorPointRef();
+        CGSize size = getContentSizeRef();
         ret.set(pos.x - size.width * pnt.x, pos.y -
-                size.height * pnt.y,
+                        size.height * pnt.y,
                 size.width, size.height);
     }
 }

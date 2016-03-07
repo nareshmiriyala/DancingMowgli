@@ -1,16 +1,21 @@
 package org.cocos2d.actions.interval;
 
-/** Blinks a CCNode object by modifying it's visible attribute
-*/
+/**
+ * Blinks a CCNode object by modifying it's visible attribute
+ */
 public class CCBlink extends CCIntervalAction {
-    private int times;
+    private final int times;
 
-    /** creates the action */
+    /**
+     * creates the action
+     */
     public static CCBlink action(float t, int b) {
         return new CCBlink(t, b);
     }
 
-    /** initilizes the action */
+    /**
+     * initilizes the action
+     */
     protected CCBlink(float t, int b) {
         super(t);
         times = b;

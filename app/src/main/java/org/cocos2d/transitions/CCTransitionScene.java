@@ -1,12 +1,12 @@
 package org.cocos2d.transitions;
 
-import javax.microedition.khronos.opengles.GL10;
-
 import org.cocos2d.actions.UpdateCallback;
 import org.cocos2d.events.CCTouchDispatcher;
 import org.cocos2d.layers.CCScene;
 import org.cocos2d.nodes.CCDirector;
 import org.cocos2d.types.CGPoint;
+
+import javax.microedition.khronos.opengles.GL10;
 
 public class CCTransitionScene extends CCScene {
 
@@ -71,7 +71,7 @@ public class CCTransitionScene extends CCScene {
 
     @Override
     public void draw(GL10 gl) {
-        if( inSceneOnTop) {
+        if (inSceneOnTop) {
             outScene.visit(gl);
             inScene.visit(gl);
         } else {
@@ -80,14 +80,14 @@ public class CCTransitionScene extends CCScene {
         }
     }
 
-    
-    private UpdateCallback setNewSceneCallback = new UpdateCallback() {
-		@Override
-		public void update(float d) {
-			setNewScene(d);
-		}
-	};
-    
+
+    private final UpdateCallback setNewSceneCallback = new UpdateCallback() {
+        @Override
+        public void update(float d) {
+            setNewScene(d);
+        }
+    };
+
     public void finish() {
         /* clean up */
         inScene.setVisible(true);
@@ -160,14 +160,14 @@ public class CCTransitionScene extends CCScene {
             outScene.cleanup();
         }
     }
-    
+
     static class TransitionWithInvalidSceneException extends RuntimeException {
         /**
-		 * 
-		 */
-		private static final long serialVersionUID = -1743490059348093939L;
+         *
+         */
+        private static final long serialVersionUID = -1743490059348093939L;
 
-		public TransitionWithInvalidSceneException(String reason) {
+        public TransitionWithInvalidSceneException(String reason) {
             super(reason);
         }
     }

@@ -2,22 +2,27 @@ package org.cocos2d.actions.interval;
 
 import org.cocos2d.nodes.CCNode;
 
-/**  Rotates a CCNode object to a certain angle by modifying it's
- rotation attribute.
- The direction will be decided by the shortest angle.
-*/ 
+/**
+ * Rotates a CCNode object to a certain angle by modifying it's
+ * rotation attribute.
+ * The direction will be decided by the shortest angle.
+ */
 
 public class CCRotateTo extends CCIntervalAction {
-    private float dstAngle;
+    private final float dstAngle;
     private float diffAngle;
     private float startAngle;
 
-    /** creates the action */
+    /**
+     * creates the action
+     */
     public static CCRotateTo action(float duration, float ang) {
         return new CCRotateTo(duration, ang);
     }
 
-    /** initializes the action */
+    /**
+     * initializes the action
+     */
     protected CCRotateTo(float duration, float ang) {
         super(duration);
         dstAngle = ang;

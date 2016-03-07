@@ -1,19 +1,27 @@
 package org.cocos2d.nodes;
 
-import java.util.ArrayList;
-
 import org.cocos2d.opengl.CCTexture2D;
 import org.cocos2d.types.CGPoint;
 import org.cocos2d.types.CGRect;
 
-/** an Animation object used within Sprites to perform animations */
+import java.util.ArrayList;
+
+/**
+ * an Animation object used within Sprites to perform animations
+ */
 public class CCAnimation {
-    /** name of the animation */
+    /**
+     * name of the animation
+     */
     private String name_;
-    /** delay between frames in seconds. */
-    private float delay_;
-    /** array of frames */
-    ArrayList<CCSpriteFrame> frames_;
+    /**
+     * delay between frames in seconds.
+     */
+    private final float delay_;
+    /**
+     * array of frames
+     */
+    final ArrayList<CCSpriteFrame> frames_;
 
     public String name() {
         return name_;
@@ -27,60 +35,77 @@ public class CCAnimation {
         return frames_;
     }
 
-    /** Creates a CCAnimation with a name
-      @since v0.99.3
-      */
+    /**
+     * Creates a CCAnimation with a name
+     *
+     * @since v0.99.3
+     */
     public static CCAnimation animation(String name) {
         return new CCAnimation(name);
     }
 
-    /** Creates a CCAnimation with a name and frames
-      @since v0.99.3
-      */
+    /**
+     * Creates a CCAnimation with a name and frames
+     *
+     * @since v0.99.3
+     */
     public static CCAnimation animation(String name, ArrayList<CCSpriteFrame> frames) {
         return new CCAnimation(name, frames);
     }
 
-    /** Creates a CCAnimation with a name and delay between frames. */
+    /**
+     * Creates a CCAnimation with a name and delay between frames.
+     */
     public static CCAnimation animation(String name, float delay) {
         return new CCAnimation(name, delay);
     }
 
-    /** Creates a CCAnimation with a name, delay and an array of CCSpriteFrames. */
+    /**
+     * Creates a CCAnimation with a name, delay and an array of CCSpriteFrames.
+     */
     public static CCAnimation animation(String name, float delay, ArrayList<CCSpriteFrame> frames) {
         return new CCAnimation(name, delay, frames);
     }
 
-    /** Initializes a CCAnimation with a name
-      @since v0.99.3
-      */
+    /**
+     * Initializes a CCAnimation with a name
+     *
+     * @since v0.99.3
+     */
     protected CCAnimation(String name) {
         this(name, null);
     }
 
 
-    /** Initializes a CCAnimation with a name and frames
-      @since v0.99.3
-      */
+    /**
+     * Initializes a CCAnimation with a name and frames
+     *
+     * @since v0.99.3
+     */
     protected CCAnimation(String name, ArrayList<CCSpriteFrame> frames) {
         this(name, 0, frames);
     }
 
-    /** Initializes a CCAnimation with a name and delay between frames. */
+    /**
+     * Initializes a CCAnimation with a name and delay between frames.
+     */
     protected CCAnimation(String name, float delay) {
-        this(name, delay, (ArrayList<CCSpriteFrame>)null);
+        this(name, delay, (ArrayList<CCSpriteFrame>) null);
     }
 
-    /** Initializes a CCAnimation with a name, delay and an array of CCSpriteFrames. */
+    /**
+     * Initializes a CCAnimation with a name, delay and an array of CCSpriteFrames.
+     */
     protected CCAnimation(String name, float delay, ArrayList<CCSpriteFrame> frames) {
         delay_ = delay;
         name_ = name;
         frames_ = new ArrayList<>();
         if (frames != null)
-        	frames_.addAll(frames);
+            frames_.addAll(frames);
     }
 
-    /** Adds a frame with an image filename.
+    /**
+     * Adds a frame with an image filename.
      * Internally it will create a CCSpriteFrame and it will add it.
      * Added to facilitate the migration from v0.8 to v0.9.
      */
@@ -115,8 +140,10 @@ public class CCAnimation {
         }
     }
      */
-    
-    /** Adds a frame to a CCAnimation. */
+
+    /**
+     * Adds a frame to a CCAnimation.
+     */
     public void addFrame(CCSpriteFrame frame) {
         frames_.add(frame);
     }
@@ -127,13 +154,14 @@ public class CCAnimation {
         delay_ = d;
 
         if (textures != null) {
-        	for (CCTexture2D tex : textures) {
-        		addFrame(tex);
-        	}
+            for (CCTexture2D tex : textures) {
+                addFrame(tex);
+            }
         }
     }
 
-    /** Adds a frame with a texture and a rect.
+    /**
+     * Adds a frame with a texture and a rect.
      * Internally it will create a CCSpriteFrame and it will add it.
      * Added to facilitate the migration from v0.8 to v0.9.
      */

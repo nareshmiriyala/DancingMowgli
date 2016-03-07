@@ -1,26 +1,15 @@
 package org.cocos2d.nodes;
 
-import static javax.microedition.khronos.opengles.GL10.GL_BLEND;
-import static javax.microedition.khronos.opengles.GL10.GL_COLOR_ARRAY;
-import static javax.microedition.khronos.opengles.GL10.GL_COLOR_BUFFER_BIT;
-import static javax.microedition.khronos.opengles.GL10.GL_DEPTH_BUFFER_BIT;
-import static javax.microedition.khronos.opengles.GL10.GL_DEPTH_TEST;
-import static javax.microedition.khronos.opengles.GL10.GL_DITHER;
-import static javax.microedition.khronos.opengles.GL10.GL_FASTEST;
-import static javax.microedition.khronos.opengles.GL10.GL_LEQUAL;
-import static javax.microedition.khronos.opengles.GL10.GL_MODELVIEW;
-import static javax.microedition.khronos.opengles.GL10.GL_NICEST;
-import static javax.microedition.khronos.opengles.GL10.GL_ONE_MINUS_SRC_ALPHA;
-import static javax.microedition.khronos.opengles.GL10.GL_PERSPECTIVE_CORRECTION_HINT;
-import static javax.microedition.khronos.opengles.GL10.GL_PROJECTION;
-import static javax.microedition.khronos.opengles.GL10.GL_SRC_ALPHA;
-import static javax.microedition.khronos.opengles.GL10.GL_TEXTURE_2D;
-
-import java.util.ArrayList;
-
-import javax.microedition.khronos.egl.EGL10;
-import javax.microedition.khronos.egl.EGLConfig;
-import javax.microedition.khronos.opengles.GL10;
+import android.app.Activity;
+import android.content.pm.ActivityInfo;
+import android.content.res.Configuration;
+import android.opengl.GLU;
+import android.os.SystemClock;
+import android.util.Log;
+import android.view.KeyEvent;
+import android.view.View;
+import android.view.ViewGroup;
+import android.view.WindowManager;
 
 import org.cocos2d.actions.CCScheduler;
 import org.cocos2d.config.ccConfig;
@@ -40,16 +29,27 @@ import org.cocos2d.types.util.CGPointUtil;
 import org.cocos2d.utils.CCFormatter;
 import org.cocos2d.utils.javolution.TextBuilder;
 
-import android.app.Activity;
-import android.content.pm.ActivityInfo;
-import android.content.res.Configuration;
-import android.opengl.GLU;
-import android.os.SystemClock;
-import android.util.Log;
-import android.view.KeyEvent;
-import android.view.View;
-import android.view.ViewGroup;
-import android.view.WindowManager;
+import java.util.ArrayList;
+
+import javax.microedition.khronos.egl.EGL10;
+import javax.microedition.khronos.egl.EGLConfig;
+import javax.microedition.khronos.opengles.GL10;
+
+import static javax.microedition.khronos.opengles.GL10.GL_BLEND;
+import static javax.microedition.khronos.opengles.GL10.GL_COLOR_ARRAY;
+import static javax.microedition.khronos.opengles.GL10.GL_COLOR_BUFFER_BIT;
+import static javax.microedition.khronos.opengles.GL10.GL_DEPTH_BUFFER_BIT;
+import static javax.microedition.khronos.opengles.GL10.GL_DEPTH_TEST;
+import static javax.microedition.khronos.opengles.GL10.GL_DITHER;
+import static javax.microedition.khronos.opengles.GL10.GL_FASTEST;
+import static javax.microedition.khronos.opengles.GL10.GL_LEQUAL;
+import static javax.microedition.khronos.opengles.GL10.GL_MODELVIEW;
+import static javax.microedition.khronos.opengles.GL10.GL_NICEST;
+import static javax.microedition.khronos.opengles.GL10.GL_ONE_MINUS_SRC_ALPHA;
+import static javax.microedition.khronos.opengles.GL10.GL_PERSPECTIVE_CORRECTION_HINT;
+import static javax.microedition.khronos.opengles.GL10.GL_PROJECTION;
+import static javax.microedition.khronos.opengles.GL10.GL_SRC_ALPHA;
+import static javax.microedition.khronos.opengles.GL10.GL_TEXTURE_2D;
 
 /**
  * Class that creates and handle the main Window and manages how
@@ -372,7 +372,7 @@ public class CCDirector implements GLSurfaceView.Renderer {
     }
 
     /* scheduled CCScenes */
-    private ArrayList<CCScene> CCScenesStack_;
+    private final ArrayList<CCScene> CCScenesStack_;
 
     /* last time the main loop was updated */
     private long lastUpdate_;
@@ -425,7 +425,7 @@ public class CCDirector implements GLSurfaceView.Renderer {
     }*/
 
     /* screen, different than surface size */
-    private CGSize screenSize_;
+    private final CGSize screenSize_;
 
     /* screen, different than surface size */
     private CGSize surfaceSize_;
@@ -460,7 +460,7 @@ public class CCDirector implements GLSurfaceView.Renderer {
     }
 
     /* contentScaleFactor could be simulated */
-    private boolean isContentScaleSupported_;
+    private final boolean isContentScaleSupported_;
 
     private float accumDtForProfiler_;
 
@@ -503,7 +503,7 @@ public class CCDirector implements GLSurfaceView.Renderer {
         displayFPS = value;
     }
 
-    private static CCDirector _sharedDirector = new CCDirector();
+    private static final CCDirector _sharedDirector = new CCDirector();
 
     /**
      * returns a shared instance of the director
@@ -766,7 +766,7 @@ public class CCDirector implements GLSurfaceView.Renderer {
         ccMacros.CC_DISABLE_DEFAULT_GL_STATES(gl);
 
         gl.glPopMatrix();
-    	
+
         /* swap buffers */
         // openGLView_.swapBuffers();
     }
@@ -1430,7 +1430,7 @@ public class CCDirector implements GLSurfaceView.Renderer {
         }
     }
 
-    private TextBuilder fpsBuilder = new TextBuilder();
+    private final TextBuilder fpsBuilder = new TextBuilder();
 
     private void showFPS(GL10 gl) {
 

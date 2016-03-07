@@ -20,22 +20,23 @@ public class CGSize {
     public static CGSize zero() {
         return new CGSize(0, 0);
     }
-    
-	public void set(CGSize s) {  	
-		width = s.width; 
-		height = s.height;
-	}
-	
-	public void set(float w, float h) {  	
-		width = w; 
-		height = h;
-	}
-	
-	private static CGSize ZERO_SIZE = CGSize.zero();
-	public static CGSize getZero() {
-		return ZERO_SIZE;
-	}
-	
+
+    public void set(CGSize s) {
+        width = s.width;
+        height = s.height;
+    }
+
+    public void set(float w, float h) {
+        width = w;
+        height = h;
+    }
+
+    private static final CGSize ZERO_SIZE = CGSize.zero();
+
+    public static CGSize getZero() {
+        return ZERO_SIZE;
+    }
+
     public float getWidth() {
         return width;
     }

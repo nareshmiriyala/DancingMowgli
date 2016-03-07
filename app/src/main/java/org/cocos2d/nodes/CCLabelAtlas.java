@@ -1,7 +1,5 @@
 package org.cocos2d.nodes;
 
-import javax.microedition.khronos.opengles.GL10;
-
 import org.cocos2d.config.ccConfig;
 import org.cocos2d.protocols.CCLabelProtocol;
 import org.cocos2d.types.ccBlendFunc;
@@ -10,33 +8,40 @@ import org.cocos2d.types.ccQuad3;
 import org.cocos2d.types.util.PoolHolder;
 import org.cocos2d.utils.javolution.TextBuilder;
 
-/** CCLabelAtlas is a subclass of CCAtlasNode.
- 
- It can be as a replacement of CCLabel since it is MUCH faster.
- 
- CCLabelAtlas versus CCLabel:
- - CCLabelAtlas is MUCH faster than CCLabel
- - CCLabelAtlas "characters" have a fixed height and width
- - CCLabelAtlas "characters" can be anything you want since they are taken from an image file
- 
- A more flexible class is CCBitmapFontAtlas. It supports variable width characters and it also has a nice editor.
+import javax.microedition.khronos.opengles.GL10;
+
+/**
+ * CCLabelAtlas is a subclass of CCAtlasNode.
+ * <p/>
+ * It can be as a replacement of CCLabel since it is MUCH faster.
+ * <p/>
+ * CCLabelAtlas versus CCLabel:
+ * - CCLabelAtlas is MUCH faster than CCLabel
+ * - CCLabelAtlas "characters" have a fixed height and width
+ * - CCLabelAtlas "characters" can be anything you want since they are taken from an image file
+ * <p/>
+ * A more flexible class is CCBitmapFontAtlas. It supports variable width characters and it also has a nice editor.
  */
-public class CCLabelAtlas extends CCAtlasNode 
-	    implements CCLabelProtocol, CCNode.CocosNodeSize {
+public class CCLabelAtlas extends CCAtlasNode
+        implements CCLabelProtocol, CCNode.CocosNodeSize {
     /// string to render
-    TextBuilder string_;
+    final TextBuilder string_;
 
     /// the first char in the charmap
-    char mapStartChar;
+    final char mapStartChar;
 
-    /** creates the CCLabelAtlas with a string,
+    /**
+     * creates the CCLabelAtlas with a string,
      * a char map file(the atlas), the width and height of each element
-     * and the starting char of the atlas */
+     * and the starting char of the atlas
+     */
     public static CCLabelAtlas label(CharSequence theString, String charmapfile, int w, int h, char c) {
         return new CCLabelAtlas(theString, charmapfile, w, h, c);
     }
 
-    /** initializes the CCLabelAtlas with a string, a char map file(the atlas), the width and height of each element and the starting char of the atlas */
+    /**
+     * initializes the CCLabelAtlas with a string, a char map file(the atlas), the width and height of each element and the starting char of the atlas
+     */
     protected CCLabelAtlas(CharSequence theString, String charmapfile, int w, int h, char c) {
         super(charmapfile, w, h, theString.length());
 
@@ -52,8 +57,8 @@ public class CCLabelAtlas extends CCAtlasNode
         int n = string_.length();
 
         PoolHolder holder = PoolHolder.getInstance();
-        ccQuad2 texCoord = holder.getccQuad2Pool().get(); 
-        ccQuad3 vertex   = holder.getccQuad3Pool().get(); 
+        ccQuad2 texCoord = holder.getccQuad2Pool().get();
+        ccQuad3 vertex = holder.getccQuad3Pool().get();
 
 //        String s = string_;
         for (int i = 0; i < n; i++) {
@@ -85,7 +90,7 @@ public class CCLabelAtlas extends CCAtlasNode
 
             textureAtlas_.updateQuad(texCoord, vertex, i);
         }
-        
+
         holder.getccQuad2Pool().free(texCoord);
         holder.getccQuad3Pool().free(vertex);
     }
@@ -107,21 +112,21 @@ public class CCLabelAtlas extends CCAtlasNode
         // Needed states: GL_TEXTURE_2D, GL_VERTEX_ARRAY, GL_TEXTURE_COORD_ARRAY
         // Unneeded states: GL_COLOR_ARRAY
         gl.glDisableClientState(GL10.GL_COLOR_ARRAY);
-	    gl.glColor4f(color_.r/255.f, color_.g/255.f, color_.b/255.f, opacity_/255.f);
+        gl.glColor4f(color_.r / 255.f, color_.g / 255.f, color_.b / 255.f, opacity_ / 255.f);
 
         boolean newBlend = false;
-        if( blendFunc_.src != ccConfig.CC_BLEND_SRC || blendFunc_.dst != ccConfig.CC_BLEND_DST ) {
+        if (blendFunc_.src != ccConfig.CC_BLEND_SRC || blendFunc_.dst != ccConfig.CC_BLEND_DST) {
             newBlend = true;
-            gl.glBlendFunc( blendFunc_.src, blendFunc_.dst );
+            gl.glBlendFunc(blendFunc_.src, blendFunc_.dst);
         }
 
         textureAtlas_.draw(gl, string_.length());
-	
-	    if( newBlend )
-		    gl.glBlendFunc(ccConfig.CC_BLEND_SRC, ccConfig.CC_BLEND_DST);
-	
-	    // Restore Default GL state. Enable GL_COLOR_ARRAY
-	    gl.glEnableClientState(GL10.GL_COLOR_ARRAY);
+
+        if (newBlend)
+            gl.glBlendFunc(ccConfig.CC_BLEND_SRC, ccConfig.CC_BLEND_DST);
+
+        // Restore Default GL state. Enable GL_COLOR_ARRAY
+        gl.glEnableClientState(GL10.GL_COLOR_ARRAY);
 
         /*
         if (ccConfig.CC_LABELATLAS_DEBUG_DRAW) {
@@ -145,16 +150,16 @@ public class CCLabelAtlas extends CCAtlasNode
         return itemHeight;
     }
 
-	@Override
-	public ccBlendFunc getBlendFunc() {
-		// TODO Auto-generated method stub
-		return null;
-	}
+    @Override
+    public ccBlendFunc getBlendFunc() {
+        // TODO Auto-generated method stub
+        return null;
+    }
 
-	@Override
-	public void setBlendFunc(ccBlendFunc blendFunc) {
-		// TODO Auto-generated method stub
-		
-	}
+    @Override
+    public void setBlendFunc(ccBlendFunc blendFunc) {
+        // TODO Auto-generated method stub
+
+    }
 }
 

@@ -4,21 +4,26 @@ import org.cocos2d.actions.interval.CCIntervalAction;
 import org.cocos2d.nodes.CCNode;
 
 
-/** Base class for Easing actions
+/**
+ * Base class for Easing actions
  */
 public class CCEaseAction extends CCIntervalAction {
-	public static final float M_PI_X_2 = (float) (Math.PI * 2.0f);
-	
-    protected CCIntervalAction other;
+    public static final float M_PI_X_2 = (float) (Math.PI * 2.0f);
 
-    /** creates the action */
+    protected final CCIntervalAction other;
+
+    /**
+     * creates the action
+     */
     public static CCEaseAction action(CCIntervalAction action) {
-    	return new CCEaseAction(action);
+        return new CCEaseAction(action);
     }
 
-    /** initializes the action */
+    /**
+     * initializes the action
+     */
     protected CCEaseAction(CCIntervalAction action) {
-    	super(action.getDuration());
+        super(action.getDuration());
         other = action;
     }
 

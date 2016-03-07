@@ -1,8 +1,8 @@
 package org.cocos2d.actions.instant;
 
-import java.lang.reflect.Method;
-
 import org.cocos2d.nodes.CCNode;
+
+import java.lang.reflect.Method;
 
 //
 // CallFunc
@@ -12,13 +12,15 @@ import org.cocos2d.nodes.CCNode;
  * Calls a 'callback'
  */
 public class CCCallFunc extends CCInstantAction {
-    protected Object targetCallback;
-    protected String selector;
-    protected Class<?> partypes[];
+    protected final Object targetCallback;
+    protected final String selector;
+    protected final Class<?>[] partypes;
 
     protected Method invocation;
 
-    /** creates the action with the callback */
+    /**
+     * creates the action with the callback
+     */
     public static CCCallFunc action(Object target, String selector) {
         return new CCCallFunc(target, selector, null);
     }
@@ -31,23 +33,20 @@ public class CCCallFunc extends CCInstantAction {
         selector = s;
         partypes = p;
 
-        if (partypes == null)
-        {
-	        try {
-	            Class<?> cls = targetCallback.getClass();
-	            invocation = cls.getMethod(selector);
-	    	} catch (NoSuchMethodException e) {
-	    		e.printStackTrace();
-	    	}
-	    }
-        else
-        {
-        	try {
+        if (partypes == null) {
+            try {
+                Class<?> cls = targetCallback.getClass();
+                invocation = cls.getMethod(selector);
+            } catch (NoSuchMethodException e) {
+                e.printStackTrace();
+            }
+        } else {
+            try {
                 Class<?> cls = targetCallback.getClass();
                 invocation = cls.getMethod(selector, partypes);
-        	} catch (NoSuchMethodException e) {
-        		e.printStackTrace();
-        	}
+            } catch (NoSuchMethodException e) {
+                e.printStackTrace();
+            }
         }
     }
 

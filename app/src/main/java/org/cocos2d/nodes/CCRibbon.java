@@ -1,11 +1,5 @@
 package org.cocos2d.nodes;
 
-import java.nio.ByteBuffer;
-import java.nio.ByteOrder;
-import java.util.ArrayList;
-
-import javax.microedition.khronos.opengles.GL10;
-
 import org.cocos2d.config.ccConfig;
 import org.cocos2d.opengl.CCTexture2D;
 import org.cocos2d.types.CCTexParams;
@@ -13,6 +7,12 @@ import org.cocos2d.types.CGPoint;
 import org.cocos2d.types.ccBlendFunc;
 import org.cocos2d.types.ccColor4B;
 import org.cocos2d.utils.FastFloatBuffer;
+
+import java.nio.ByteBuffer;
+import java.nio.ByteOrder;
+import java.util.ArrayList;
+
+import javax.microedition.khronos.opengles.GL10;
 
 /**
  * A ribbon is a dynamically generated list of polygons drawn as a single or series
@@ -30,22 +30,24 @@ import org.cocos2d.utils.FastFloatBuffer;
  * @since v0.8.1
  */
 public class CCRibbon extends CCNode {
-    /** object to hold ribbon segment data */
+    /**
+     * object to hold ribbon segment data
+     */
     public static class CCRibbonSegment {
 
         private static final int COUNT = 50;
 
-        float[] verts = new float[COUNT * 3 * 2];
-        float[] coords = new float[COUNT * 2 * 2];
-        float[] colors = new float[COUNT * 4 * 2];
-        float[] creationTime = new float[COUNT];
+        final float[] verts = new float[COUNT * 3 * 2];
+        final float[] coords = new float[COUNT * 2 * 2];
+        final float[] colors = new float[COUNT * 4 * 2];
+        final float[] creationTime = new float[COUNT];
         boolean finished;
         int end;
         int begin;
 
-        FastFloatBuffer mVertices;
-        FastFloatBuffer mCoordinates;
-        FastFloatBuffer mColors;
+        final FastFloatBuffer mVertices;
+        final FastFloatBuffer mCoordinates;
+        final FastFloatBuffer mColors;
 
         public CCRibbonSegment() {
             ByteBuffer vfb = ByteBuffer.allocateDirect(COUNT * 3 * 2 * 4);
@@ -126,8 +128,8 @@ public class CCRibbon extends CCNode {
 
     }
 
-    ArrayList<CCRibbonSegment> segments_;
-    ArrayList<CCRibbonSegment> deletedSegments_;
+    final ArrayList<CCRibbonSegment> segments_;
+    final ArrayList<CCRibbonSegment> deletedSegments_;
 
     CGPoint lastPoint1_;
     CGPoint lastPoint2_;
@@ -135,30 +137,42 @@ public class CCRibbon extends CCNode {
     int vertCount_;
     float texVPos_;
     float curTime_;
-    float fadeTime_;
+    final float fadeTime_;
     float delta_;
     float lastWidth_;
     float lastSign_;
     boolean pastFirstPoint_;
 
-    /** Texture used by the ribbon. Conforms to CCTextureProtocol protocol */
+    /**
+     * Texture used by the ribbon. Conforms to CCTextureProtocol protocol
+     */
     CCTexture2D texture_;
 
-    /** Texture lenghts in pixels */
-    float textureLength_;
+    /**
+     * Texture lenghts in pixels
+     */
+    final float textureLength_;
 
-    /** color used by the Ribbon (RGBA) */
-    ccColor4B color_;
+    /**
+     * color used by the Ribbon (RGBA)
+     */
+    final ccColor4B color_;
 
-    /** GL blendind function */
+    /**
+     * GL blendind function
+     */
     ccBlendFunc blendFunc_;
 
-    /** creates the ribbon */
+    /**
+     * creates the ribbon
+     */
     public static CCRibbon node(float w, String path, float l, ccColor4B color, float fade) {
         return new CCRibbon(w, path, l, color, fade);
     }
 
-    /** init the ribbon */
+    /**
+     * init the ribbon
+     */
     protected CCRibbon(float w, String path, float l, ccColor4B color, float fade) {
 
         segments_ = new ArrayList<>();
@@ -195,8 +209,8 @@ public class CCRibbon extends CCNode {
 
     // rotates a point around 0, 0
     private CGPoint rotatePoint(CGPoint vec, float a) {
-        float xtemp = (vec.x * (float)Math.cos(a)) - (vec.y * (float)Math.sin(a));
-        vec.y = (vec.x * (float)Math.sin(a)) + (vec.y * (float)Math.cos(a));
+        float xtemp = (vec.x * (float) Math.cos(a)) - (vec.y * (float) Math.sin(a));
+        vec.y = (vec.x * (float) Math.sin(a)) + (vec.y * (float) Math.cos(a));
         vec.x = xtemp;
         return vec;
     }
@@ -309,13 +323,17 @@ public class CCRibbon extends CCNode {
         seg.end++;
     }
 
-    /** polling function */
+    /**
+     * polling function
+     */
     public void update(float delta) {
         curTime_ += delta;
         delta_ = delta;
     }
 
-    /** determine side of line */
+    /**
+     * determine side of line
+     */
     public float sideOfLine(CGPoint p, CGPoint l1, CGPoint l2) {
         CGPoint vp = CGPoint.ccpPerp(CGPoint.ccpSub(l1, l2));
         CGPoint vx = CGPoint.ccpSub(p, l1);

@@ -1,13 +1,13 @@
 package org.cocos2d.actions;
 
-import java.util.ArrayList;
+import android.util.Log;
 
 import org.cocos2d.actions.base.CCAction;
 import org.cocos2d.nodes.CCNode;
 import org.cocos2d.utils.collections.ConcurrentArrayHashMap;
 import org.cocos2d.utils.pool.ConcOneClassPool;
 
-import android.util.Log;
+import java.util.ArrayList;
 
 
 /**
@@ -37,7 +37,7 @@ public class CCActionManager implements UpdateCallback {
         }
     }
 
-    private ConcOneClassPool<HashElement> pool = new ConcOneClassPool<CCActionManager.HashElement>() {
+    private final ConcOneClassPool<HashElement> pool = new ConcOneClassPool<CCActionManager.HashElement>() {
         @Override
         protected HashElement allocate() {
             return new HashElement();

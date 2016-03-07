@@ -7,20 +7,25 @@ import org.cocos2d.nodes.CCNode;
 // Repeat
 //
 
-/** Repeats an action a number of times.
+/**
+ * Repeats an action a number of times.
  * To repeat an action forever use the CCRepeatForever action.
  */
 public class CCRepeat extends CCIntervalAction {
-    private int times;
+    private final int times;
     private int total;
-    private CCFiniteTimeAction other;
+    private final CCFiniteTimeAction other;
 
-    /** creates a CCRepeat action. Times is an unsigned integer between 1 and pow(2,30) */
+    /**
+     * creates a CCRepeat action. Times is an unsigned integer between 1 and pow(2,30)
+     */
     public static CCRepeat action(CCFiniteTimeAction action, int t) {
         return new CCRepeat(action, t);
     }
 
-    /** initializes a CCRepeat action. Times is an unsigned integer between 1 and pow(2,30) */
+    /**
+     * initializes a CCRepeat action. Times is an unsigned integer between 1 and pow(2,30)
+     */
     protected CCRepeat(CCFiniteTimeAction action, int t) {
         super(action.getDuration() * t);
 
@@ -59,15 +64,15 @@ public class CCRepeat extends CCIntervalAction {
             total++;
             other.stop();
             other.start(target);
-    		// repeat is over ?
-    		if( total== times)
-    			// so, set it in the original position
-    			other.update(0);
-    		else {
-    			// no ? start next repeat with the right update
-    			// to prevent jerk (issue #390)
-    			other.update(t-total);
-    		}
+            // repeat is over ?
+            if (total == times)
+                // so, set it in the original position
+                other.update(0);
+            else {
+                // no ? start next repeat with the right update
+                // to prevent jerk (issue #390)
+                other.update(t - total);
+            }
 
         } else {
             float r = t % 1.0f;
@@ -75,7 +80,7 @@ public class CCRepeat extends CCIntervalAction {
             // else it could be 0.
             if (dt == 1.0f) {
                 r = 1.0f;
-                total ++;
+                total++;
             }
             other.update(Math.min(r, 1));
         }

@@ -13,20 +13,20 @@ import org.cocos2d.types.ccColor4B;
  * the streak to fade out, the minimum segment size it how many pixels the
  * streak will move before adding a new ribbon segement, and the texture
  * length is the how many pixels the texture is stretched across. The texture
- * is vertically aligned along the streak segemnts. 
- *
+ * is vertically aligned along the streak segemnts.
+ * <p/>
  * Limitations:
- *   CCMotionStreak, by default, will use the GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA blending function.
- *   This blending function might not be the correct one for certain textures.
- *   But you can change it by using:
- *     [obj setBlendFunc: (ccBlendfunc) {new_src_blend_func, new_dst_blend_func}];
+ * CCMotionStreak, by default, will use the GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA blending function.
+ * This blending function might not be the correct one for certain textures.
+ * But you can change it by using:
+ * [obj setBlendFunc: (ccBlendfunc) {new_src_blend_func, new_dst_blend_func}];
  *
  * @since v0.8.1
  */
 public class CCMotionStreak extends CCNode implements UpdateCallback/*implements CocosNodeTexture*/ {
-    CCRibbon ribbon_;
-    float segThreshold_;
-    float width_;
+    final CCRibbon ribbon_;
+    final float segThreshold_;
+    final float width_;
     CGPoint lastLocation_;
 
     /**
@@ -40,11 +40,13 @@ public class CCMotionStreak extends CCNode implements UpdateCallback/*implements
      * creates the a MotionStreak. The image will be loaded using the TextureMgr.
      */
     public CCMotionStreak streak(float fade, float seg,
-    	String path, float width, float length, ccColor4B color) {
-    	return new CCMotionStreak(fade, seg, path, width, length, color);
-    }    
+                                 String path, float width, float length, ccColor4B color) {
+        return new CCMotionStreak(fade, seg, path, width, length, color);
+    }
 
-    /** initializes a MotionStreak. The file will be loaded using the TextureMgr. */
+    /**
+     * initializes a MotionStreak. The file will be loaded using the TextureMgr.
+     */
     public CCMotionStreak(float fade, float seg, String path, float width, float length, ccColor4B color) {
         segThreshold_ = seg;
         width_ = width;
@@ -63,7 +65,7 @@ public class CCMotionStreak extends CCNode implements UpdateCallback/*implements
     public void update(float delta) {
         CGPoint location = convertToWorldSpace(0, 0);
         ribbon_.setPosition(CGPoint.make(-1 * location.x, -1 * location.y));
-        float len = (float)Math.sqrt((float) Math.pow(lastLocation_.x - location.x, 2) + (float) Math.pow(lastLocation_.y - location.y, 2));
+        float len = (float) Math.sqrt((float) Math.pow(lastLocation_.x - location.x, 2) + (float) Math.pow(lastLocation_.y - location.y, 2));
         if (len > segThreshold_) {
             ribbon_.addPoint(location, width_);
             lastLocation_ = location;

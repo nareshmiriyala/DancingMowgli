@@ -5,20 +5,24 @@ import org.cocos2d.types.CCBezierConfig;
 import org.cocos2d.types.CGPoint;
 
 
-/** 
+/**
  * An action that moves the target with a cubic Bezier curve by a certain distance.
  */
 public class CCBezierBy extends CCIntervalAction {
 
-    protected CCBezierConfig config;
+    protected final CCBezierConfig config;
     protected CGPoint startPosition;
 
-    /** creates the action with a duration and a bezier configuration */
+    /**
+     * creates the action with a duration and a bezier configuration
+     */
     public static CCBezierBy action(float t, CCBezierConfig c) {
         return new CCBezierBy(t, c);
     }
 
-    /** initializes the action with a duration and a bezier configuration */
+    /**
+     * initializes the action with a duration and a bezier configuration
+     */
     protected CCBezierBy(float t, CCBezierConfig c) {
         super(t);
         config = c;

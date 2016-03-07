@@ -1,16 +1,6 @@
 package org.cocos2d.layers;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.nio.ByteBuffer;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-
-import javax.xml.parsers.SAXParser;
-import javax.xml.parsers.SAXParserFactory;
+import android.util.Log;
 
 import org.cocos2d.config.ccMacros;
 import org.cocos2d.nodes.CCDirector;
@@ -24,7 +14,17 @@ import org.xml.sax.SAXParseException;
 import org.xml.sax.XMLReader;
 import org.xml.sax.helpers.DefaultHandler;
 
-import android.util.Log;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.nio.ByteBuffer;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+
+import javax.xml.parsers.SAXParser;
+import javax.xml.parsers.SAXParserFactory;
 
 /* CCTMXMapInfo contains the information about the map like:
  - Map orientation (hexagonal, isometric or orthogonal)
@@ -40,97 +40,101 @@ import android.util.Log;
 
  */
 public class CCTMXMapInfo {
-	public final static String LOG_TAG = CCTMXMapInfo.class.getSimpleName();
+    public final static String LOG_TAG = CCTMXMapInfo.class.getSimpleName();
 
 
-	public final static int TMXLayerAttribNone = 1;
-	public final static int TMXLayerAttribBase64 = 1 << 1;
-	public final static int TMXLayerAttribGzip = 1 << 2;
+    public final static int TMXLayerAttribNone = 1;
+    public final static int TMXLayerAttribBase64 = 1 << 1;
+    public final static int TMXLayerAttribGzip = 1 << 2;
 
-	public final static int TMXPropertyNone = 0;
-	public final static int TMXPropertyMap  = 1;
-	public final static int TMXPropertyLayer= 2;
-	public final static int TMXPropertyObjectGroup = 3;
-	public final static int TMXPropertyObject = 4;
-	public final static int TMXPropertyTile = 5;
+    public final static int TMXPropertyNone = 0;
+    public final static int TMXPropertyMap = 1;
+    public final static int TMXPropertyLayer = 2;
+    public final static int TMXPropertyObjectGroup = 3;
+    public final static int TMXPropertyObject = 4;
+    public final static int TMXPropertyTile = 5;
 
-	protected StringBuilder	    currentString;
-	protected boolean		storingCharacters;
-	protected int			layerAttribs;
-	protected int			parentElement;
-	protected int		    parentGID;
-
-
-	// tmx filename
-	public String filename;
-
-	// map orientation
-	public int	orientation;
-
-	// map width & height
-	public CGSize	mapSize;
-
-	// tiles width & height
-	public CGSize	tileSize;
-
-	// Layers
-	public ArrayList<CCTMXLayerInfo> layers;
-
-	// tilesets
-	public ArrayList<CCTMXTilesetInfo> tilesets;
-
-	// ObjectGroups
-	public ArrayList<CCTMXObjectGroup> objectGroups;
-
-	// properties
-	public HashMap<String, String> properties;
-
-	// tile properties
-	public HashMap<String, HashMap<String, String>> tileProperties;
+    protected StringBuilder currentString;
+    protected boolean storingCharacters;
+    protected int layerAttribs;
+    protected int parentElement;
+    protected int parentGID;
 
 
-	/** creates a TMX Format with a tmx file */
-	public static CCTMXMapInfo formatWithTMXFile(String tmxFile) {
-		return new CCTMXMapInfo(tmxFile);
-	}
+    // tmx filename
+    public final String filename;
 
-	/** initializes a TMX format witha  tmx file */
-	protected CCTMXMapInfo(String tmxFile) {
-		super();
+    // map orientation
+    public int orientation;
 
-		tilesets= new ArrayList<CCTMXTilesetInfo>();
-		layers	= new ArrayList<CCTMXLayerInfo>();
-		filename = tmxFile;
-		objectGroups 	= new ArrayList<CCTMXObjectGroup>();
-		properties 		= new HashMap<String, String>();
-		tileProperties 	= new HashMap<String, HashMap<String, String> >();
+    // map width & height
+    public CGSize mapSize;
 
-		// tmp vars
-		currentString = new StringBuilder();
-		storingCharacters = false;
-		layerAttribs 	= TMXLayerAttribNone;
-		parentElement 	= TMXPropertyNone;
+    // tiles width & height
+    public CGSize tileSize;
 
-		parseXMLFile(filename);
-	}
+    // Layers
+    public final ArrayList<CCTMXLayerInfo> layers;
 
-	/* initalises parsing of an XML file, either a tmx (Map) file or tsx (Tileset) file */
-	private void parseXMLFile(String xmlFilename) {
-		try {
-			SAXParserFactory saxFactory = SAXParserFactory.newInstance();
-			SAXParser parser = saxFactory.newSAXParser();
-			XMLReader reader = parser.getXMLReader();
+    // tilesets
+    public final ArrayList<CCTMXTilesetInfo> tilesets;
 
-			InputStream is = CCDirector.sharedDirector().getActivity().getResources().getAssets().open(xmlFilename);
-			BufferedReader in = new BufferedReader(new InputStreamReader(is));
+    // ObjectGroups
+    public final ArrayList<CCTMXObjectGroup> objectGroups;
 
-			CCTMXXMLParser handler = new CCTMXXMLParser();
-			reader.setContentHandler(handler);
-			reader.parse(new InputSource(in));
-		} catch(Exception e) {
-			Log.e(LOG_TAG, Arrays.toString(e.getStackTrace()));
-		}
-		/*
+    // properties
+    public final HashMap<String, String> properties;
+
+    // tile properties
+    public final HashMap<String, HashMap<String, String>> tileProperties;
+
+
+    /**
+     * creates a TMX Format with a tmx file
+     */
+    public static CCTMXMapInfo formatWithTMXFile(String tmxFile) {
+        return new CCTMXMapInfo(tmxFile);
+    }
+
+    /**
+     * initializes a TMX format witha  tmx file
+     */
+    protected CCTMXMapInfo(String tmxFile) {
+        super();
+
+        tilesets = new ArrayList<CCTMXTilesetInfo>();
+        layers = new ArrayList<CCTMXLayerInfo>();
+        filename = tmxFile;
+        objectGroups = new ArrayList<CCTMXObjectGroup>();
+        properties = new HashMap<String, String>();
+        tileProperties = new HashMap<String, HashMap<String, String>>();
+
+        // tmp vars
+        currentString = new StringBuilder();
+        storingCharacters = false;
+        layerAttribs = TMXLayerAttribNone;
+        parentElement = TMXPropertyNone;
+
+        parseXMLFile(filename);
+    }
+
+    /* initalises parsing of an XML file, either a tmx (Map) file or tsx (Tileset) file */
+    private void parseXMLFile(String xmlFilename) {
+        try {
+            SAXParserFactory saxFactory = SAXParserFactory.newInstance();
+            SAXParser parser = saxFactory.newSAXParser();
+            XMLReader reader = parser.getXMLReader();
+
+            InputStream is = CCDirector.sharedDirector().getActivity().getResources().getAssets().open(xmlFilename);
+            BufferedReader in = new BufferedReader(new InputStreamReader(is));
+
+            CCTMXXMLParser handler = new CCTMXXMLParser();
+            reader.setContentHandler(handler);
+            reader.parse(new InputSource(in));
+        } catch (Exception e) {
+            Log.e(LOG_TAG, Arrays.toString(e.getStackTrace()));
+        }
+        /*
 		// we'll do the parsing
 		[parser setDelegate:self];
 		[parser setShouldProcessNamespaces:NO];
@@ -142,272 +146,271 @@ public class CCTMXMapInfo {
 
 		[parser release];
 		 */
-	}
+    }
 
 
+    /*
+     * Internal TMX parser
+     *
+     * IMPORTANT: These classed should not be documented using doxygen strings
+     * since the user should not use them.
+     *
+     */
+    class CCTMXXMLParser extends DefaultHandler {
 
-	/*
-	 * Internal TMX parser
-	 *
-	 * IMPORTANT: These classed should not be documented using doxygen strings
-	 * since the user should not use them.
-	 *
-	 */
-	class CCTMXXMLParser extends DefaultHandler {
+        @Override
+        public void startDocument() {
+            // myList = new ArrayList<HashMap<String, String>>();
+        }
 
-		@Override
-		public void startDocument() {
-			// myList = new ArrayList<HashMap<String, String>>();
-		}
+        @Override
+        public void startElement(String uri, String localName, String qName, Attributes attributes)
+                throws SAXException {
 
-		@Override
-	    public void startElement(String uri, String localName, String qName, Attributes attributes) 
-			throws SAXException {
+            switch (localName) {
+                case "map":
+                    String version = attributes.getValue("version");
+                    if (!version.equals("1.0")) {
+                        ccMacros.CCLOG(LOG_TAG, "cocos2d: TMXFormat: Unsupported TMX version: " + version);
+                    }
 
-			switch (localName) {
-				case "map":
-					String version = attributes.getValue("version");
-					if (!version.equals("1.0")) {
-						ccMacros.CCLOG(LOG_TAG, "cocos2d: TMXFormat: Unsupported TMX version: " + version);
-					}
+                    String orientationStr = attributes.getValue("orientation");
+                    switch (orientationStr) {
+                        case "orthogonal":
+                            orientation = CCTMXTiledMap.CCTMXOrientationOrtho;
+                            break;
+                        case "isometric":
+                            orientation = CCTMXTiledMap.CCTMXOrientationIso;
+                            break;
+                        case "hexagonal":
+                            orientation = CCTMXTiledMap.CCTMXOrientationHex;
+                            break;
+                        default:
+                            ccMacros.CCLOG(LOG_TAG, "cocos2d: TMXFomat: Unsupported orientation: " + orientation);
+                            break;
+                    }
 
-					String orientationStr = attributes.getValue("orientation");
-					switch (orientationStr) {
-						case "orthogonal":
-							orientation = CCTMXTiledMap.CCTMXOrientationOrtho;
-							break;
-						case "isometric":
-							orientation = CCTMXTiledMap.CCTMXOrientationIso;
-							break;
-						case "hexagonal":
-							orientation = CCTMXTiledMap.CCTMXOrientationHex;
-							break;
-						default:
-							ccMacros.CCLOG(LOG_TAG, "cocos2d: TMXFomat: Unsupported orientation: " + orientation);
-							break;
-					}
+                    mapSize = CGSize.make(Integer.parseInt(attributes.getValue("width")),
+                            Integer.parseInt(attributes.getValue("height")));
+                    tileSize = CGSize.make(Integer.parseInt(attributes.getValue("tilewidth")),
+                            Integer.parseInt(attributes.getValue("tileheight")));
 
-					mapSize = CGSize.make(Integer.parseInt(attributes.getValue("width")),
-							Integer.parseInt(attributes.getValue("height")));
-					tileSize = CGSize.make(Integer.parseInt(attributes.getValue("tilewidth")),
-							Integer.parseInt(attributes.getValue("tileheight")));
+                    // The parent element is now "map"
+                    parentElement = TMXPropertyMap;
+                    break;
+                case "tileset":
 
-					// The parent element is now "map"
-					parentElement = TMXPropertyMap;
-					break;
-				case "tileset":
+                    // If this is an external tileset then start parsing that
+                    String externalTilesetFilename = attributes.getValue("source");
+                    if (externalTilesetFilename != null) {
+                        // Tileset file will be relative to the map file. So we need to convert it to an absolute path
+                        String dir = filename.substring(0, filename.lastIndexOf("/"));
+                        externalTilesetFilename = dir + "/" + externalTilesetFilename;    // Append path to tileset file
 
-					// If this is an external tileset then start parsing that
-					String externalTilesetFilename = attributes.getValue("source");
-					if (externalTilesetFilename != null) {
-						// Tileset file will be relative to the map file. So we need to convert it to an absolute path
-						String dir = filename.substring(0, filename.lastIndexOf("/"));
-						externalTilesetFilename = dir + "/" + externalTilesetFilename;    // Append path to tileset file
+                        CCTMXMapInfo.this.parseXMLFile(externalTilesetFilename);
+                    } else {
+                        CCTMXTilesetInfo tileset = new CCTMXTilesetInfo();
+                        tileset.name = attributes.getValue("name");
+                        tileset.firstGid = Integer.parseInt(attributes.getValue("firstgid"));
+                        String value = attributes.getValue("spacing");
+                        tileset.spacing = value == null ? 0 : Integer.parseInt(value);
+                        value = attributes.getValue("margin");
+                        tileset.margin = value == null ? 0 : Integer.parseInt(value);
+                        CGSize s = CGSize.zero();
+                        s.width = Integer.parseInt(attributes.getValue("tilewidth"));
+                        s.height = Integer.parseInt(attributes.getValue("tileheight"));
+                        tileset.tileSize = s;
 
-						CCTMXMapInfo.this.parseXMLFile(externalTilesetFilename);
-					} else {
-						CCTMXTilesetInfo tileset = new CCTMXTilesetInfo();
-						tileset.name = attributes.getValue("name");
-						tileset.firstGid = Integer.parseInt(attributes.getValue("firstgid"));
-						String value = attributes.getValue("spacing");
-						tileset.spacing = value == null ? 0 : Integer.parseInt(value);
-						value = attributes.getValue("margin");
-						tileset.margin = value == null ? 0 : Integer.parseInt(value);
-						CGSize s = CGSize.zero();
-						s.width = Integer.parseInt(attributes.getValue("tilewidth"));
-						s.height = Integer.parseInt(attributes.getValue("tileheight"));
-						tileset.tileSize = s;
+                        tilesets.add(tileset);
+                    }
 
-						tilesets.add(tileset);
-					}
+                    break;
+                case "tile": {
+                    CCTMXTilesetInfo info = tilesets.get(tilesets.size() - 1);
+                    HashMap<String, String> dict = new HashMap<String, String>();
+                    parentGID = info.firstGid + Integer.parseInt(attributes.getValue("id"));
+                    tileProperties.put(String.valueOf(parentGID), dict);
+                    parentElement = TMXPropertyTile;
 
-					break;
-				case "tile": {
-					CCTMXTilesetInfo info = tilesets.get(tilesets.size() - 1);
-					HashMap<String, String> dict = new HashMap<String, String>();
-					parentGID = info.firstGid + Integer.parseInt(attributes.getValue("id"));
-					tileProperties.put(String.valueOf(parentGID), dict);
-					parentElement = TMXPropertyTile;
+                    break;
+                }
+                case "layer":
+                    CCTMXLayerInfo layer = new CCTMXLayerInfo();
+                    layer.name = attributes.getValue("name");
 
-					break;
-				}
-				case "layer":
-					CCTMXLayerInfo layer = new CCTMXLayerInfo();
-					layer.name = attributes.getValue("name");
+                    CGSize s = CGSize.zero();
+                    s.width = Integer.parseInt(attributes.getValue("width"));
+                    s.height = Integer.parseInt(attributes.getValue("height"));
+                    layer.layerSize = s;
 
-					CGSize s = CGSize.zero();
-					s.width = Integer.parseInt(attributes.getValue("width"));
-					s.height = Integer.parseInt(attributes.getValue("height"));
-					layer.layerSize = s;
+                    String visible = attributes.getValue("visible");
+                    layer.visible = visible == null || !(visible.equals("0"));
 
-					String visible = attributes.getValue("visible");
-					layer.visible = visible == null || !(visible.equals("0"));
+                    if (attributes.getValue("opacity") != null) {
+                        layer.opacity = (int) (255 * Float.parseFloat(attributes.getValue("opacity")));
+                    } else {
+                        layer.opacity = 255;
+                    }
 
-					if (attributes.getValue("opacity") != null) {
-						layer.opacity = (int) (255 * Float.parseFloat(attributes.getValue("opacity")));
-					} else {
-						layer.opacity = 255;
-					}
+                    try {
+                        int x = Integer.parseInt(attributes.getValue("x"));
+                        int y = Integer.parseInt(attributes.getValue("y"));
 
-					try {
-						int x = Integer.parseInt(attributes.getValue("x"));
-						int y = Integer.parseInt(attributes.getValue("y"));
+                        layer.offset = CGPoint.ccp(x, y);
+                    } catch (Exception e) {
+                        layer.offset = CGPoint.zero();
+                    }
 
-						layer.offset = CGPoint.ccp(x, y);
-					} catch (Exception e) {
-						layer.offset = CGPoint.zero();
-					}
+                    layers.add(layer);
 
-					layers.add(layer);
+                    // The parent element is now "layer"
+                    parentElement = TMXPropertyLayer;
 
-					// The parent element is now "layer"
-					parentElement = TMXPropertyLayer;
+                    break;
+                case "objectgroup": {
 
-					break;
-				case "objectgroup": {
+                    CCTMXObjectGroup objectGroup = new CCTMXObjectGroup();
+                    objectGroup.groupName = attributes.getValue("name");
+                    CGPoint positionOffset = CGPoint.zero();
+                    try {
+                        positionOffset.x = Integer.parseInt(attributes.getValue("x")) * tileSize.width;
+                        positionOffset.y = Integer.parseInt(attributes.getValue("y")) * tileSize.height;
+                    } catch (Exception e) {
+                    }
+                    objectGroup.positionOffset = positionOffset;
 
-					CCTMXObjectGroup objectGroup = new CCTMXObjectGroup();
-					objectGroup.groupName = attributes.getValue("name");
-					CGPoint positionOffset = CGPoint.zero();
-					try {
-						positionOffset.x = Integer.parseInt(attributes.getValue("x")) * tileSize.width;
-						positionOffset.y = Integer.parseInt(attributes.getValue("y")) * tileSize.height;
-					} catch (Exception e) {
-					}
-					objectGroup.positionOffset = positionOffset;
+                    objectGroups.add(objectGroup);
 
-					objectGroups.add(objectGroup);
+                    // The parent element is now "objectgroup"
+                    parentElement = TMXPropertyObjectGroup;
 
-					// The parent element is now "objectgroup"
-					parentElement = TMXPropertyObjectGroup;
+                    break;
+                }
+                case "image":
+                    CCTMXTilesetInfo tileset = tilesets.get(tilesets.size() - 1);
 
-					break;
-				}
-				case "image":
-					CCTMXTilesetInfo tileset = tilesets.get(tilesets.size() - 1);
+                    // build full path
+                    String imagename = attributes.getValue("source");
+                    int idx = filename.lastIndexOf("/");
+                    if (idx != -1) {
+                        String path = filename.substring(0, idx);
+                        tileset.sourceImage = path + "/" + imagename;
+                    } else {
+                        tileset.sourceImage = imagename;
+                    }
 
-					// build full path
-					String imagename = attributes.getValue("source");
-					int idx = filename.lastIndexOf("/");
-					if (idx != -1) {
-						String path = filename.substring(0, idx);
-						tileset.sourceImage = path + "/" + imagename;
-					} else {
-						tileset.sourceImage = imagename;
-					}
+                    break;
+                case "data":
+                    String encoding = attributes.getValue("encoding");
+                    String compression = attributes.getValue("compression");
 
-					break;
-				case "data":
-					String encoding = attributes.getValue("encoding");
-					String compression = attributes.getValue("compression");
+                    if (encoding.equals("base64")) {
+                        layerAttribs |= TMXLayerAttribBase64;
+                        storingCharacters = true;
 
-					if (encoding.equals("base64")) {
-						layerAttribs |= TMXLayerAttribBase64;
-						storingCharacters = true;
+                        assert (compression == null || compression.equals("gzip")) : "TMX: unsupported compression method";
 
-						assert (compression == null || compression.equals("gzip")) : "TMX: unsupported compression method";
+                        if (compression.equals("gzip")) {
+                            layerAttribs |= TMXLayerAttribGzip;
+                        }
+                    }
 
-						if (compression.equals("gzip")) {
-							layerAttribs |= TMXLayerAttribGzip;
-						}
-					}
+                    assert (layerAttribs != TMXLayerAttribNone) : "TMX tile map: Only base64 and/or gzip maps are supported";
 
-					assert (layerAttribs != TMXLayerAttribNone) : "TMX tile map: Only base64 and/or gzip maps are supported";
+                    break;
+                case "object": {
 
-					break;
-				case "object": {
+                    CCTMXObjectGroup objectGroup = objectGroups.get(objectGroups.size() - 1);
 
-					CCTMXObjectGroup objectGroup = objectGroups.get(objectGroups.size() - 1);
+                    // The value for "type" was blank or not a valid class name
+                    // Create an instance of TMXObjectInfo to store the object and its properties
+                    HashMap<String, String> dict = new HashMap<String, String>();
 
-					// The value for "type" was blank or not a valid class name
-					// Create an instance of TMXObjectInfo to store the object and its properties
-					HashMap<String, String> dict = new HashMap<String, String>();
+                    // Set the name of the object to the value for "name"
+                    dict.put("name", attributes.getValue("name"));
 
-					// Set the name of the object to the value for "name"
-					dict.put("name", attributes.getValue("name"));
+                    // Assign all the attributes as key/name pairs in the properties dictionary
+                    dict.put("type", attributes.getValue("type"));
 
-					// Assign all the attributes as key/name pairs in the properties dictionary
-					dict.put("type", attributes.getValue("type"));
+                    int x = (int) (Integer.parseInt(attributes.getValue("x")) + objectGroup.positionOffset.x);
+                    dict.put("x", String.valueOf(x));
 
-					int x = (int) (Integer.parseInt(attributes.getValue("x")) + objectGroup.positionOffset.x);
-					dict.put("x", String.valueOf(x));
+                    int y = (int) (Integer.parseInt(attributes.getValue("y")) + objectGroup.positionOffset.y);
+                    // Correct y position. (Tiled uses Flipped, cocos2d uses Standard)
+                    y = (int) ((mapSize.height * tileSize.height) - y - Integer.parseInt(attributes.getValue("height")));
+                    dict.put("y", String.valueOf(y));
 
-					int y = (int) (Integer.parseInt(attributes.getValue("y")) + objectGroup.positionOffset.y);
-					// Correct y position. (Tiled uses Flipped, cocos2d uses Standard)
-					y = (int) ((mapSize.height * tileSize.height) - y - Integer.parseInt(attributes.getValue("height")));
-					dict.put("y", String.valueOf(y));
+                    dict.put("width", attributes.getValue("width"));
+                    dict.put("height", attributes.getValue("height"));
 
-					dict.put("width", attributes.getValue("width"));
-					dict.put("height", attributes.getValue("height"));
+                    // Add the object to the objectGroup
+                    objectGroup.objects.add(dict);
 
-					// Add the object to the objectGroup
-					objectGroup.objects.add(dict);
+                    // The parent element is now "object"
+                    parentElement = TMXPropertyObject;
 
-					// The parent element is now "object"
-					parentElement = TMXPropertyObject;
+                    break;
+                }
+                case "property":
+                    String name = attributes.getValue("name");
+                    String value = attributes.getValue("value");
+                    if (parentElement == TMXPropertyNone) {
 
-					break;
-				}
-				case "property":
-					String name = attributes.getValue("name");
-					String value = attributes.getValue("value");
-					if (parentElement == TMXPropertyNone) {
+                        ccMacros.CCLOG(LOG_TAG,
+                                "TMX tile map: Parent element is unsupported. Cannot add property named '" + name + "' with value '" + value + "'");
+                    } else if (parentElement == TMXPropertyMap) {
 
-						ccMacros.CCLOG(LOG_TAG,
-								"TMX tile map: Parent element is unsupported. Cannot add property named '" + name + "' with value '" + value + "'");
-					} else if (parentElement == TMXPropertyMap) {
+                        // The parent element is the map
+                        properties.put(name, value);
 
-						// The parent element is the map
-						properties.put(name, value);
+                    } else if (parentElement == TMXPropertyLayer) {
 
-					} else if (parentElement == TMXPropertyLayer) {
+                        // The parent element is the last layer
+                        layer = layers.get(layers.size() - 1);
+                        // Add the property to the layer
+                        layer.properties.put(name, value);
 
-						// The parent element is the last layer
-						layer = layers.get(layers.size() - 1);
-						// Add the property to the layer
-						layer.properties.put(name, value);
+                    } else if (parentElement == TMXPropertyObjectGroup) {
 
-					} else if (parentElement == TMXPropertyObjectGroup) {
+                        // The parent element is the last object group
+                        CCTMXObjectGroup objectGroup = objectGroups.get(objectGroups.size() - 1);
+                        objectGroup.properties.put(name, value);
 
-						// The parent element is the last object group
-						CCTMXObjectGroup objectGroup = objectGroups.get(objectGroups.size() - 1);
-						objectGroup.properties.put(name, value);
+                    } else if (parentElement == TMXPropertyObject) {
 
-					} else if (parentElement == TMXPropertyObject) {
+                        // The parent element is the last object
+                        CCTMXObjectGroup objectGroup = objectGroups.get(objectGroups.size() - 1);
+                        HashMap<String, String> dict = objectGroup.objects.get(objectGroup.objects.size() - 1);
+                        dict.put(name, value);
+                    } else if (parentElement == TMXPropertyTile) {
 
-						// The parent element is the last object
-						CCTMXObjectGroup objectGroup = objectGroups.get(objectGroups.size() - 1);
-						HashMap<String, String> dict = objectGroup.objects.get(objectGroup.objects.size() - 1);
-						dict.put(name, value);
-					} else if (parentElement == TMXPropertyTile) {
-
-						HashMap<String, String> dict = tileProperties.get(String.valueOf(parentGID));
-						dict.put(name, value);
-					}
-					break;
-			}
-		}
+                        HashMap<String, String> dict = tileProperties.get(String.valueOf(parentGID));
+                        dict.put(name, value);
+                    }
+                    break;
+            }
+        }
 
 
-		@Override
-		public void endElement(String uri, String elementName, String qName)
-		throws SAXException {
-			if (elementName.equals("data") && (layerAttribs&TMXLayerAttribBase64) != 0) {
-				storingCharacters = false;
+        @Override
+        public void endElement(String uri, String elementName, String qName)
+                throws SAXException {
+            if (elementName.equals("data") && (layerAttribs & TMXLayerAttribBase64) != 0) {
+                storingCharacters = false;
 
-				CCTMXLayerInfo layer = layers.get(layers.size()-1);
+                CCTMXLayerInfo layer = layers.get(layers.size() - 1);
 
-				byte[] buffer = null;
-				try {
-					buffer = Base64.decode(currentString.toString());
-				} catch (IOException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
-				if (buffer == null ) {
-					ccMacros.CCLOG(LOG_TAG, "cocos2d: TiledMap: decode data error");
-					return;
-				}
+                byte[] buffer = null;
+                try {
+                    buffer = Base64.decode(currentString.toString());
+                } catch (IOException e1) {
+                    // TODO Auto-generated catch block
+                    e1.printStackTrace();
+                }
+                if (buffer == null) {
+                    ccMacros.CCLOG(LOG_TAG, "cocos2d: TiledMap: decode data error");
+                    return;
+                }
 
 				/*if ((layerAttribs & TMXLayerAttribGzip) != 0) {
 					try {
@@ -431,52 +434,52 @@ public class CCTMXMapInfo {
 					}
 
 				} else { */
-				// automatically ungzip, so we can make use of it directly.
-				try {
-					ByteBuffer b = ByteBuffer.wrap(buffer);
-					layer.tiles = b.asIntBuffer();
-				} catch (Exception e) {
-					ccMacros.CCLOG(LOG_TAG, "cocos2d: TiledMap: inflate data error");
-				}
+                // automatically ungzip, so we can make use of it directly.
+                try {
+                    ByteBuffer b = ByteBuffer.wrap(buffer);
+                    layer.tiles = b.asIntBuffer();
+                } catch (Exception e) {
+                    ccMacros.CCLOG(LOG_TAG, "cocos2d: TiledMap: inflate data error");
+                }
 
-				currentString = new StringBuilder();
-			} else if (elementName.equals("map")) {
-				// The map element has ended
-				parentElement = TMXPropertyNone;
+                currentString = new StringBuilder();
+            } else if (elementName.equals("map")) {
+                // The map element has ended
+                parentElement = TMXPropertyNone;
 
-			} else if (elementName.equals("layer")) {
-				// The layer element has ended
-				parentElement = TMXPropertyNone;
+            } else if (elementName.equals("layer")) {
+                // The layer element has ended
+                parentElement = TMXPropertyNone;
 
-			} else if (elementName.equals("objectgroup")) {
-				// The objectgroup element has ended
-				parentElement = TMXPropertyNone;
+            } else if (elementName.equals("objectgroup")) {
+                // The objectgroup element has ended
+                parentElement = TMXPropertyNone;
 
-			} else if (elementName.equals("object")) {
-				// The object element has ended
-				parentElement = TMXPropertyNone;
-			}
+            } else if (elementName.equals("object")) {
+                // The object element has ended
+                parentElement = TMXPropertyNone;
+            }
 
-		}
+        }
 
-		@Override
-		public void characters(char[] ch, int start, int length)
-		throws SAXException {
-			if (storingCharacters) {
-				currentString.append(ch, start, length);
-			}
-		}
+        @Override
+        public void characters(char[] ch, int start, int length)
+                throws SAXException {
+            if (storingCharacters) {
+                currentString.append(ch, start, length);
+            }
+        }
 
-		@Override
-		public void   	error(SAXParseException e) {
-			ccMacros.CCLOG(LOG_TAG, e.getLocalizedMessage());
-		}
+        @Override
+        public void error(SAXParseException e) {
+            ccMacros.CCLOG(LOG_TAG, e.getLocalizedMessage());
+        }
 
-		@Override
-		public void 	fatalError(SAXParseException e) {
-			ccMacros.CCLOG(LOG_TAG, e.getLocalizedMessage());
-		}
+        @Override
+        public void fatalError(SAXParseException e) {
+            ccMacros.CCLOG(LOG_TAG, e.getLocalizedMessage());
+        }
 
-	}
+    }
 
 }

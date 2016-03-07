@@ -1,17 +1,18 @@
 package org.cocos2d.nodes;
 
-import java.lang.ref.WeakReference;
-
 import org.cocos2d.opengl.CCTexture2D;
 import org.cocos2d.opengl.GLResourceHelper;
 import org.cocos2d.protocols.CCLabelProtocol;
 import org.cocos2d.types.CGRect;
 import org.cocos2d.types.CGSize;
 
-/** CCLabel is a subclass of CCTextureNode that knows how to render text labels
- *
+import java.lang.ref.WeakReference;
+
+/**
+ * CCLabel is a subclass of CCTextureNode that knows how to render text labels
+ * <p/>
  * All features from CCTextureNode are valid in CCLabel
- *
+ * <p/>
  * CCLabel objects are slow. Consider using CCLabelAtlas or CCBitmapFontAtlas instead.
  */
 
@@ -23,32 +24,40 @@ public class CCLabel extends CCSprite implements CCLabelProtocol {
         RIGHT
     }
 
-    private CGSize _dimensions;
-    private TextAlignment _alignment;
-    private String _fontName;
-    private float _fontSize;
-    private String _string; 
+    private final CGSize _dimensions;
+    private final TextAlignment _alignment;
+    private final String _fontName;
+    private final float _fontSize;
+    private String _string;
 
-    /** creates a CCLabel from a fontname, alignment, dimension and font size */
-    public static CCLabel makeLabel(String string, final CGSize dimensions, TextAlignment alignment, 
+    /**
+     * creates a CCLabel from a fontname, alignment, dimension and font size
+     */
+    public static CCLabel makeLabel(String string, final CGSize dimensions, TextAlignment alignment,
                                     String fontname, float fontsize) {
         return new CCLabel(string, dimensions, alignment, fontname, fontsize);
     }
 
-    /** creates a CCLabel from a fontname and font size */
+    /**
+     * creates a CCLabel from a fontname and font size
+     */
     public static CCLabel makeLabel(String string, String fontname, float fontsize) {
         return new CCLabel(string, CGSize.make(0, 0), TextAlignment.CENTER, fontname, fontsize);
     }
 
-    /** initializes the CCLabel with a font name and font size */
+    /**
+     * initializes the CCLabel with a font name and font size
+     */
     protected CCLabel(CharSequence string, String fontname, float fontsize) {
-        this(string, CGSize.make(0,0), TextAlignment.CENTER, fontname, fontsize);
+        this(string, CGSize.make(0, 0), TextAlignment.CENTER, fontname, fontsize);
     }
 
-    /** initializes the CCLabel with a font name, alignment, dimension and font size */
+    /**
+     * initializes the CCLabel with a font name, alignment, dimension and font size
+     */
     protected CCLabel(CharSequence string, final CGSize dimensions, TextAlignment alignment,
-                        String name, float size) {
-    	super();
+                      String name, float size) {
+        super();
         _dimensions = dimensions;
         _alignment = alignment;
         _fontName = name;
@@ -58,42 +67,44 @@ public class CCLabel extends CCSprite implements CCLabelProtocol {
     }
 
     private static class StringReloader implements GLResourceHelper.GLResourceLoader {
-    	
-    	private WeakReference<CCLabel> label;
-    	
-    	public StringReloader(CCLabel holder) {
-    		label = new WeakReference<>(holder);
-		}
-    	
-    	@Override
-		public void load(GLResourceHelper.Resource res) {
-    		CCLabel thisp = label.get();
-    		if(thisp == null)
-    			return;
-    		
-	    	if (CGSize.equalToSize(thisp._dimensions, CGSize.zero())) {
-	    		((CCTexture2D)res).initWithText(thisp._string, thisp._fontName, thisp._fontSize);
-	    	} else {
-	    		((CCTexture2D)res).initWithText(thisp._string, thisp._dimensions, thisp._alignment, thisp._fontName, thisp._fontSize);
-	    	}
-	        
-		    CGSize size = thisp.texture_.getContentSize();
-		    thisp.setTextureRect(CGRect.make(0, 0, size.width, size.height));
-		}
+
+        private final WeakReference<CCLabel> label;
+
+        public StringReloader(CCLabel holder) {
+            label = new WeakReference<>(holder);
+        }
+
+        @Override
+        public void load(GLResourceHelper.Resource res) {
+            CCLabel thisp = label.get();
+            if (thisp == null)
+                return;
+
+            if (CGSize.equalToSize(thisp._dimensions, CGSize.zero())) {
+                ((CCTexture2D) res).initWithText(thisp._string, thisp._fontName, thisp._fontSize);
+            } else {
+                ((CCTexture2D) res).initWithText(thisp._string, thisp._dimensions, thisp._alignment, thisp._fontName, thisp._fontSize);
+            }
+
+            CGSize size = thisp.texture_.getContentSize();
+            thisp.setTextureRect(CGRect.make(0, 0, size.width, size.height));
+        }
     }
-    
-    /** changes the string to render
+
+    /**
+     * changes the string to render
+     *
      * @warning Changing the string is as expensive as creating a new CCLabel.
-        To obtain better performance use CCLabelAtlas
+     * To obtain better performance use CCLabelAtlas
      */
-    public void setString(CharSequence seq) {   	
-    	if(_string != null && _string.equals(seq))
-    		return;
+    public void setString(CharSequence seq) {
+        if (_string != null && _string.equals(seq))
+            return;
 
         _string = seq.toString();
-    	CCTexture2D texture = new CCTexture2D();
-    	setTexture(texture);
-    	texture.setLoader(new StringReloader(this));
+        CCTexture2D texture = new CCTexture2D();
+        setTexture(texture);
+        texture.setLoader(new StringReloader(this));
 //    	texture.setLoader(new GLResourceHelper.GLResourceLoader() {
 //    		@Override
 //    		public void load(GLResourceHelper.Resource res) {
@@ -110,7 +121,7 @@ public class CCLabel extends CCSprite implements CCLabelProtocol {
 //    		}
 //    	});
     }
-    
+
     public String toString() {
         return "CCLabel <" + CCLabel.class.getSimpleName() + " = " + this.hashCode()
                 + " | FontName = " + _fontName + ", FontSize = " + _fontSize + ">";

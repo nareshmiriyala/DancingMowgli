@@ -1,7 +1,7 @@
 package org.cocos2d.opengl;
 
-import javax.microedition.khronos.opengles.GL10;
-import javax.microedition.khronos.opengles.GL11ExtensionPack;
+import android.graphics.Bitmap;
+import android.graphics.Bitmap.Config;
 
 import org.cocos2d.config.ccMacros;
 import org.cocos2d.nodes.CCDirector;
@@ -10,90 +10,97 @@ import org.cocos2d.nodes.CCSprite;
 import org.cocos2d.opengl.GLResourceHelper.Resource;
 import org.cocos2d.types.CGSize;
 
-import android.graphics.Bitmap;
-import android.graphics.Bitmap.Config;
+import javax.microedition.khronos.opengles.GL10;
+import javax.microedition.khronos.opengles.GL11ExtensionPack;
 
 /**
- RenderTexture is a generic rendering target. To render things into it,
- simply construct a render target, call begin on it, call visit on any cocos
- scenes or objects to render them, and call end. For convienience, render texture
- adds a sprite as it's display child with the results, so you can simply add
- the render texture to your scene and treat it like any other CocosNode.
- There are also functions for saving the render texture to disk in PNG or JPG format.
- 
- @since v0.8.1
+ * RenderTexture is a generic rendering target. To render things into it,
+ * simply construct a render target, call begin on it, call visit on any cocos
+ * scenes or objects to render them, and call end. For convienience, render texture
+ * adds a sprite as it's display child with the results, so you can simply add
+ * the render texture to your scene and treat it like any other CocosNode.
+ * There are also functions for saving the render texture to disk in PNG or JPG format.
+ *
+ * @since v0.8.1
  */
 public class CCRenderTexture extends CCNode {
-	public static final int kImageFormatJPG = 0;
-	public static final int kImageFormatPNG = 1;
+    public static final int kImageFormatJPG = 0;
+    public static final int kImageFormatPNG = 1;
 
 
-	int			 [] fbo_ = new int[1];
-	int			 [] oldFBO_ = new int[1];
-	CCTexture2D		texture_;
+    final int[] fbo_ = new int[1];
+    final int[] oldFBO_ = new int[1];
+    final CCTexture2D texture_;
 
-    /** sprite being used */
-	protected CCSprite		sprite_;
-	public CCSprite getSprite() {
-		return sprite_;
-	}
+    /**
+     * sprite being used
+     */
+    protected CCSprite sprite_;
 
-    /** creates a RenderTexture object with width and height */
+    public CCSprite getSprite() {
+        return sprite_;
+    }
+
+    /**
+     * creates a RenderTexture object with width and height
+     */
     public static CCRenderTexture renderTexture(int width, int height) {
         return new CCRenderTexture(width, height);
     }
 
-    /** initializes a RenderTexture object with width and height */
+    /**
+     * initializes a RenderTexture object with width and height
+     */
     protected CCRenderTexture(int width, int height) {
-        GL11ExtensionPack egl = (GL11ExtensionPack)CCDirector.gl;
-		egl.glGetIntegerv(GL11ExtensionPack.GL_FRAMEBUFFER_BINDING_OES, oldFBO_, 0);
-		// int format = CCNode.kCCTexture2DPixelFormat_RGBA8888;  
-		// textures must be power of two squared
-		int pow = 8;
-		while (pow < width || pow < height) {
-			pow*=2;
-		}
-    
-		final int finPow = pow;
-		texture_ = new CCTexture2D();
-		texture_.setLoader(new GLResourceHelper.GLResourceLoader() {
-			@Override
-			public void load(Resource res) {
-				Bitmap bmp = Bitmap.createBitmap(finPow, finPow, Config.ARGB_8888);
-				((CCTexture2D)res).initWithImage(bmp);
-			}
-		});
+        GL11ExtensionPack egl = (GL11ExtensionPack) CCDirector.gl;
+        egl.glGetIntegerv(GL11ExtensionPack.GL_FRAMEBUFFER_BINDING_OES, oldFBO_, 0);
+        // int format = CCNode.kCCTexture2DPixelFormat_RGBA8888;
+        // textures must be power of two squared
+        int pow = 8;
+        while (pow < width || pow < height) {
+            pow *= 2;
+        }
 
-    
-		// generate FBO
-		egl.glGenRenderbuffersOES(1, fbo_, 0);
-		egl.glBindFramebufferOES(GL11ExtensionPack.GL_FRAMEBUFFER_OES, fbo_[0]);
-    
-		// associate texture with FBO
-		egl.glFramebufferTexture2DOES(GL11ExtensionPack.GL_FRAMEBUFFER_OES, GL11ExtensionPack.GL_COLOR_ATTACHMENT0_OES, GL10.GL_TEXTURE_2D, texture_.name(), 0);
-    
-		// check if it worked (probably worth doing :) )
-		int status = egl.glCheckFramebufferStatusOES(GL11ExtensionPack.GL_FRAMEBUFFER_OES);
-		if (status != GL11ExtensionPack.GL_FRAMEBUFFER_COMPLETE_OES) {
-			ccMacros.CCLOG("Render Texture", "Could not attach texture to framebuffer");
-			return ;
-		}
-		sprite_ = CCSprite.sprite(texture_);
+        final int finPow = pow;
+        texture_ = new CCTexture2D();
+        texture_.setLoader(new GLResourceHelper.GLResourceLoader() {
+            @Override
+            public void load(Resource res) {
+                Bitmap bmp = Bitmap.createBitmap(finPow, finPow, Config.ARGB_8888);
+                ((CCTexture2D) res).initWithImage(bmp);
+            }
+        });
+
+
+        // generate FBO
+        egl.glGenRenderbuffersOES(1, fbo_, 0);
+        egl.glBindFramebufferOES(GL11ExtensionPack.GL_FRAMEBUFFER_OES, fbo_[0]);
+
+        // associate texture with FBO
+        egl.glFramebufferTexture2DOES(GL11ExtensionPack.GL_FRAMEBUFFER_OES, GL11ExtensionPack.GL_COLOR_ATTACHMENT0_OES, GL10.GL_TEXTURE_2D, texture_.name(), 0);
+
+        // check if it worked (probably worth doing :) )
+        int status = egl.glCheckFramebufferStatusOES(GL11ExtensionPack.GL_FRAMEBUFFER_OES);
+        if (status != GL11ExtensionPack.GL_FRAMEBUFFER_COMPLETE_OES) {
+            ccMacros.CCLOG("Render Texture", "Could not attach texture to framebuffer");
+            return;
+        }
+        sprite_ = CCSprite.sprite(texture_);
 //		texture_ = null;
-		sprite_.setScaleY(-1);
-		addChild(sprite_);
-		egl.glBindFramebufferOES(GL11ExtensionPack.GL_FRAMEBUFFER_OES, oldFBO_[0]);
+        sprite_.setScaleY(-1);
+        addChild(sprite_);
+        egl.glBindFramebufferOES(GL11ExtensionPack.GL_FRAMEBUFFER_OES, oldFBO_[0]);
     }
 
     public void finalize() throws Throwable {
-    	GL11ExtensionPack egl = (GL11ExtensionPack)CCDirector.gl;
-	    egl.glDeleteFramebuffersOES(1, fbo_, 0);
+        GL11ExtensionPack egl = (GL11ExtensionPack) CCDirector.gl;
+        egl.glDeleteFramebuffersOES(1, fbo_, 0);
 
         super.finalize();
     }
 
     public void begin() {
-    	GL10 gl = CCDirector.gl;
+        GL10 gl = CCDirector.gl;
         ccMacros.CC_DISABLE_DEFAULT_GL_STATES(gl);
         // Save the current matrix
         gl.glPushMatrix();
@@ -106,23 +113,23 @@ public class CCRenderTexture extends CCNode {
         float heightRatio = size.height / texSize.height;
 
         // Adjust the orthographic propjection and viewport
-        gl.glOrthof((float)-1.0 / widthRatio,  (float)1.0 / widthRatio, (float)-1.0 / heightRatio, (float)1.0 / heightRatio, -1,1);
-        gl.glViewport(0, 0, (int)texSize.width, (int)texSize.height);
+        gl.glOrthof((float) -1.0 / widthRatio, (float) 1.0 / widthRatio, (float) -1.0 / heightRatio, (float) 1.0 / heightRatio, -1, 1);
+        gl.glViewport(0, 0, (int) texSize.width, (int) texSize.height);
 
         gl.glGetIntegerv(GL11ExtensionPack.GL_FRAMEBUFFER_BINDING_OES, oldFBO_, 0);
-        ((GL11ExtensionPack)gl).glBindFramebufferOES(GL11ExtensionPack.GL_FRAMEBUFFER_OES, fbo_[0]);//Will direct drawing to the frame buffer created above
+        ((GL11ExtensionPack) gl).glBindFramebufferOES(GL11ExtensionPack.GL_FRAMEBUFFER_OES, fbo_[0]);//Will direct drawing to the frame buffer created above
 
         ccMacros.CC_ENABLE_DEFAULT_GL_STATES(gl);
     }
 
     public void end() {
-    	GL10 gl = CCDirector.gl;
-    	GL11ExtensionPack egl = (GL11ExtensionPack)CCDirector.gl;
+        GL10 gl = CCDirector.gl;
+        GL11ExtensionPack egl = (GL11ExtensionPack) CCDirector.gl;
         egl.glBindFramebufferOES(GL11ExtensionPack.GL_FRAMEBUFFER_OES, oldFBO_[0]);
         // Restore the original matrix and viewport
         gl.glPopMatrix();
         CGSize size = CCDirector.sharedDirector().displaySize();
-        gl.glViewport(0, 0, (int)size.width, (int)size.height);
+        gl.glViewport(0, 0, (int) size.width, (int) size.height);
 
         gl.glColorMask(true, true, true, true);
     }
@@ -229,7 +236,9 @@ public class CCRenderTexture extends CCNode {
 	    return [self saveBuffer:name format:kImageFormatJPG];
     }*/
 
-    /** clears the texture with a color */
+    /**
+     * clears the texture with a color
+     */
     public void clear(float r, float g, float b, float a) {
         begin();
         GL10 gl = CCDirector.gl;

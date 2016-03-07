@@ -1,7 +1,7 @@
 package org.cocos2d.types;
 
 public class CGRect {
-    public CGPoint origin;
+    public final CGPoint origin;
     public CGSize size;
 
     public CGRect() {
@@ -11,12 +11,13 @@ public class CGRect {
     public CGRect(final CGPoint origin, final CGSize size) {
         this(origin.x, origin.y, size.width, size.height);
     }
-    
+
     private static final CGRect ZERO_RECT = new CGRect(0, 0, 0, 0);
+
     public static CGRect getZero() {
-    	return ZERO_RECT;
+        return ZERO_RECT;
     }
-    
+
     public static CGRect zero() {
         return new CGRect(0, 0, 0, 0);
     }
@@ -28,25 +29,25 @@ public class CGRect {
     public static CGRect make(float x, float y, float w, float h) {
         return new CGRect(x, y, w, h);
     }
-    
+
     public static CGRect make(CGRect r) {
-    	return new CGRect(r.origin, r.size);
+        return new CGRect(r.origin, r.size);
     }
 
     private CGRect(float x, float y, float w, float h) {
         origin = CGPoint.ccp(x, y);
         size = CGSize.make(w, h);
     }
-    
-	public void set(CGRect r) {
-		origin.set(r.origin);
-		size.set(r.size);
-	}
 
-	public void set(float x, float y, float w, float h) {
-		origin.set(x, y);
-		size.set(w, h);
-	}
+    public void set(CGRect r) {
+        origin.set(r.origin);
+        size.set(r.size);
+    }
+
+    public void set(float x, float y, float w, float h) {
+        origin.set(x, y);
+        size.set(w, h);
+    }
 
     public boolean contains(float x, float y) {
         return size.width > 0 && size.height > 0  // check for empty first
@@ -80,11 +81,10 @@ public class CGRect {
                 && (maxX(aRect) >= maxX(bRect))
                 && (maxY(aRect) >= maxY(bRect)));
     }
-    
-    public static boolean intersects(CGRect a, CGRect b)
-    {
-    	return (a.origin.x >= (b.origin.x - a.size.width) && a.origin.x <= (b.origin.x - a.size.width) + (b.size.width + a.size.width)
-    			&& a.origin.y >= (b.origin.y - a.size.height) && a.origin.y <= (b.origin.y - a.size.height) + (b.size.height + a.size.height));
+
+    public static boolean intersects(CGRect a, CGRect b) {
+        return (a.origin.x >= (b.origin.x - a.size.width) && a.origin.x <= (b.origin.x - a.size.width) + (b.size.width + a.size.width)
+                && a.origin.y >= (b.origin.y - a.size.height) && a.origin.y <= (b.origin.y - a.size.height) + (b.size.height + a.size.height));
     }
 
     public static CGRect applyAffineTransform(CGRect aRect, CGAffineTransform matrix) {
@@ -113,8 +113,10 @@ public class CGRect {
             max.y = Math.max(max.y, p[i].y);
         }
 
-        r.origin.x = min.x; r.origin.y = min.y;
-        r.size.width = max.x - min.x; r.size.height = max.y - min.y;
+        r.origin.x = min.x;
+        r.origin.y = min.y;
+        r.size.width = max.x - min.x;
+        r.size.height = max.y - min.y;
 
         return r;
     }
@@ -186,18 +188,18 @@ public class CGRect {
         MaxYEdge,
     }
 
-    private static CGRect sRect = new CGRect();
-    private static CGRect rRect = new CGRect();
+    private static final CGRect sRect = new CGRect();
+    private static final CGRect rRect = new CGRect();
 
     public static void divideRect(final CGRect aRect, CGRect[] slice, CGRect[] remainder, float amount, CGRect.Edge edge) {
 
         if (slice == null) {
             slice = new CGRect[1];
-        	slice[0] = sRect;
+            slice[0] = sRect;
         }
 
         if (remainder == null) {
-        	remainder = new CGRect[1];
+            remainder = new CGRect[1];
             remainder[0] = rRect;
         }
 

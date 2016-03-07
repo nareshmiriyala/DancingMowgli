@@ -2,32 +2,32 @@ package org.cocos2d.utils.pool;
 
 import java.util.HashMap;
 
-@SuppressWarnings({ "rawtypes", "unchecked" })
+@SuppressWarnings({"rawtypes", "unchecked"})
 public class ObjectPool {
 
-	private HashMap<Class<?>, OneClassPool<?>> lists;
+    private final HashMap<Class<?>, OneClassPool<?>> lists;
 
-	public ObjectPool() {
-		lists = new HashMap<>();
-	}
+    public ObjectPool() {
+        lists = new HashMap<>();
+    }
 
-	public <T> OneClassPool<T> registerPool(Class<T> clazz, OneClassPool<T> newPool) {
-		OneClassPool<T> pool = (OneClassPool<T>)lists.get(clazz);
-		if(pool == null) {
+    public <T> OneClassPool<T> registerPool(Class<T> clazz, OneClassPool<T> newPool) {
+        OneClassPool<T> pool = (OneClassPool<T>) lists.get(clazz);
+        if (pool == null) {
 //			pool = new OneClassPool<T>(clazz);
-			lists.put(clazz, newPool);
-		}
-		return pool;
-	}
-	
+            lists.put(clazz, newPool);
+        }
+        return pool;
+    }
 
-	public <T> OneClassPool<T> getPool(Class<T> clazz) {
-		return (OneClassPool<T>)lists.get(clazz);
-	}
 
-	public void clearAll() {
-		for(OneClassPool objs : lists.values()) {
-			objs.clear();
-		}
-	}
+    public <T> OneClassPool<T> getPool(Class<T> clazz) {
+        return (OneClassPool<T>) lists.get(clazz);
+    }
+
+    public void clearAll() {
+        for (OneClassPool objs : lists.values()) {
+            objs.clear();
+        }
+    }
 }

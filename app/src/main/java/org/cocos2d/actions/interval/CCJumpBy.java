@@ -5,22 +5,26 @@ import org.cocos2d.types.CGPoint;
 
 /**
  * Moves a CCNode object simulating a parabolic jump movement by modifying it's position attribute.
-*/
+ */
 public class CCJumpBy extends CCIntervalAction {
     protected CGPoint startPosition;
-    protected CGPoint delta;
-    protected float height;
-    protected int jumps;
+    protected final CGPoint delta;
+    protected final float height;
+    protected final int jumps;
 
-    /** creates the action */
+    /**
+     * creates the action
+     */
     public static CCJumpBy action(float time, CGPoint pos, float height, int jumps) {
         return new CCJumpBy(time, pos, height, jumps);
     }
 
-    /** initializes the action */
+    /**
+     * initializes the action
+     */
     protected CCJumpBy(float time, CGPoint pos, float h, int j) {
         super(time);
-        startPosition = CGPoint.make(0,0);
+        startPosition = CGPoint.make(0, 0);
         delta = CGPoint.make(pos.x, pos.y);
         height = h;
         jumps = j;

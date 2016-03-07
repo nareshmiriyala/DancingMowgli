@@ -7,31 +7,36 @@ import org.cocos2d.types.CGPoint;
 // MoveTo
 //
 
-/** Moves a CCNode object to the position x,y. x and y are absolute coordinates by modifying it's position attribute.
-*/
+/**
+ * Moves a CCNode object to the position x,y. x and y are absolute coordinates by modifying it's position attribute.
+ */
 public class CCMoveTo extends CCIntervalAction {
-    private CGPoint endPosition;
-    private CGPoint startPosition;
-    protected CGPoint delta;
+    private final CGPoint endPosition;
+    private final CGPoint startPosition;
+    protected final CGPoint delta;
 
-    /** creates the action */
+    /**
+     * creates the action
+     */
     public static CCMoveTo action(float t, CGPoint pos) {
         return new CCMoveTo(t, pos);
     }
 
-    /** initializes the action */
+    /**
+     * initializes the action
+     */
     protected CCMoveTo(float t, CGPoint pos) {
         super(t);
         startPosition = CGPoint.zero();
         endPosition = CGPoint.make(pos.x, pos.y);
         delta = CGPoint.zero();
     }
-    
+
     /**
      * Lets extend basic functionality for reuse action.
      */
     public void setEndPosition(CGPoint pos) {
-    	endPosition.set(pos);
+        endPosition.set(pos);
     }
 
     @Override
@@ -50,6 +55,6 @@ public class CCMoveTo extends CCIntervalAction {
     @Override
     public void update(float t) {
         target.setPosition(startPosition.x + delta.x * t,
-        					startPosition.y + delta.y * t);
+                startPosition.y + delta.y * t);
     }
 }

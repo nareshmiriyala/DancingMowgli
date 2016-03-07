@@ -3,24 +3,24 @@ package org.cocos2d.utils.pool;
 import org.cocos2d.utils.collections.ConcNodeCachingStack;
 
 public abstract class ConcOneClassPool<T> {
-	private ConcNodeCachingStack<T> objs;
+    private final ConcNodeCachingStack<T> objs;
 
-	public ConcOneClassPool() {
-		objs = new ConcNodeCachingStack<>();
-	}
+    public ConcOneClassPool() {
+        objs = new ConcNodeCachingStack<>();
+    }
 
-	protected abstract T allocate();
-	
-	public T get() {
-		T ret = objs.pop();
-		if(null == ret) {
-			ret = allocate();
-		}
+    protected abstract T allocate();
 
-		return ret;
-	}
-	
-	public void free(T obj) {
-		objs.push(obj);
-	}
+    public T get() {
+        T ret = objs.pop();
+        if (null == ret) {
+            ret = allocate();
+        }
+
+        return ret;
+    }
+
+    public void free(T obj) {
+        objs.push(obj);
+    }
 }

@@ -5,44 +5,52 @@ import org.cocos2d.nodes.CCNode;
 
 ////////////////////////////////////////////////////////////
 
-/** CCAccelAmplitude action */
+/**
+ * CCAccelAmplitude action
+ */
 public class CCAccelAmplitude extends CCIntervalAction {
-	/** amplitude rate */
-	float			rate;
-	
-	CCIntervalAction other;
-	
-	/** creates the action with an inner action that has the amplitude property,
-	 * 	 and a duration time */
-	public static CCAccelAmplitude action(CCIntervalAction action, float d) {
-		return new CCAccelAmplitude(action, d);
-	}
+    /**
+     * amplitude rate
+     */
+    final float rate;
 
-	/** initializes the action with an inner action that has the amplitude property,
-	 * 		 and a duration time */
-	public CCAccelAmplitude (CCIntervalAction action, float d) {
-		super(d);
+    final CCIntervalAction other;
 
-		rate = 1.0f;
-		other = action;
-	}
+    /**
+     * creates the action with an inner action that has the amplitude property,
+     * and a duration time
+     */
+    public static CCAccelAmplitude action(CCIntervalAction action, float d) {
+        return new CCAccelAmplitude(action, d);
+    }
 
-	@Override
-	public void start(CCNode aTarget) {
-		super.start(aTarget);
-		other.start(target);
-	}
+    /**
+     * initializes the action with an inner action that has the amplitude property,
+     * and a duration time
+     */
+    public CCAccelAmplitude(CCIntervalAction action, float d) {
+        super(d);
 
-	@Override
-	public void update(float time)	{
-		other.setAmplitudeRate((float)Math.pow(time, rate));
-		other.update(time);
-	}
+        rate = 1.0f;
+        other = action;
+    }
 
-	@Override
-	public CCIntervalAction reverse() {
-		return CCAccelAmplitude.action(other.reverse(), duration);
-	}
+    @Override
+    public void start(CCNode aTarget) {
+        super.start(aTarget);
+        other.start(target);
+    }
+
+    @Override
+    public void update(float time) {
+        other.setAmplitudeRate((float) Math.pow(time, rate));
+        other.update(time);
+    }
+
+    @Override
+    public CCIntervalAction reverse() {
+        return CCAccelAmplitude.action(other.reverse(), duration);
+    }
 
 }
 

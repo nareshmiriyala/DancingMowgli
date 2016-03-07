@@ -1,25 +1,28 @@
 package org.cocos2d.nodes;
 
+import org.cocos2d.types.CGPoint;
+
 import java.util.ArrayList;
 
 import javax.microedition.khronos.opengles.GL10;
 
-import org.cocos2d.types.CGPoint;
-
-/** CCParallaxNode: A node that simulates a parallax scroller
+/**
+ * CCParallaxNode: A node that simulates a parallax scroller
  * The children will be moved faster / slower than the parent according the the parallax ratio.
  */
 public class CCParallaxNode extends CCNode {
 
-    /** array that holds the offset / ratio of the children */
-    private ArrayList<CCPointObject> parallaxArray_;
+    /**
+     * array that holds the offset / ratio of the children
+     */
+    private final ArrayList<CCPointObject> parallaxArray_;
     private CGPoint lastPosition;
 
     static class CCPointObject {
-        private float ratioX_;
-        private float ratioY_;
-        private float offsetX_;
-        private float offsetY_;
+        private final float ratioX_;
+        private final float ratioY_;
+        private final float offsetX_;
+        private final float offsetY_;
         private CCNode child_;
 
         public CCPointObject(float ratioX, float ratioY, float offsetX, float offsetY) {
@@ -53,14 +56,14 @@ public class CCParallaxNode extends CCNode {
             return offsetY_;
         }
     }
-    
+
     public static CCParallaxNode node() {
         return new CCParallaxNode();
     }
 
     protected CCParallaxNode() {
         parallaxArray_ = new ArrayList<>(5);
-        lastPosition = CGPoint.make(-100,-100);
+        lastPosition = CGPoint.make(-100, -100);
     }
 
     @Override
@@ -69,30 +72,32 @@ public class CCParallaxNode extends CCNode {
         return null;
     }
 
-    /** Adds a child to the container with a z-order, a parallax ratio and a position offset
-    It returns self, so you can chain several addChilds.
-    @since v0.8
-    */
+    /**
+     * Adds a child to the container with a z-order, a parallax ratio and a position offset
+     * It returns self, so you can chain several addChilds.
+     *
+     * @since v0.8
+     */
     public CCNode addChild(CCNode child, int z,
-    		float ratioX, float ratioY, float offsetX, float offsetY) {
+                           float ratioX, float ratioY, float offsetX, float offsetY) {
         assert child != null : "Argument must be non-null";
         CCPointObject obj = new CCPointObject(ratioX, ratioY, offsetX, offsetY);
         obj.setChild(child);
         parallaxArray_.add(obj);
-	
+
         CGPoint pnt = getPosition();
         float x = pnt.x * ratioX + offsetX;
         float y = pnt.y * ratioY + offsetY;
         child.setPosition(CGPoint.make(x, y));
-	
+
         return super.addChild(child, z, child.getTag());
     }
 
     @Override
     public void removeChild(CCNode node, boolean cleanup) {
-        for( int i=0;i < parallaxArray_.size();i++) {
+        for (int i = 0; i < parallaxArray_.size(); i++) {
             CCPointObject point = parallaxArray_.get(i);
-            if( point.getChild().equals(node) ) {
+            if (point.getChild().equals(node)) {
                 parallaxArray_.remove(i);
                 break;
             }
@@ -107,16 +112,16 @@ public class CCParallaxNode extends CCNode {
     }
 
     private CGPoint absolutePosition() {
-        CGPoint ret = getPosition();	
+        CGPoint ret = getPosition();
         CCNode cn = this;
-	
+
         while (cn.parent_ != null) {
             cn = cn.parent_;
             CGPoint pnt = cn.getPosition();
             ret.x += pnt.x;
             ret.y += pnt.y;
         }
-	
+
         return ret;
     }
 
@@ -128,8 +133,8 @@ public class CCParallaxNode extends CCNode {
     @Override
     public void visit(GL10 gl) {
         CGPoint pos = absolutePosition();
-        if( ! CGPoint.equalToPoint(pos, lastPosition) ) {
-            for(int i=0; i < parallaxArray_.size(); i++ ) {
+        if (!CGPoint.equalToPoint(pos, lastPosition)) {
+            for (int i = 0; i < parallaxArray_.size(); i++) {
                 CCPointObject point = parallaxArray_.get(i);
                 float x = -pos.x + pos.x * point.getRatioX() + point.getOffsetX();
                 float y = -pos.y + pos.y * point.getRatioY() + point.getOffsetY();
@@ -141,5 +146,5 @@ public class CCParallaxNode extends CCNode {
 
         super.visit(gl);
     }
-    
+
 }

@@ -1,7 +1,5 @@
 package org.cocos2d.nodes;
 
-import javax.microedition.khronos.opengles.GL10;
-
 import org.cocos2d.config.ccConfig;
 import org.cocos2d.opengl.CCTexture2D;
 import org.cocos2d.opengl.CCTextureAtlas;
@@ -10,6 +8,8 @@ import org.cocos2d.protocols.CCTextureProtocol;
 import org.cocos2d.types.CGSize;
 import org.cocos2d.types.ccBlendFunc;
 import org.cocos2d.types.ccColor3B;
+
+import javax.microedition.khronos.opengles.GL10;
 
 /**
  * AtlasNode is a subclass of CocosNode that implements CocosNodeOpacity, CocosNodeRGB and
@@ -23,19 +23,20 @@ import org.cocos2d.types.ccColor3B;
  * - contentSize
  */
 
-/** CCAtlasNode is a subclass of CCNode that implements the CCRGBAProtocol and
- CCTextureProtocol protocol
- 
- It knows how to render a TextureAtlas object.
- If you are going to render a TextureAtlas consider subclassing CCAtlasNode (or a subclass of CCAtlasNode)
- 
- All features from CCNode are valid, plus the following features:
- - opacity and RGB colors
+/**
+ * CCAtlasNode is a subclass of CCNode that implements the CCRGBAProtocol and
+ * CCTextureProtocol protocol
+ * <p/>
+ * It knows how to render a TextureAtlas object.
+ * If you are going to render a TextureAtlas consider subclassing CCAtlasNode (or a subclass of CCAtlasNode)
+ * <p/>
+ * All features from CCNode are valid, plus the following features:
+ * - opacity and RGB colors
  */
 public abstract class CCAtlasNode extends CCNode
         implements CCRGBAProtocol, CCTextureProtocol {
     /// texture atlas
-    protected CCTextureAtlas textureAtlas_;
+    protected final CCTextureAtlas textureAtlas_;
     /// chars per row
     protected int itemsPerRow;
     /// chars per column
@@ -47,23 +48,25 @@ public abstract class CCAtlasNode extends CCNode
     protected float texStepY;
 
     /// width of each char
-    protected int itemWidth;
+    protected final int itemWidth;
     /// height of each char
-    protected int itemHeight;
+    protected final int itemHeight;
 
     // blend function
-    ccBlendFunc blendFunc_;
+    final ccBlendFunc blendFunc_;
 
     // texture RGBA
     int opacity_;
     ccColor3B color_;
-	ccColor3B	colorUnmodified_;
+    ccColor3B colorUnmodified_;
     boolean opacityModifyRGB_;
 
-    /** initializes an CCAtlasNode  with an Atlas file the width and height of each item and the quantity of items to render*/
+    /**
+     * initializes an CCAtlasNode  with an Atlas file the width and height of each item and the quantity of items to render
+     */
     protected CCAtlasNode(String tile, int w, int h, int c) {
-    	super();
-    	
+        super();
+
         itemWidth = w;
         itemHeight = h;
         opacity_ = 255;
@@ -76,7 +79,7 @@ public abstract class CCAtlasNode extends CCNode
 
         updateBlendFunc();
         updateOpacityModifyRGB();
-        
+
         calculateMaxItems();
         calculateTexCoordsSteps();
     }
@@ -93,7 +96,8 @@ public abstract class CCAtlasNode extends CCNode
         texStepY = itemHeight / (float) tex.pixelsHigh();
     }
 
-    /** updates the Atlas (indexed vertex array).
+    /**
+     * updates the Atlas (indexed vertex array).
      * Shall be overriden in subclasses
      */
     public abstract void updateAtlasValues();
@@ -101,11 +105,11 @@ public abstract class CCAtlasNode extends CCNode
     @Override
     public void draw(GL10 gl) {
 
-    	// Default GL states: GL_TEXTURE_2D, GL_VERTEX_ARRAY, GL_COLOR_ARRAY, GL_TEXTURE_COORD_ARRAY
-    	// Needed states: GL_TEXTURE_2D, GL_VERTEX_ARRAY, GL_TEXTURE_COORD_ARRAY
-    	// Unneeded states: GL_COLOR_ARRAY
-    	gl.glDisableClientState(GL10.GL_COLOR_ARRAY);
-    	
+        // Default GL states: GL_TEXTURE_2D, GL_VERTEX_ARRAY, GL_COLOR_ARRAY, GL_TEXTURE_COORD_ARRAY
+        // Needed states: GL_TEXTURE_2D, GL_VERTEX_ARRAY, GL_TEXTURE_COORD_ARRAY
+        // Unneeded states: GL_COLOR_ARRAY
+        gl.glDisableClientState(GL10.GL_COLOR_ARRAY);
+
         gl.glColor4f(color_.r / 255f, color_.g / 255f, color_.b / 255f, opacity_ / 255f);
 
         boolean newBlend = false;
@@ -119,21 +123,23 @@ public abstract class CCAtlasNode extends CCNode
         if (newBlend)
             gl.glBlendFunc(ccConfig.CC_BLEND_SRC, ccConfig.CC_BLEND_DST);
 
-       	
-    	// is this chepear than saving/restoring color state ?
-    	// XXX: There is no need to restore the color to (255,255,255,255). Objects should use the color
-    	// XXX: that they need
+
+        // is this chepear than saving/restoring color state ?
+        // XXX: There is no need to restore the color to (255,255,255,255). Objects should use the color
+        // XXX: that they need
         //    	glColor4ub( 255, 255, 255, 255);
 
-    	// restore default GL state
-    	gl.glEnableClientState(GL10.GL_COLOR_ARRAY);
+        // restore default GL state
+        gl.glEnableClientState(GL10.GL_COLOR_ARRAY);
     }
-    
-    /** conforms to CCRGBAProtocol protocol */
+
+    /**
+     * conforms to CCRGBAProtocol protocol
+     */
     public void setOpacity(int opacity) {
         opacity_ = opacity;
 
-	    // special opacity for premultiplied textures
+        // special opacity for premultiplied textures
         if (opacityModifyRGB_) {
             setColor(colorUnmodified_);
         }
@@ -143,15 +149,17 @@ public abstract class CCAtlasNode extends CCNode
         return opacity_;
     }
 
-    /** conforms to CCRGBAProtocol protocol */
+    /**
+     * conforms to CCRGBAProtocol protocol
+     */
     public void setColor(ccColor3B color) {
         color_ = new ccColor3B(color);
         colorUnmodified_ = new ccColor3B(color);
-        if( opacityModifyRGB_ ){
-            color_.r = color.r * opacity_/255;
-            color_.g = color.g * opacity_/255;
-            color_.b = color.b * opacity_/255;
-        }	
+        if (opacityModifyRGB_) {
+            color_.r = color.r * opacity_ / 255;
+            color_.g = color.g * opacity_ / 255;
+            color_.b = color.b * opacity_ / 255;
+        }
     }
 
     public ccColor3B getColor() {
@@ -163,15 +171,20 @@ public abstract class CCAtlasNode extends CCNode
     }
 
     // CocosNodeTexture protocol
-    /** conforms to CCTextureProtocol protocol */
+
+    /**
+     * conforms to CCTextureProtocol protocol
+     */
     public void updateBlendFunc() {
-    	if( ! (textureAtlas_.getTexture().hasPremultipliedAlpha() )) {
-    		blendFunc_.src = GL10.GL_SRC_ALPHA;
-    		blendFunc_.dst = GL10.GL_ONE_MINUS_SRC_ALPHA;
-    	}
+        if (!(textureAtlas_.getTexture().hasPremultipliedAlpha())) {
+            blendFunc_.src = GL10.GL_SRC_ALPHA;
+            blendFunc_.dst = GL10.GL_ONE_MINUS_SRC_ALPHA;
+        }
     }
 
-    /** conforms to CCTextureProtocol protocol */
+    /**
+     * conforms to CCTextureProtocol protocol
+     */
     public void setTexture(CCTexture2D texture) {
         textureAtlas_.setTexture(texture);
         updateBlendFunc();
@@ -181,17 +194,17 @@ public abstract class CCAtlasNode extends CCNode
     public CCTexture2D getTexture() {
         return textureAtlas_.getTexture();
     }
-    
+
     public void setOpacityModifyRGB(boolean modify) {
-    	opacityModifyRGB_ = modify;
+        opacityModifyRGB_ = modify;
     }
 
     public boolean doesOpacityModifyRGB() {
-    	return opacityModifyRGB_;
+        return opacityModifyRGB_;
     }
 
     public void updateOpacityModifyRGB() {
-    	opacityModifyRGB_ = textureAtlas_.getTexture().hasPremultipliedAlpha();
+        opacityModifyRGB_ = textureAtlas_.getTexture().hasPremultipliedAlpha();
     }
 }
 
