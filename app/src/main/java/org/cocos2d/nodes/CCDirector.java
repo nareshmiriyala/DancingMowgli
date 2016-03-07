@@ -320,8 +320,6 @@ public class CCDirector implements GLSurfaceView.Renderer {
     // rotates the screen if an orientation differnent than Portrait is used
     private void applyOrientation(GL10 gl) {
         CGSize s = surfaceSize_;
-        float h = s.height / 2;
-        float w = s.width / 2;
 
         // XXX it's using hardcoded values.
         // What if the the screen size changes in the future?
@@ -734,7 +732,7 @@ public class CCDirector implements GLSurfaceView.Renderer {
      * This method is called every frame. Don't call it manually.
      */
     public void drawCCScene(GL10 gl) {
-    	
+
         /* calculate "global" dt */
         calculateDeltaTime();
         

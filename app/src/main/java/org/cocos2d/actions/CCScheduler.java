@@ -55,8 +55,8 @@ public class CCScheduler {
 	// "updates with priority" stuff
 	//
     final ArrayList<tListEntry>    updatesNeg;	// list of priority < 0
-	ArrayList<tListEntry>    updates0;	// list priority == 0
-	ArrayList<tListEntry>    updatesPos;	// list priority > 0
+	final ArrayList<tListEntry>    updates0;	// list priority == 0
+	final ArrayList<tListEntry>    updatesPos;	// list priority > 0
 		
 	// Used for "selectors with interval"
 	ConcurrentArrayHashMap<Object, tHashSelectorEntry>  hashForSelectors;
