@@ -112,11 +112,9 @@ public class CCTileMapAtlas extends CCAtlasNode {
         ccColor3B value = ptr[pos.x + pos.y * tgaInfo->width];
         */
 
-        ccColor3B value = new ccColor3B(tgaInfo.imageData[(pos.x + pos.y * tgaInfo.width)],
+        return new ccColor3B(tgaInfo.imageData[(pos.x + pos.y * tgaInfo.width)],
                 tgaInfo.imageData[pos.x + 1 + pos.y * tgaInfo.width],
                 tgaInfo.imageData[pos.x + 2 + pos.y * tgaInfo.width]);
-
-        return value;
     }
     
     /**

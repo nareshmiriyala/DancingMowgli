@@ -109,9 +109,8 @@ public class CCMenu extends CCLayer {
 
     public void setColor(ccColor3B color) {
         /* conforms to CCRGBAProtocol protocol */
-        ccColor3B color_ = color;
         for (CCNode item: children_) {
-            ((CCRGBAProtocol)item).setColor(color_);
+            ((CCRGBAProtocol)item).setColor(color);
         }
     }
 

@@ -20,8 +20,7 @@ public class CCFlipX extends CCInstantAction {
 
     @Override
     public CCFlipX copy() {
-        CCFlipX copy = new CCFlipX(flipX);
-        return copy;
+        return new CCFlipX(flipX);
     }
 
     @Override

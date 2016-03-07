@@ -152,17 +152,15 @@ public class CCGrid3D extends CCGridBase {
     /** returns the vertex at a given position */
     public CCVertex3D vertex(ccGridSize pos) {
         int index = (pos.x * (gridSize_.y + 1) + pos.y) * 3;
-        CCVertex3D vert = new CCVertex3D(vertices.get(index), vertices.get(index + 1), vertices.get(index + 2));
 
-        return vert;
+        return new CCVertex3D(vertices.get(index), vertices.get(index + 1), vertices.get(index + 2));
     }
 
     /** returns the original (non-transformed) vertex at a given position */
     public CCVertex3D originalVertex(ccGridSize pos) {
         int index = (pos.x * (gridSize_.y + 1) + pos.y) * 3;
-        CCVertex3D vert = new CCVertex3D(originalVertices.get(index), originalVertices.get(index + 1), originalVertices.get(index + 2));
 
-        return vert;
+        return new CCVertex3D(originalVertices.get(index), originalVertices.get(index + 1), originalVertices.get(index + 2));
     }
 
     /** sets a new vertex at a given position */

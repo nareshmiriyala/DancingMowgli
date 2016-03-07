@@ -1117,10 +1117,9 @@ public abstract class CCParticleSystem extends CCNode implements CCTextureProtoc
                 CGPoint	newPos;
 
                 if( positionType_ == kCCPositionTypeFree || positionType_ == kCCPositionTypeRelative ) {
-                    CGPoint diff = tmp;
-                    CGPointUtil.sub(currentPosition, p.startPos, diff);
-                    CGPointUtil.sub(p.pos, diff, diff);
-                    newPos = diff;
+					CGPointUtil.sub(currentPosition, p.startPos, tmp);
+                    CGPointUtil.sub(p.pos, tmp, tmp);
+                    newPos = tmp;
                 } else {
                     newPos = p.pos;
                 }

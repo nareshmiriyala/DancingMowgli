@@ -138,16 +138,13 @@ public class CCQuadParticleSystem extends CCParticleSystem implements Resource {
 	}
 	
 	public void initTexCoordsWithRect(float rectX, float rectY, float rectW, float rectH) {
-		float bottomLeftX = rectX;
 		float bottomLeftY = rectY;
 
-		float bottomRightX = bottomLeftX + rectW;
+		float bottomRightX = rectX + rectW;
 		float bottomRightY = bottomLeftY;
 
-		float topLeftX = bottomLeftX;
 		float topLeftY = bottomLeftY + rectH;
 
-		float topRightX = bottomRightX;
 		float topRightY = topLeftY;
 
 		// Important. Texture in cocos2d are inverted, so the Y component should be inverted
@@ -162,7 +159,7 @@ public class CCQuadParticleSystem extends CCParticleSystem implements Resource {
 		for(int i=0; i<totalParticles; i++) {
 			final int base = i * 8;
 			// bottom-left vertex:
-			texCoords.put(base, bottomLeftX);
+			texCoords.put(base, rectX);
 			texCoords.put(base + 1, bottomLeftY);
 			
 			// bottom-right vertex:
@@ -170,11 +167,11 @@ public class CCQuadParticleSystem extends CCParticleSystem implements Resource {
 			texCoords.put(base + 3, bottomRightY);
 			
 			// top-left vertex:
-			texCoords.put(base + 4, topLeftX);
+			texCoords.put(base + 4, rectX);
 			texCoords.put(base + 5, topLeftY);
 			
 			// top-right vertex:
-			texCoords.put(base + 6, topRightX);
+			texCoords.put(base + 6, bottomRightX);
 			texCoords.put(base + 7, topRightY);
 		}
 	}
@@ -247,8 +244,6 @@ public class CCQuadParticleSystem extends CCParticleSystem implements Resource {
 			float x1 = -size_2;
 			float y1 = -size_2;
 
-			float x2 = size_2;
-			float y2 = size_2;
 			float x = newPos.x;
 			float y = newPos.y;
 
@@ -257,12 +252,12 @@ public class CCQuadParticleSystem extends CCParticleSystem implements Resource {
 			float sr = (float) Math.sin(r);
 			float ax = x1 * cr - y1 * sr + x;
 			float ay = x1 * sr + y1 * cr + y;
-			float bx = x2 * cr - y1 * sr + x;
-			float by = x2 * sr + y1 * cr + y;
-			float cx = x2 * cr - y2 * sr + x;
-			float cy = x2 * sr + y2 * cr + y;
-			float dx = x1 * cr - y2 * sr + x;
-			float dy = x1 * sr + y2 * cr + y;
+			float bx = size_2 * cr - y1 * sr + x;
+			float by = size_2 * sr + y1 * cr + y;
+			float cx = size_2 * cr - size_2 * sr + x;
+			float cy = size_2 * sr + size_2 * cr + y;
+			float dx = x1 * cr - size_2 * sr + x;
+			float dy = x1 * sr + size_2 * cr + y;
 			
 			final int base = particleIdx * 8;
 			// bottom-left vertex:

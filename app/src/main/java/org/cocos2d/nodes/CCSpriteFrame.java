@@ -91,8 +91,7 @@ public class CCSpriteFrame {
     }
 
     public CCSpriteFrame copy() {
-        CCSpriteFrame copy = new CCSpriteFrame(texture_, rect_, offset_, originalSize_, rotated_);
-        return copy;
+        return new CCSpriteFrame(texture_, rect_, offset_, originalSize_, rotated_);
     }
 }
 

@@ -89,9 +89,8 @@ public class CCLabel extends CCSprite implements CCLabelProtocol {
     public void setString(CharSequence seq) {   	
     	if(_string != null && _string.equals(seq))
     		return;
-    		
-    	final String string = seq.toString();
-    	_string = string;
+
+        _string = seq.toString();
     	CCTexture2D texture = new CCTexture2D();
     	setTexture(texture);
     	texture.setLoader(new StringReloader(this));

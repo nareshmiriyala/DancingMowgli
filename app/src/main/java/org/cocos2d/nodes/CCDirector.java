@@ -754,7 +754,6 @@ public class CCDirector implements GLSurfaceView.Renderer {
     
     /** returns the size of the OpenGL view in pixels, according to the landspace */
     public CGSize winSize() {
-        CGSize s = CGSize.make(screenSize_.width, screenSize_.height);
         /*if( deviceOrientation_ == kCCDeviceOrientationLandscapeLeft) {
             // swap x,y in landscape mode
             float t = s.width;
@@ -762,7 +761,7 @@ public class CCDirector implements GLSurfaceView.Renderer {
             s.height = t;
         }*/
 
-        return s;
+        return CGSize.make(screenSize_.width, screenSize_.height);
     }
     
     public CGSize winSizeRef() {
@@ -907,10 +906,8 @@ public class CCDirector implements GLSurfaceView.Renderer {
          		newSize.height = size.width / targetRatio;
          		offset.y = (size.height - newSize.height) / 2;
          }
-         
-         CGRect rect = CGRect.make(offset, newSize);
-         
-         return rect;
+
+        return CGRect.make(offset, newSize);
     }
     
 	public void setScreenSize(float width, float height) {
@@ -1387,7 +1384,7 @@ public class CCDirector implements GLSurfaceView.Renderer {
         boolean mTranslucentBackground = false;
         if (mTranslucentBackground) {
             // We want a depth buffer and an getOpacity buffer
-            int[] configSpec = {
+            return new int[]{
                     EGL10.EGL_RED_SIZE, 8,
                     EGL10.EGL_GREEN_SIZE, 8,
                     EGL10.EGL_BLUE_SIZE, 8,
@@ -1395,15 +1392,13 @@ public class CCDirector implements GLSurfaceView.Renderer {
                     EGL10.EGL_DEPTH_SIZE, 16,
                     EGL10.EGL_NONE
             };
-            return configSpec;
         } else {
             // We want a depth buffer, don't care about the
             // details of the color buffer.
-            int[] configSpec = {
+            return new int[]{
                     EGL10.EGL_DEPTH_SIZE, 16,
                     EGL10.EGL_NONE
             };
-            return configSpec;
         }
     }
 
