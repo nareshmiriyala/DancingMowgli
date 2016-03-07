@@ -386,7 +386,7 @@ public class CCSpriteSheet extends CCNode implements CCTextureProtocol {
                 return p.atlasIndex + 1;
         } else {
             // previous & sprite belong to the same branch
-            if (((previous != null ? previous.getZOrder() : 0) < 0 && z < 0) || (previous.getZOrder() >= 0 && z >= 0)) {
+            if (((previous != null ? previous.getZOrder() : 0) < 0 && z < 0) || ((previous != null ? previous.getZOrder() : 0) >= 0 && z >= 0)) {
                 return highestAtlasIndexInChild(previous) + 1;
             }
             // else (previous < 0 and sprite >= 0 )

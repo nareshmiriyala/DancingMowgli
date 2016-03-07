@@ -104,7 +104,7 @@ public final class IntMap<T> implements Iterable<Entry<T>>, Cloneable {
             e.value = value;
             return oldValue;
         }
-        table[index] = new Entry<T>(key, value, table[index]);
+        table[index] = new Entry<>(key, value, table[index]);
         if (size++ >= threshold){
             // Rehash.
             int newCapacity = 2 * capacity;
