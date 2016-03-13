@@ -9,7 +9,7 @@ android {
         applicationId "com.dellnaresh.cherry.picker"
         minSdkVersion 10
         targetSdkVersion 23
-        versionCode 3
+        versionCode 1
         versionName '0'
     }
     buildTypes {
